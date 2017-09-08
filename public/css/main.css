@@ -1,0 +1,77 @@
+/*E8F9C5
+CCE6BF
+B3D7A9
+90CB9F
+72C086*/
+
+
+body, html{
+    margin:0; padding: 0;
+    font-family: Raleway, Arial, serif;
+    background-color: #2b3137;
+    min-height: 800px;
+}
+
+.navbar-inverse{
+    background-color: #24292e;
+    border-radius: 0px !important;
+    border: none !important;
+}
+
+.navbar-right li{
+    padding: 0px;
+    margin: 0px;
+}
+
+.navbar-right img{
+    width: 25px;
+    height: 25px;
+}
+
+.loginPage{
+    padding-top: 200px;
+    color: grey;
+}
+
+.loginPage .jumbotron{
+    padding-top: 0px;
+    color: white;
+    background-color: transparent;
+}
+
+.loginPage .jumbotron p{
+    color: grey;
+    font-weight: 700;
+}
+
+#loginDiv a{
+    color: grey;
+}
+
+.loginFormDiv{
+    padding: 40px;
+    border-left: 15px solid green;
+    display: none;
+    background-color: white;
+}
+
+.loginFormDiv input{
+    transition: all .4s ease-in-out;
+    border: none !important;
+    border-bottom: 2px solid grey !important;
+    border-radius: 0px !important;
+    background-color: transparent !important;
+}
+
+.loginFormDiv h3{
+    margin: 0px;
+    margin-bottom: 25px;
+}
+
+.btn-green{
+    background-color: green;
+    color: whitesmoke;
+    font-size: 12px;
+    font-weight: 700;
+    border-color: transparent;
+}
