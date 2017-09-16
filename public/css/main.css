@@ -19,7 +19,7 @@ body, html {
 }
 
 .navbar-inverse {
-    background-color: rgba(36, 41, 46, .7);
+    background-color: rgba(36, 41, 46, .9);
     border-radius: 0px !important;
     border: none !important;
 }
@@ -30,7 +30,7 @@ body, html {
 }
 
 .navbar-right li a{
-    color: #9bb7dd !important;
+    color: #FFF !important;
     font-weight: 600;
     transition: all .4s ease-in-out;
 }
