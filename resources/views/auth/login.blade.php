@@ -1,18 +1,11 @@
 @extends('layouts.master')
 
-@section('navigation')
-    <nav class="navbar navbar-inverse">
-        <div class="container">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" style="padding-right: 0"><img src="{{asset('img/cosbis/facebook.png')}}" alt="facebook" class="img-circle"></a></li>
-                <li><a href="#"><img src="{{asset('img/cosbis/twitter.png')}}" alt="facebook" class="img-circle"></a></li>
-            </ul>
-        </div>
-    </nav>
+@section('css')
+    <link rel="stylesheet" href="{{asset('/css/login.css')}}">
 @endsection
 
 @section('content')
-    <div class="container-fluid loginbg">
+    <div class="container-fluid loginbg noPadding">
         <div class="container loginPage">
             <div class="col-md-6 jumbotron">
                 <h1><b>Learn, Live, Evolve</b></h1>

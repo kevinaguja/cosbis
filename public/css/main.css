@@ -7,9 +7,7 @@ B3D7A9
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Raleway, Arial, serif;
-    background-color: #2b3137;
-    min-height: 800px;
+    font-family: Raleway, Roboto, Arial;
 }
 
 .noPadding {
@@ -21,61 +19,35 @@ body, html {
 }
 
 .navbar-inverse {
-    background-color: #24292e;
+    background-color: rgba(36, 41, 46, .7);
     border-radius: 0px !important;
     border: none !important;
 }
 
-.navbar-right li {
+.nav li {
     padding: 0px;
     margin: 0px;
+}
+
+.navbar-right li a{
+    color: #9bb7dd !important;
+    font-weight: 600;
+    transition: all .4s ease-in-out;
+}
+
+.greenLinks li a{
+    color: #2ab27b !important;
+    font-weight: 700;
+}
+
+
+.navbar ul li a:hover{
+    color: white !important;
 }
 
 .navbar-right img {
     width: 25px;
     height: 25px;
-}
-
-.loginPage {
-    padding-top: 10%;
-    color: grey;
-}
-
-.loginPage .jumbotron {
-    padding-top: 0px;
-    color: white;
-    background-color: transparent;
-}
-
-.loginPage .jumbotron p {
-    color: grey;
-    font-weight: 700;
-}
-
-#loginDiv a {
-    color: grey;
-}
-
-.loginFormDiv {
-    padding: 40px;
-    border-left: 15px solid green;
-    display: none;
-    background-color: white;
-    border-radius: 3px;
-    margin-bottom: 100px;
-}
-
-.loginFormDiv input {
-    transition: all .4s ease-in-out;
-    border: none !important;
-    border-bottom: 2px solid grey !important;
-    border-radius: 0px !important;
-    background-color: transparent !important;
-}
-
-.loginFormDiv h3 {
-    margin: 0px;
-    margin-bottom: 25px;
 }
 
 .btn-green {
@@ -102,4 +74,16 @@ body, html {
 .headerLabel h1{
     font-weight: 100;
     color: #333;
+}
+
+@media (min-width: 768px) {
+    .navbar .navbar-nav {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+    }
+
+    .navbar .navbar-collapse {
+        text-align: center;
+    }
 }

@@ -1,0 +1,43 @@
+
+
+.loginPage {
+    padding-top: 10%;
+    color: grey;
+}
+
+.loginPage .jumbotron {
+    padding-top: 0px;
+    color: white;
+    background-color: transparent;
+}
+
+.loginPage .jumbotron p {
+    color: grey;
+    font-weight: 700;
+}
+
+#loginDiv a {
+    color: grey;
+}
+
+.loginFormDiv {
+    padding: 40px;
+    border-left: 15px solid green;
+    display: none;
+    background-color: white;
+    border-radius: 3px;
+    margin-bottom: 100px;
+}
+
+.loginFormDiv input {
+    transition: all .4s ease-in-out;
+    border: none !important;
+    border-bottom: 2px solid grey !important;
+    border-radius: 0px !important;
+    background-color: transparent !important;
+}
+
+.loginFormDiv h3 {
+    margin: 0px;
+    margin-bottom: 25px;
+}

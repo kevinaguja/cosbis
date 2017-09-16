@@ -1,0 +1,62 @@
+header h1, .latestHappeningsDiv h1{
+    font-weight: 600;
+    text-shadow: 1px 1px 3px grey;
+    color: #333 !important;
+}
+
+header, .newsLetterDiv{
+    font-weight: 600;
+}
+
+.headlinesDiv, .latestHappeningsDiv{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.newsItem{
+    padding: 30px;
+}
+
+.newsImageDiv{
+    max-height:300px;
+    overflow:hidden;
+}
+
+.newsItem h4{
+    font-weight: 800;
+}
+
+.newsImageDiv img{
+    width: 100%;
+    height: auto;
+}
+
+.latestHappeningsDiv{
+    padding-top: 50px;
+    background-color: #DDD !important;
+}
+
+.nav-pills a{
+    color: green;
+    font-weight: 600;
+}
+
+.active a{
+    background-color: transparent !important;
+    color: black !important;
+    border-bottom: 3px solid #398439;
+}
+
+.btn-primary{
+    background-color: transparent !important;
+    color: black !important;
+    border: 2px solid #2e6da4;
+}
+
+.newsLetterDiv{
+    background-color: #2ab27b;
+}
+
+.newsLetterDiv, .newsLetterDiv h1{
+    color: #f5f8fa !important;
+}

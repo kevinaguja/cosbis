@@ -18,12 +18,10 @@
     <link href="{{asset('css/main.css')}}" rel="stylesheet">
     @yield('css')
 </head>
-<body style="background-image: url('{{asset('img/cosbis/loginmidbg.svg')}}')">
-    @yield('navigation')
-    <div class="container-fluid" style="padding:0; margin:0; height: 100%;">
-        @yield('content')
+<body class="noPadding noMargin">
+@yield('navigation')
+@yield('content')
 
-        @yield('js')
-    </div>
+@yield('js')
 </body>
 </html>
