@@ -17,7 +17,6 @@ class CreateOrganizationsTable extends Migration
             $table->increments('id');
             $table->string('name',100);
             $table->text('description');
-            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }

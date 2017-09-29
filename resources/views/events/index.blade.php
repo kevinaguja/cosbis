@@ -44,10 +44,12 @@
                                         size="small"
                                         type="info"
                                         @click="move(scope.row.id)">View</el-button>
+                                @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())
                                 <el-button
                                         size="small"
                                         type="danger"
-                                        @click="window.location.href='/'">Downvote</el-button>
+                                        @click="window.location.href='/'">Delete</el-button>
+                                @endif
                             </template>
                         </el-table-column>
                     </el-table>

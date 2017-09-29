@@ -16,7 +16,7 @@
         <div class="col-md-12" style="margin-top: 25px;">
             <div class="col-md-12 dark-bottom-border">
                 <div>
-                    <h3><b>Profile - <small>Welcome to the cosbr control panel</small></b></h3>
+                    <h3><b>Profile - <small>Welcome to the Cosbr control panel</small></b></h3>
                     <div class="green-bottom-border col-md-2 col-xs-3"></div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     since: {{Carbon\Carbon::parse(auth()->user()->created_at)->toFormattedDateString()}}</h5>
                 <h5 class="profilePictureDetails"><span class="glyphicon glyphicon-pencil"></span>Last updated
                     on: {{Carbon\Carbon::parse(auth()->user()->updated_at)->diffForHumans()}}</h5>
-                <button class="btn btn-primary">Edit Profile</button>
+                <button class="btn btn-primary" onclick="window.location.href='/profile/edit'">Edit Profile</button>
             </div>
             <div class="col-md-12">
                 <hr>
@@ -63,7 +63,35 @@
                 <div class="tab-content">
                     <div id="accouncements" class="tab-pane fade in active">
                         <div class="col-md-12 noPadding">
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="dashBoxes" style="background-color: #4CAF50;">
+                                    <h4 style="color: white"><b> Latest Announcement</b></h4>
+                                    <hr>
+                                    <h5 style="color: whitesmoke"><b>Classes Suspended for Today</b></h5>
+                                    <h5 class="dashDetails">
+                                        <small>Due to tropical storm ganda, the
+                                            Antipolo City Government has suspended classes for today, September 27,
+                                            2017Due to
+                                            tropical storm ganda, the
+                                            Antipolo City Government has suspended classes for today, September 27,
+                                            2017Due to
+                                            tropical storm ganda, the
+                                            Antipolo City Government has suspended classes for today, September 27,
+                                            2017Due to
+                                            tropical storm ganda, the
+                                            Antipolo City Government has suspended classes for today, September 27,
+                                            2017Due to
+                                            tropical storm ganda, the
+                                            Antipolo City Government has suspended classes for today, September 27,
+                                            2017Due to
+                                            tropical storm ganda, the
+                                            Antipolo City Government has suspended classes for today, September 27, 2017
+                                        </small>
+                                    </h5>
+                                    <button class="btn btn-warning pull-right">Read more</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
                                 <div class="dashBoxes" style="background-color: #4CAF50;">
                                     <h4 style="color: white"><b> Latest Announcement</b></h4>
                                     <hr>

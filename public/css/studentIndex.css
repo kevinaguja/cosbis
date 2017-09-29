@@ -25,7 +25,48 @@
     overflow: hidden !important;
 }
 
+.imageCircle{
+    border-radius: 50%;
+    width: 150px !important;
+    height: 150px !important;
+}
+
+.changePhoto{
+    background-color: transparent;
+    color: white;
+    padding-top: 25px;
+}
+
+.changePhoto label:hover{
+    cursor: pointer;
+}
+
+.header{
+    background-color: #5c5250 ;
+    padding: 20px;
+    padding-bottom: 0px;
+}
+
+.header img{
+    box-shadow: 1px 1px 5px black;
+}
+
+@media (max-width: 1000px) and (min-width:768px){
+    .profilePictureDiv{
+        text-align: left;
+    }
+}
+
 @media (max-width: 768px){
+    .textLeftOnXs .text-right{
+        text-align: left !important;
+        padding-left: 0;
+    }
+
+    .header{
+        align-content: center;
+    }
+
     .profilePictureDetails{
         text-align: center !important;
     }

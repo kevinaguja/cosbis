@@ -45,8 +45,12 @@
                                         @click="move(scope.row.id)">View</el-button>
                                 <el-button
                                         size="small"
+                                        type="success"
+                                        @click="window.location.href='/'">Hazzah!</el-button>
+                                <el-button
+                                        size="small"
                                         type="danger"
-                                        @click="window.location.href='/'">Downvote</el-button>
+                                        @click="window.location.href='/'">Boo!</el-button>
                             </template>
                         </el-table-column>
                     </el-table>

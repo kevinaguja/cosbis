@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function(){
     Route::get('/profile', 'AccountController@index');
+    Route::get('/profile/edit', 'AccountController@edit');
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/events', 'EventController@index');
     Route::get('/events/create', 'EventController@create');

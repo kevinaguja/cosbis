@@ -17,6 +17,7 @@ class UserTableSeeder extends Seeder
             'email' =>'cosbr@cosbr.com',
             'is_verified' => '1',
             'role_id' => '1',
+            'img' => '/img/account_img/example.jpg',
             'student_number' => 'CoSBR-ADMIN',
             'phone' => '0999-231-3122',
             'is_suspended' => '0',

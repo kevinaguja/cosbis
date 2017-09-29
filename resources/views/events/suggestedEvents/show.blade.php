@@ -21,7 +21,7 @@
             </div>
 
             <div class="col-md-12" id="app">
-                <button class="btn eventsBtn" style="margin-bottom: 15px" onclick="window.location.href='/suggestions/create'"><b><span class="glyphicon glyphicon-pencil" style="color: green"></span> Suggest an Event</b></button>
+                <button class="btn eventsBtn" style="margin-bottom: 15px" onclick="window.location.href='/suggestions'"><b><span class="glyphicon glyphicon-book" style="color: green"></span> All Suggestions</b></button>
                 <template>
                     <el-table :data="tableData3" style="width: 100%">
                         <el-table-column type="expand">
@@ -41,7 +41,7 @@
                                 <el-button
                                         size="small"
                                         type="info"
-                                        @click="window.location.href='/'">View</el-button>
+                                        @click="move(scope.row.id)">View</el-button>
                                 <el-button
                                         size="small"
                                         type="warning"
@@ -61,6 +61,11 @@
                 data() {
                     return {
                         tableData3: suggestedEvents
+                    }
+                },
+                methods: {
+                    move: function(id){
+                        window.location.href='/events/' + id
                     }
                 }
             }
