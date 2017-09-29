@@ -6,8 +6,13 @@ header h1,
     color: #333 !important;
 }
 
-header, .newsLetterDiv{
+.feedbackDiv{
     font-weight: 600;
+    background-color: #2ab27b ;
+}
+
+.feedbackDiv h1{
+    color: white;
 }
 
 .sc h3, .sc h6{
@@ -19,6 +24,16 @@ header, .newsLetterDiv{
     font-weight: 500;
     line-height: 1.2em !important;
     display: block;
+}
+
+.headlinesDiv{
+    background-color: #333;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.headlinesDiv h4, .headlinesDiv h4 small, .headlinesDiv button{
+    color: whitesmoke !important;
 }
 
 .headlinesDiv, .latestHappeningsDiv{
@@ -60,14 +75,19 @@ header, .newsLetterDiv{
     border-bottom: 3px solid #398439;
 }
 
+button{
+    transition: all .4s ease-in-out;
+}
+
 .btn-primary{
     background-color: transparent !important;
     color: black !important;
-    border: 2px solid #2e6da4;
+    border: 2px solid grey;
 }
 
-.newsLetterDiv{
-    background-color: #2ab27b;
+.btn-primary:hover{
+    background-color: rgba(255, 255, 255, .2) !important;
+    border: 2px solid #2ab27b;
 }
 
 .newsLetterDiv, .newsLetterDiv h1{
@@ -99,5 +119,17 @@ a[aria-expanded=false] .chevronUp {
     height: 30px;
 }
 
+.feedbackBtn{
+    background-color: transparent;
+    border: none;
+    border-radius: 0px;
+    width: 100%;
+    color: white;
+    font-weight: 900;
+    border-bottom: 1px solid transparent;
+    transition: all .2s ease-in-out;
+}
 
-
+.feedbackBtn:hover{
+    border-bottom: 1px solid white;
+}

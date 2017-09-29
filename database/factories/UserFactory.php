@@ -2,24 +2,20 @@
 
 use Faker\Generator as Faker;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
 
 $factory->define(App\User::class, function (Faker $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
+        'firstname' => $faker->firstName,
+        'lastname' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
+        'is_verified' => $faker->boolean(1),
+        'student_number' => str_random(15),
+        'phone' => $faker->phoneNumber,
+        'role_id' => $faker->randomElement(App\Role::pluck('id')->toArray()),
+        'is_suspended' => $faker->boolean(0),
         'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'remember_token' => str_random(15),
     ];
 });

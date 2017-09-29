@@ -7,12 +7,12 @@
 
 .loginPage .jumbotron {
     padding-top: 0px;
-    color: white;
+    color: green;
     background-color: transparent;
 }
 
 .loginPage .jumbotron p {
-    color: grey;
+    color: #333;
     font-weight: 700;
 }
 

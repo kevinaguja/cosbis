@@ -1,0 +1,78 @@
+.eventsBtn{
+    border-radius: 0px !important;
+    background-color: transparent !important;
+    color: grey;
+    border-bottom: solid 2px grey;
+    transition: all .4s ease-in-out;
+}
+
+.eventsBtn:hover{
+    background-color: #4CAF50 !important;
+}
+
+.suggestionFaq hr{
+    border: 2px solid grey;
+}
+
+.suggestionFaq{
+    font-family: sans-serif;
+}
+
+.suggestionFaq h1{
+    color: dimgrey;
+}
+
+.suggestionFaq ol li:hover{
+    cursor: pointer;
+}
+
+.suggestionFaq li h4 a{
+    font-weight: 600;
+    color: grey;
+}
+
+.suggestionForm hr{
+    border: 2px solid grey;
+}
+
+.suggestionForm h1{
+    color: dimgrey;
+}
+
+.content-2-div{
+    padding-left: 0px; padding-right:0px;
+}
+
+.content-2-div .col-md-6:nth-child(1){
+    padding-left: 0px;
+}
+
+.content-2-div .col-md-6:nth-child(2){
+    padding-right: 0px;
+}
+
+.eventBannerDiv{
+    height: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #5c5250;
+    box-shadow: 1px 1px 5px grey;
+}
+
+@media (min-width: 768px){
+    .suggestionForm{
+        padding-right: 70px;
+    }
+}
+
+@media (max-width: 768px){
+
+    .content-2-div .col-md-6:nth-child(1){
+        padding-right: 0px;
+    }
+
+    .content-2-div .col-md-6:nth-child(2){
+        padding-left: 0px;
+    }
+}

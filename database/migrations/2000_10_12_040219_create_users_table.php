@@ -13,16 +13,21 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('users');
         Schema::create('users', function (Blueprint $table) {
-//            $table->increments('id');
-            $table->increments('student_number');
-            $table->string('firstname', 60);
-            $table->string('lastname', 60);
-            $table->string('email', 100)->unique();
+            $table->increments('id');
+            $table->string('student_number');
+            $table->string('firstname',50);
+            $table->string('lastname',50);
+            $table->boolean('is_verified')->default(false);
+            $table->integer('role_id')->default(2)->unsigned();
+            $table->string('email')->unique();
             $table->string('password');
+            $table->string('phone',50);
+            $table->text('img')->nullable();
+            $table->boolean('is_suspended')->default(false);
             $table->rememberToken();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

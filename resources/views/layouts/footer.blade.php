@@ -1,5 +1,5 @@
 <div class="footer col-md-12">
-   <div class="container-fluid">
+   <div class="container">
        <div class="col-md-4">
            <div class="col-md-12">
                <div class="col-md-4 noPadding">
@@ -46,7 +46,7 @@
 
            <div class="col-md-3">
                <h6><b>Contact</b></h6>
-               <a href=""><span><img class="icon" src="{{asset('img/cosbis/fb.png')}}" alt=""></span> <small> Facebook </small> </a><br>
+               <a href=""><span><img class="icon" src="{{asset('Cosbis')}}" alt=""></span> <small> Facebook </small> </a><br>
                <a href=""><span><img class="icon" src="{{asset('img/cosbis/twitter2.png')}}" alt=""></span> <small> Twitter </small></a><br>
                <a href=""><span><img class="icon" src="{{asset('img/cosbis/gmail.png')}}" alt=""></span> <small> Email </small></a><br>
            </div>
