@@ -12,7 +12,7 @@
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
-        <div class="col-md-12" style="margin-top: 25px;">
+        <div class="col-md-12 bg-white">
             <div class="col-md-12 dark-bottom-border">
                 <div>
                     <h3><b>Events Suggestion - <small>Suggest events you think would be both beneficial and fun for the other students</small></b></h3>
@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12" id="app">
+            <div class="col-md-12" id="app" style="padding-bottom: 25px">
                 <button class="btn eventsBtn" style="margin-bottom: 15px" onclick="window.location.href='/suggestions/mysuggestions'"><b><span class="glyphicon glyphicon-book" style="color: green"></span> My Suggested Events</b></button>
                 <button class="btn eventsBtn" style="margin-bottom: 15px" onclick="window.location.href='/events/create'"><b><span class="glyphicon glyphicon-pencil" style="color: green"></span> Suggest an Event</b></button>
                 <template>

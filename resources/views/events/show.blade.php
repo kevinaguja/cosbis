@@ -12,14 +12,14 @@
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
-        <div class="container eventDetails noPadding" style="background-color: #FFF">
+        <div class="col-md-12 eventDetails noPadding bg-white" style="background-color: #FFF">
             <div class="col-md-12 noPadding noMargin eventBannerDiv">
                 <img src="{{$event->img}}" alt="" style="width:100%;">
             </div>
             <div class="col-md-12" style="padding-left: 5em; padding-right: 5em">
                 <h3>
                     <p><b>{{$event->title}} <small style = "color:red">({{Carbon\Carbon::parse($event->date)->diffForHumans()}})</small></b></p>
-                    <p style="text-indent: 2em" class="text-justify"><small >{{$event->description}}</small></p>
+                    <p style="text-indent: 1em" class="text-justify"><small >{{$event->description}}</small></p>
                     <br>
                     @if((strcmp('new', $event->status)===0 && $event->user_id === auth()->user()->id) || auth()->user()->is_admin() || auth()->user()->is_superadmin())
                         <button class="btn btn-success" style="background-color: #4CAF50">Edit</button>

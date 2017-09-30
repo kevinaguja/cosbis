@@ -31,6 +31,10 @@
     color: grey;
 }
 
+.suggestionForm{
+    display: none;
+}
+
 .suggestionForm hr{
     border: 2px solid grey;
 }
@@ -59,12 +63,6 @@
     background-position: center;
     background-color: #5c5250;
     box-shadow: 1px 1px 5px grey;
-}
-
-@media (min-width: 768px){
-    .suggestionForm{
-        padding-right: 70px;
-    }
 }
 
 @media (max-width: 768px){

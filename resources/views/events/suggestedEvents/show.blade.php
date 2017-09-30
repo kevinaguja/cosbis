@@ -12,7 +12,7 @@
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
-        <div class="col-md-12" style="margin-top: 25px;">
+        <div class="col-md-12 bg-white" style="padding-bottom: 25px">
             <div class="col-md-12 dark-bottom-border">
                 <div>
                     <h3><b>My Events - <small>Don't let your ideas turn to dust. suggest an event now</small></b></h3>

@@ -18,11 +18,9 @@
 </head>
 <body class="noPadding noMargin" style="background-color: #eaecf3">
 <div class="container-fluid noPadding noMargin">
-    <div class="container noPadding">
-        @yield('navigation')
-        @yield('content')
-        @yield('js')
-    </div>
+    @yield('navigation')
+    @yield('content')
+    @yield('js')
 </div>
 </body>
 </html>

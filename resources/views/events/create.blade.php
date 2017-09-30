@@ -13,7 +13,7 @@
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
-        <div class="col-md-12" style="margin-top: 25px;">
+        <div class="col-md-12 noPadding bg-white">
             {{--<div class="col-md-12 dark-bottom-border">
                 <div>
                     <h3><b>Suggest an Event - <small>We would like to hear from you. Suggest something fun, creative, and lasting.</small></b></h3>
@@ -21,11 +21,13 @@
                 </div>
             </div>--}}
 
-            <div class="col-md-12 padding-25">
-                <div class="col-md-5 suggestionFaq">
+            <div class="col-md-12 noPadding" id="app" style="padding-bottom: 25px">
+                <div class="col-md-12 suggestionFaq" id="suggestionFaq">
+                    <div class="col-md-12 dark-bottom-border">
+                        <h3><b>What you need to know</b></h3>
+                        <div class="green-bottom-border col-md-2 col-xs-3"></div>
+                    </div>
                     <div class="col-md-12 noPadding">
-                        <h1><b>What you need to know</b></h1>
-                        <hr>
                         <ol class="panel-group list-unstyled" id="accordion">
                             <li class="panel panel-default" data-toggle="collapse" data-parent="#accordion"
                                 href="#rule1">
@@ -78,15 +80,16 @@
                         </ol>
                         </ol>
                     </div>
+                    <button class="btn btn-success" @click="proceedToCreate()">Proceed</button>
                 </div>
-                <div class="col-md-7 suggestionForm">
-                    <h1><b>Suggestion Form</b></h1>
-                    <hr>
-                        <form action="/events/create" method="POST" enctype="multipart/form-data">
+                <div class="col-md-12 noPadding noMargin suggestionForm" id="suggestionForm">
+                    <img src="{{asset('img/events/default.jpg')}}" alt="" style="width:100%">
+                    <form action="/events/create" method="POST" enctype="multipart/form-data" class="col-md-12">
                         {{csrf_field()}}
 
                         <div class="col-md-12">
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                                <br>
                                 <label for="title">Title</label>
                                 <input class="form-control" type="text" name="title" id="title" placeholder="Title..." value="{{old('title')}}">
                                 @if ($errors->has('title'))
@@ -133,7 +136,7 @@
                                     <label for="theme">Date</label>
                                     <input class="form-control" type="date" name="date" id="date">
                                 </div>
-                                <div class="col-md-6 form-group{{ $errors->has('time') ? ' has-error' : '' }}" id="app">
+                                <div class="col-md-6 form-group{{ $errors->has('time') ? ' has-error' : '' }}">
                                     <label for="theme">Time</label>
                                     <input type="hidden" v-model="value1" name="time">
                                     <el-time-select v-model="value1" style="width:100%" name="time" :picker-options="{
@@ -176,6 +179,13 @@
                 return {
                     value1: ''
                 };
+            },
+            methods: {
+                proceedToCreate: function(){
+                    $('#suggestionFaq').fadeOut(function(){
+                        $('#suggestionForm').fadeIn();
+                    });
+                }
             }
         }
         var Ctor = Vue.extend(Main)

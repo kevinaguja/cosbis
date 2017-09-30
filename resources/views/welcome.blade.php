@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.mainpage')
 
 @section('css')
     <link rel="stylesheet" href="{{asset('css/frontpage.css')}}">

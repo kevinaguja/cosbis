@@ -71,6 +71,10 @@ B3D7A9
     cursor: pointer;
 }
 
+.btn-success{
+    background-color: #o4CAF50 !important;
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -79,8 +83,12 @@ body, html {
 }
 
 .cms-wrapper{
-    margin-left: 15% !important;
-    width: 85% !important;
+    margin-left: 25% !important;
+    width: 75% !important;
+}
+
+.bg-white{
+    background-color: #fff;
 }
 
 .noPadding {
@@ -158,6 +166,7 @@ body, html {
     color: white !important;
 }
 
+
 .footerImgDiv{
     max-height:100px;
 }
@@ -192,13 +201,6 @@ body, html {
 
     .navbar .navbar-collapse {
         text-align: center;
-    }
-}
-
-@media (max-width: 1500px){
-    .cms-wrapper{
-        margin-left: 22% !important;
-        width: 78% !important;
     }
 }
 
