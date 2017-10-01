@@ -12,7 +12,7 @@
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
-        <div class="col-md-12 bg-white">
+        <div class="col-md-12 col-sm-12 bg-white">
             <div class="col-md-12 dark-bottom-border">
                 <div>
                     <h3><b>Events Suggestion - <small>Suggest events you think would be both beneficial and fun for the other students</small></b></h3>

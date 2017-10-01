@@ -13,7 +13,7 @@
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
-        <div class="col-md-12 bg-white noPadding noMargin">
+        <div class="col-md-12 col-sm-12 bg-white noPadding noMargin">
             <div class="col-md-12">
                 <div class="col-md-12 dark-bottom-border">
                     <div>

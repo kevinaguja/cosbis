@@ -15,7 +15,7 @@
         <div class="col-md-12 noPadding bg-white">
             <div class="col-md-12 header noPadding">
                 <div class="col-md-12 text-center readjustOrientation" style=" overflow: hidden">
-                    <div class="col-md-2 col-md-offset-5">
+                    <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
                         <img id="imgEl" src="{{asset(auth()->user()->img)}}" class="img-responsive center-block img-circle" style="margin: 5px;" alt="">
                     </div>
                 </div>

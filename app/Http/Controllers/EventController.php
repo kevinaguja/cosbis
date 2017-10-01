@@ -22,10 +22,7 @@ class EventController extends Controller
 
     public function show($id)
     {
-        $event= \App\Event::where([
-                    ["status", "<>", "rejected"],
-                    ["id", "=", $id]
-                ])->first();
+        $event= \App\Event::where("id", "=", $id)->first();
 
         return view('events.show', compact('event'));
     }

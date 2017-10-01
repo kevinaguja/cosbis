@@ -13,7 +13,7 @@
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
-        <div class="col-md-12 bg-white">
+        <div class="col-md-12 col-sm-12 bg-white">
             <div class="col-md-12 dark-bottom-border">
                 <div>
                     <h3><b>Events - <small>Regularly check on the events lists in order to avoid missing out on all of the campus fun</small></b></h3>
