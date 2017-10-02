@@ -12,7 +12,7 @@
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
-        <div class="col-md-12 col-sm-12 bg-white">
+        <div class="col-md-12 col-sm-12 col-xs-12 bg-white">
             <div class="col-md-12 dark-bottom-border">
                 <div>
                     <h3><b>Events Suggestion - <small>Suggest events you think would be both beneficial and fun for the other students</small></b></h3>
@@ -27,7 +27,13 @@
                     <el-table :data="tableData3" style="width: 100%">
                         <el-table-column type="expand">
                             <template scope="props">
+                                <div class="col-md-12 noPadding" style="padding-bottom: 15px">
+                                    <div class="col-md-6 noPadding">
+                                        <img :src="props.row.img" alt="Event Picture" style="width:100%">
+                                    </div>
+                                </div>
                                 <p><b>Title:</b> @{{ props.row.title }}</p>
+                                <p><b>Author:</b>@{{ props.row.firstname }} @{{ props.row.lastname }}</p>
                                 <p><b>Description:</b> @{{ props.row.description }}</p>
                                 <p><b>Date:</b> @{{ props.row.date }}</p>
                                 <p><b>Time:</b> @{{ props.row.time }}</p>
@@ -35,7 +41,10 @@
                         </el-table-column>
                         <el-table-column label="Title" prop="title">
                         </el-table-column>
-                        <el-table-column label="Author" prop="user.firstname">
+                        <el-table-column label="Author">
+                            <template scope="scope">
+                                <p><b>@{{ scope.row.user.firstname }} @{{ scope.row.user.lastname }}</b></p>
+                            </template>
                         </el-table-column>
                         <el-table-column label="Operations">
                             <template scope="scope">

@@ -12,7 +12,7 @@
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
-        <div class="col-md-12 bg-white" style="padding-bottom: 25px">
+        <div class="col-md-12 col-sm-12 col-xs-12 bg-white" style="padding-bottom: 25px">
             <div class="col-md-12 dark-bottom-border">
                 <div>
                     <h3><b>My Events - <small>Don't let your ideas turn to dust. suggest an event now</small></b></h3>
@@ -36,6 +36,7 @@
                         </el-table-column>
                         <el-table-column label="Title" prop="title">
                         </el-table-column>
+                        </el-table-column>
                         <el-table-column label="Operations">
                             <template scope="scope">
                                 <el-button
@@ -55,20 +56,20 @@
     </div>
 
     <script>
-        var suggestedEvents= {!! json_encode($events) !!}
+        var suggestedEvents= {!! json_encode($events) !!};
 
         var Main = {
-                data() {
-                    return {
-                        tableData3: suggestedEvents
-                    }
-                },
-                methods: {
-                    move: function(id){
-                        window.location.href='/events/' + id
-                    }
+            data() {
+                return {
+                    tableData3: suggestedEvents
+                }
+            },
+            methods: {
+                move: function(id){
+                    window.location.href='/events/' + id
                 }
             }
+        }
         var Ctor = Vue.extend(Main)
         new Ctor().$mount('#app')
     </script>

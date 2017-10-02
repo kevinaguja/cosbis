@@ -75,6 +75,13 @@ B3D7A9
     background-color: #4CAF50 !important;
 }
 
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    background-color: rgba(76, 175, 80, .8);
+    border-color: transparent !important;
+    color: black;
+    cursor: default;
+}
+
 body, html {
     margin: 0;
     padding: 0;

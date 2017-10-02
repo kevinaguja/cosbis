@@ -1,5 +1,28 @@
+.nav-pills a{
+    color: green;
+    font-weight: 600;
+}
+
+.active a{
+    background-color: transparent !important;
+    color: black !important;
+    border-bottom: 2px solid #398439;
+    border-radius: 0px !important;
+}
+
 .profilePictureDiv{
     text-align: right;
+}
+
+.btn-primary{
+    background-color: transparent !important;
+    color: black !important;
+    border: 2px solid grey;
+}
+
+.btn-primary:hover{
+    background-color: rgba(255, 255, 255, .2) !important;
+    border: 2px solid #398439;
 }
 
 .dashBoxes{

@@ -67,7 +67,8 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu" id="navDropdown">
-                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                            <li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                         </ul>
                     </li>
                 </ul>

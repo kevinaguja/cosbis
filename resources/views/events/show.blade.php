@@ -12,7 +12,7 @@
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
-        <div class="col-md-12 col-sm-12 eventDetails noPadding bg-white" style="background-color: #FFF">
+        <div class="col-md-12 col-sm-12 col-xs-12 eventDetails noPadding bg-white" style="background-color: #FFF">
             <div class="col-md-12 noPadding noMargin eventBannerDiv">
                 <img src="{{$event->img}}" alt="" style="width:100%;">
             </div>

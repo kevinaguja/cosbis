@@ -14,9 +14,11 @@
                 </div>
             </li>
             <hr class="light-hr">
-            <li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
             <li><a {{Request::is("profile*") ? " class= active" :  ''}} href="/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
             <li><a {{Request::is("announcements*") ? " class= active" :  ''}} href="/profile"><span class="glyphicon glyphicon-info-sign"></span> Accouncements</a></li>
+            @if(auth()->user()->is_admin())
+                <li><a {{Request::is("profile*") ? " class= active" :  ''}} href="/users">Users</a></li>
+            @endif
             <li id="accordion">
                 <a data-toggle="collapse" data-parent="#accordion" href="#eventsCollapse"><span class="glyphicon glyphicon-cloud"></span> Events <small><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></small></a>
                 <div id="eventsCollapse" class="panel-collapse collapse {{Request::is("events*") || Request::is("suggestions*") ? "in" :  ''}}">
@@ -41,12 +43,12 @@
             </li>
             <li id="accordion">
                 <a data-toggle="collapse" data-parent="#accordion" href="#preferencesCollapse"><span class="glyphicon glyphicon-paperclip"></span> Settings <small><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></small></a>
-                    <div id="preferencesCollapse" class="panel-collapse collapse">
-                        <a href="#">Preference 1</a>
-                        <a href="#">Preference 2</a>
-                        <a href="#">Preference 3</a>
-                        <a href="#">Preference 4</a>
-                        <a href="#">Preference 5</a>
+                <div id="preferencesCollapse" class="panel-collapse collapse">
+                    <a href="#">Preference 1</a>
+                    <a href="#">Preference 2</a>
+                    <a href="#">Preference 3</a>
+                    <a href="#">Preference 4</a>
+                    <a href="#">Preference 5</a>
                 </div>
             </li>
             <li>
@@ -59,8 +61,8 @@
                 <label class="col-md-12 text-center">
                     <small>
                         College of San Benildo-Rizal
-                    <br>
-                    <span class="glyphicon glyphicon-copyright-mark"></span> {{Carbon\Carbon::parse(Carbon\Carbon::now())->year}}
+                        <br>
+                        <span class="glyphicon glyphicon-copyright-mark"></span> {{Carbon\Carbon::parse(Carbon\Carbon::now())->year}}
                     </small>
                 </label>
                 <img src="{{asset('img/cosbis/cosbr-logo.png')}}" alt="" style="width: 30%">

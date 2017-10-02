@@ -13,7 +13,7 @@
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
-        <div class="col-md-12 col-sm-12 bg-white">
+        <div class="col-md-12 col-sm-12 col-xs-12 bg-white">
             <div class="col-md-12 dark-bottom-border">
                 <div>
                     <h3><b>Events - <small>Regularly check on the events lists in order to avoid missing out on all of the campus fun</small></b></h3>
@@ -28,6 +28,11 @@
                     <el-table :data="tableData3" style="width: 100%">
                         <el-table-column type="expand">
                             <template scope="props">
+                                <div class="col-md-12 noPadding" style="padding-bottom: 15px">
+                                    <div class="col-md-6 noPadding">
+                                        <img :src="props.row.img" alt="Event Picture" style="width:100%">
+                                    </div>
+                                </div>
                                 <p><b>Title:</b> @{{ props.row.title }}</p>
                                 <p><b>Description:</b> @{{ props.row.description }}</p>
                                 <p><b>Date:</b> @{{ props.row.date }}</p>
