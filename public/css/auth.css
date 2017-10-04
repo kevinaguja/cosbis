@@ -1,0 +1,17 @@
+.authDiv {
+    margin-top: 150px;
+    border-radius: 15px;
+}
+
+.authDiv .panel {
+    padding: 0px;
+}
+
+.authDiv .panel-body {
+    padding: 0px;
+}
+
+.passwordReset h5 {
+    letter-spacing: .1em;
+    color: green;
+}

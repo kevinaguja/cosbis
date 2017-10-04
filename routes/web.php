@@ -23,15 +23,30 @@ Auth::routes();
 Route::middleware('auth')->group(function(){
     Route::get('/profile', 'AccountController@index');
     Route::get('/profile/edit', 'AccountController@edit');
+    Route::patch('/profile/edit', 'AccountController@update');
+    Route::get('/profile/password','AccountController@password');
+    Route::patch('/profile/password','AccountController@updatePassword');
     Route::get('/', 'HomeController@index')->name('home');
+
+    Route::get('/announcements', 'AnnouncementController@index');
+
     Route::get('/events', 'EventController@index');
+    Route::get('/events/calendar', 'EventController@calendar');
     Route::get('/events/create', 'EventController@create');
     Route::post('/events/create', 'EventController@store');
-
     Route::get('/events/{id}', 'EventController@show');
 
     Route::get('/suggestions', 'SuggestedEventController@index');
     Route::get('/suggestions/mysuggestions', 'SuggestedEventController@show');
+
+    Route::get('/organizations','OrganizationController@index');
+
+    Route::group(['namespace'=>'Admin', 'middleware'=>'superadmin'], function (){
+        Route::get('/accounts/','AccountController@index');
+        Route::get('/accounts/{user}','AccountController@show');
+        Route::get('/accounts/{user}/edit','AccountController@edit');
+        Route::patch('/accounts/{user}/edit','AccountController@update');
+    });
 });
 
 Route::get('try', function(){

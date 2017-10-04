@@ -62,21 +62,40 @@
 
                     <div class="tab-content">
                         <div id="accouncements" class= '{{strcmp(request('active'), '1')==0 || strcmp(request('active'), '')==0 ? "tab-pane fade in active": "tab-pane fade"}}'>
-                                @foreach($announcements as $announcement)
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="dashBoxes" style="background-color: #4CAF50">
-                                            <h4 style="color: white"><b> {{$announcement->title}}</b> <br> <small style="color: whitesmoke">{{Carbon\Carbon::parse($announcement->created_at)->diffForHumans()}}</small></h4>
-                                            <hr>
-                                            <h6 style="color: whitesmoke"><b> By: {{$announcement->user->firstname}} {{$announcement->user->lastname}}</b></h6>
-                                            <h5 class="dashDetails">
-                                                <small>
-                                                    {{$announcement->announcement}}
-                                                </small>
-                                            </h5>
-                                            <button class="btn btn-warning pull-right">Read more</button>
+                            @foreach($announcements as $announcement)
+                                <div class="col-md-12">
+                                    <div class="dashBoxes" style="box-shadow: none; max-height: none;">
+                                        <div>
+                                            <h4><b>{{$announcement->title}}</b> <small style="color: grey">{{Carbon\Carbon::parse($announcement->created_at)->diffForHumans()}}</small>
+                                            </h4>
+                                            <h4 class="col-md-12 text-justify">
+                                                {{$announcement->announcement}}
+                                            </h4>
+                                        </div>
+                                        <div class="col-md-12 noPadding">
+                                            <h6 style="color: black" class="pull-left">
+                                                <img src="{{$announcement->user->img}}" alt="" style="width: 50px; display: inline" class="img-circle">
+                                                @switch($announcement->user->role_id)
+                                                    @case('1')
+                                                    <b class="alert-success"> By: {{$announcement->user->firstname}} {{$announcement->user->lastname}}</b>
+                                                    @break;
+                                                    @case('2')
+                                                    <b class="alert-warning"> By: {{$announcement->user->firstname}} {{$announcement->user->lastname}}</b>
+                                                    @break;
+                                                    @case('3')
+                                                    <b class="alert-danger"> By: {{$announcement->user->firstname}} {{$announcement->user->lastname}}</b>
+                                                    @break;
+                                                @endswitch
+                                            </h6>
+                                            <button class="btn btn-danger pull-right navbar-text">Read more</button>
                                         </div>
                                     </div>
-                                @endforeach
+                                    <hr>
+                                </div>
+                            @endforeach
+                            <div class="col-md-12 text-right">
+                                {{$announcements->links()}}
+                            </div>
                         </div>
                         <div id="events" class= '{{strcmp(request('active'), '2')==0 ? "tab-pane fade in active": "tab-pane fade"}}'>
                             @foreach($events as $event)

@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
             $table->text('description');
             $table->string('status');
             $table->string('time');
-            $table->string('date');
+            $table->timestamp('date');
             $table->string('location');
             $table->string('type');
             $table->string('theme');

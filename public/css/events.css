@@ -4,6 +4,8 @@
     color: grey;
     border-bottom: solid 2px grey;
     transition: all .4s ease-in-out;
+    box-shadow: none !important
+;
 }
 
 .eventsBtn:hover{
@@ -64,6 +66,15 @@
     background-color: #5c5250;
     box-shadow: 1px 1px 5px grey;
 }
+
+.announcementsDiv ul li{
+    background-color: #f6f7f9;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.announcementsDiv ul li h5{padding:10px}
+.announcementsDiv ul li p{text-indent: 1em; border-bottom: none}
 
 @media (max-width: 768px){
 

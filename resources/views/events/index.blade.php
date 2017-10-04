@@ -1,30 +1,46 @@
 @extends('layouts.master')
-
 @section('css')
     <link rel="stylesheet" href="{{asset('css/sidebar.css')}}">
     <link rel="stylesheet" href="{{asset('css/events.css')}}">
-
 @endsection
-
 @section('navigation')
     @include('layouts.navigationadmin')
 @endsection
-
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
         <div class="col-md-12 col-sm-12 col-xs-12 bg-white">
-            <div class="col-md-12 dark-bottom-border">
+            {{--<div class="col-md-12 dark-bottom-border">
                 <div>
                     <h3><b>Events - <small>Regularly check on the events lists in order to avoid missing out on all of the campus fun</small></b></h3>
                     <div class="green-bottom-border col-md-2 col-xs-3"></div>
                 </div>
-            </div>
-
-            <div class="col-md-12" id="app" style="padding-bottom: 25px">
-                <button class="btn eventsBtn" style="margin-bottom: 15px" onclick="window.location.href='/suggestions/mysuggestions'"><b><span class="glyphicon glyphicon-book" style="color: green"></span> My Suggested Events</b></button>
-                <button class="btn eventsBtn" style="margin-bottom: 15px" onclick="window.location.href='/events/create'"><b><span class="glyphicon glyphicon-pencil" style="color: green"></span> Suggest an Event</b></button>
-                <template>
+            </div>--}}
+            <div class="col-md-12" id="app" style="padding-bottom: 25px; padding-top: 25px;">
+                <div class="col-md-4 col-xs-5">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </div>
+                <button class="btn eventsBtn pull-right" style="margin-bottom: 15px; margin-right: 15px" onclick="window.location.href='/events/create'"><b><span class="glyphicon glyphicon-pencil" style="color: green"></span> Suggest an Event</b></button>
+                @foreach($events as $event)
+                    <div class="col-md-12" style="margin-bottom: 25px">
+                        <div class="col-md-12 noPadding">
+                            <img src="{{$event->img}}" alt="News Image" style="width: 100%">
+                            <hr>
+                            <h4><b> {{$event->title}}</b> <br> <small style="color: grey">({{Carbon\Carbon::parse($event->date)->toFormattedDateString()}} - {{$event->time}}) {{Carbon\Carbon::parse($event->date)->diffForHumans()}}</small></h4>
+                            <h6 style="color: grey"><b> By: {{$event->user->firstname}} {{$event->user->lastname}}</b></h6>
+                            <h4 class="dashDetails" style="color: #000;">
+                                <small>
+                                    {{$event->description}}
+                                </small>
+                            </h4>
+                            <button class="btn btn-warning pull-right" onclick="window.location.href='events/{{$event->id}}'">Read more</button>
+                        </div>
+                    </div>
+                @endforeach
+                <div class="col-md-12 text-right">
+                    {{$events->links()}}
+                </div>
+                {{--<template>
                     <el-table :data="tableData3" style="width: 100%">
                         <el-table-column type="expand">
                             <template scope="props">
@@ -58,14 +74,12 @@
                             </template>
                         </el-table-column>
                     </el-table>
-                </template>
+                </template>--}}
             </div>
         </div>
     </div>
-
     <script>
         var events= {!! json_encode($events) !!};
-
         var Main = {
             data() {
                 return {

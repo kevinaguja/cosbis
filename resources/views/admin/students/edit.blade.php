@@ -12,14 +12,14 @@
 @section('content')
     @include('layouts.sidebar')
     <div class="cms-wrapper">
-        <form action="/profile/edit" method="post" enctype="multipart/form-data">
+        <form action="/accounts/{{$account->id}}/edit" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             {!! method_field("PATCH") !!}
             <div class="col-md-12 noPadding bg-white">
                 <div class="col-md-12 header noPadding">
                     <div class="col-md-12 text-center readjustOrientation" style=" overflow: hidden">
                         <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
-                            <img id="imgEl" src="{{asset(auth()->user()->img)}}" class="img-responsive center-block img-circle" style="margin: 5px;" alt="">
+                            <img id="imgEl" src="{{asset($account->img)}}" class="img-responsive center-block img-circle" style="margin: 5px;" alt="">
                         </div>
                     </div>
 
@@ -46,6 +46,7 @@
                 </div>
                 <div class="col-md-11" style="padding-top: 10px">
                     <div class="col-md-8 col-md-offset-2">
+                        <input type="hidden" value="{{$account->id}}" name="id">
                         <h2><b>Edit Profile Information</b></h2>
                         <hr>
                         <div class="col-md-12 noPadding textLeftOnXs">
@@ -53,7 +54,7 @@
                                 <h5 class="col-md-3 text-right "><b>Student ID: </b></h5>
                                 <div class="form-group col-md-9 noPadding" style="border-bottom: 2px solid green;">
                                     <input class="form-control" disabled required
-                                           value="{{ucwords(strtolower(auth()->user()->student_number))}}">
+                                           value="{{ucwords(strtolower($account->student_number))}}">
                                 </div>
                             </div>
 
@@ -61,7 +62,7 @@
                                 <h5 class="col-md-3 text-right "><b>First Name: </b></h5>
                                 <div class="form-group col-md-9 noPadding">
                                     <input type="text" class="form-control" name="firstname" required
-                                           value="{{ucwords(strtolower(auth()->user()->firstname))}}">
+                                           value="{{ucwords(strtolower($account->firstname))}}">
                                 </div>
                             </div>
 
@@ -69,7 +70,7 @@
                                 <h5 class="col-md-3 text-right "><b>Last Name: </b></h5>
                                 <div class="form-group col-md-9 noPadding">
                                     <input type="text" class="form-control" name="lastname" required
-                                           value="{{ucwords(strtolower(auth()->user()->lastname))}}">
+                                           value="{{ucwords(strtolower($account->lastname))}}">
                                 </div>
                             </div>
 
@@ -77,16 +78,33 @@
                                 <h5 class="col-md-3 text-right "><b>Phone: </b></h5>
                                 <div class="form-group col-md-9 noPadding">
                                     <input type="text" class="form-control" name="phone" required
-                                           value="{{auth()->user()->phone}}">
+                                           value="{{$account->phone}}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <h5 class="col-md-3 text-right "><b>Email: </b></h5>
                                 <div class="form-group col-md-9 noPadding">
-                                    <input type="text" class="form-control" required name="email" value="{{auth()->user()->email}}">
+                                    <input type="text" class="form-control" required name="email" value="{{$account->email}}">
                                 </div>
                             </div>
+
+                            @if($account->role_id!=1)
+                                <div class="form-group">
+                                    <h5 class="col-md-3 text-right "><b>Role: </b></h5>
+                                    <div class="form-group col-md-9 noPadding">
+                                        <select name="role" class="form-control">
+                                            @foreach($roles as $role)
+                                                @if($role->id==$account->role_id)
+                                                    <option value="{{$role->id}}" selected>{{$role->name}}</option>
+                                                @else
+                                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -106,7 +124,6 @@
                             @endif
                         </div>
                         <div class="form-group text-right">
-                            <a href="\profile\password" type="button" class="btn buttons btn-info">Change Password</a>
                             <button type="submit" class="btn buttons btn-success">Update</button>
                         </div>
                     </div>

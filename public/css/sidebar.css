@@ -23,6 +23,7 @@
     width: 280px;
     background-color: ghostwhite;
     max-width: 280px !important;
+    max-height: 100%;
     position:fixed;
     overflow: auto;
 }
@@ -149,3 +150,41 @@
         font-size: 1vw;
     }
 }
+
+/*
+@media (min-width: 768px) and (max-height: 1920px){
+    .sidebar ul{
+        max-height: 1500px;
+        overflow: auto;
+    }
+}
+
+@media (min-width: 768px) and (max-height: 1500px){
+    .sidebar ul{
+        max-height: 1200px;
+        overflow: auto;
+    }
+}
+
+@media (min-width: 768px) and (max-height: 1200px){
+    .sidebar ul{
+        max-height: 900px;
+        overflow: auto;
+    }
+}
+
+
+
+@media (min-width: 768px) and (max-height: 900px){
+    .sidebar ul{
+        max-height: 600px;
+        overflow: auto;
+    }
+}
+
+@media (min-width: 768px) and (max-height: 600px){
+    .sidebar ul{
+        max-height: 600px;
+        overflow: auto;
+    }
+}*/

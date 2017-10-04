@@ -4,15 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Craftbeer\Filetransfer\Classes\PhotoTransferable;
 use App\Http\Requests\events\StoreEventRequest;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
     //
     public function index()
     {
-            $events= \App\Event::where('status', '=', 'approved')->get();
+        $events= \App\Event::where('status', '=', 'approved')->paginate(5);
 
         return view('events.index', compact('events'));
+    }
+
+    public function calendar()
+    {
+        $now= Carbon::now()->format('Y-m-d');
+        $week_ago= Carbon::now()->subDays(7)->format('Y-m-d');
+        $week_from_now = Carbon::now()->addDays(7)->format('Y-m-d');
+
+        $events= \App\Event::where([['date', '>=', $week_ago], ['status', '=', 'approved']])
+            ->orderBy('date', 'asc')
+            ->get();
+        $upcomming_events= \App\Event::where([['date', '>', $now], ['status', '=', 'approved']])
+            ->orderBy('date', 'asc')
+            ->get();
+        $new_events= \App\Event::where([['created_at', '>=', $week_ago], ['status', '=', 'new']])
+            ->orderBy('date', 'asc')
+            ->get();
+
+        foreach($events as $event){
+            $event->date= Carbon::parse($event->date)->toDayDateTimeString();
+        }
+        foreach($upcomming_events as $event){
+            $event->date= Carbon::parse($event->date)->toDayDateTimeString();
+        }
+        foreach($new_events as $event){
+            $event->date= Carbon::parse($event->date)->toDayDateTimeString();
+        }
+
+        return view('events.calendar', compact('events', 'upcomming_events', 'new_events'));
     }
 
     public function create()
