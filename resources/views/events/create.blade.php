@@ -30,6 +30,22 @@
                                     <h3><b>Guidelines</b></h3>
                                     <div class="green-bottom-border col-md-2 col-xs-3"></div>
                                 </div>
+                                @if(session()->has('success'))
+                                    <div class="col-md-12">
+                                        <div class="col-md-12 alert alert-success">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            {{session('success')}}
+                                        </div>
+                                    </div>
+                                @endif
+                                @if(session()->has('error'))
+                                    <div class="col-md-12">
+                                        <div class="col-md-12 alert alert-danger">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            {{session('error')}}
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="col-md-12">
                                     <ol class="panel-group list-unstyled" id="accordion">
                                         <li class="panel panel-default" data-toggle="collapse" data-parent="#accordion"
@@ -90,7 +106,7 @@
                                     @else
                                         <div class="col-md-12 noPadding noMargin suggestionForm" id="suggestionForm">
                                             @endif
-                                            <img src="{{asset('img/events/default.jpg')}}" alt="" style="width:100%">
+                                            <img src="{{asset('img/events/default.jpg')}}" alt="" style="width:100%" id="imgBanner">
                                             <form action="/events/create" method="POST" enctype="multipart/form-data" class="col-md-12">
                                                 {{csrf_field()}}
 
@@ -142,6 +158,12 @@
                                                         <div class="col-md-6 form-group{{ $errors->has('date') ? ' has-error' : '' }}">
                                                             <label for="theme">Date</label>
                                                             <input class="form-control" type="date" name="date" id="date">
+
+                                                            @if ($errors->has('date'))
+                                                                <span class="help-block">
+                                        <strong>{{ $errors->first('date') }}</strong>
+                                    </span>
+                                                            @endif
                                                         </div>
                                                         <div class="col-md-6 form-group{{ $errors->has('time') ? ' has-error' : '' }}">
                                                             <label for="theme">Time</label>
@@ -187,6 +209,34 @@
                             value1: ''
                         };
                     },
+                    mounted: function(){
+                        //set default date
+                        var now = new Date();
+
+                        var day = ("0" + now.getDate()).slice(-2);
+                        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+                        var today = now.getFullYear()+"-"+(month)+"-"+(day);
+
+                        $('#date').val(today);
+
+                        $('#img').on('change', function () {
+                            var input = this;
+                            var url = $(this).val();
+                            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+                            if (input.files && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+
+                                console.log(input.files[0]);
+                                var reader = new FileReader();
+
+                                $(reader).on("load", function (e) {
+                                    $('#imgBanner').attr('src', e.target.result);
+                                });
+
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        });
+                    },
                     methods: {
                         proceedToCreate: function(){
                             $('#suggestionFaq').fadeOut(function(){
@@ -197,5 +247,8 @@
                 }
                 var Ctor = Vue.extend(Main)
                 new Ctor().$mount('#app')
+
+
+
             </script>
 @endsection

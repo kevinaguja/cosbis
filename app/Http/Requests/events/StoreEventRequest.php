@@ -26,8 +26,8 @@ class StoreEventRequest extends FormRequest
         return [
             'title' => 'required|max:100',
             'description' => 'required',
-            'time' => 'max:255',
-            'date' => 'max:255',
+            'time' => 'required|max:255',
+            'date' => 'required|max:255',
             'location' => 'max:255',
             'type' => 'required|max:255',
             'img' => 'image',

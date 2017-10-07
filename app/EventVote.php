@@ -12,6 +12,7 @@ class EventVote extends Model
     protected $fillable=[
         'event_id',
         'user_id',
+        'vote',
     ];
 
     public function user(){

@@ -16,9 +16,9 @@
         <div class="col-md-12 col-sm-12 col-xs-12 bg-white" style="padding-top: 25px">
             <div class="col-md-12" style="margin-bottom: 15px;">
                 <ul class="nav nav-pills" style="border-radius: 0px;">
-                    <li class= 'active'><a data-toggle="pill" href="#index">Index</a></li>
-                    <li><a data-toggle="pill" href="#upcomming">Upcomming</a></li>
-                    <li><a data-toggle="pill" href="#suggestions">New Suggestions</a></li>
+                    <li class= 'active'><a data-toggle="pill" href="#index"><span class="glyphicon glyphicon-th-list"></span> Index</a></li>
+                    <li><a data-toggle="pill" href="#upcomming"><span class="glyphicon glyphicon-bitcoin"></span> Upcomming</a></li>
+                    <li><a data-toggle="pill" href="#suggestions"><span class="glyphicon glyphicon-plus-sign"></span> New Suggestions</a></li>
                 </ul>
             </div>
             <div class="col-md-12">
@@ -27,7 +27,10 @@
                         <ul class="list-unstyled">
                             @foreach($events as $event)
                                 <li>
-                                    <h5><b>{{Carbon\Carbon::parse($event->date)->toDayDateTimeString()}}</b></h5>
+                                    <h5>
+                                        <b>{{Carbon\Carbon::parse($event->date)->toDayDateTimeString()}}</b>
+                                        <p class="pull-right"><small>{{count($event->comments)}} comments</small></p>
+                                    </h5>
                                     <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right" style="border:none; color: cornflowerblue !important;">Find out more</a></p>
                                 </li>
                             @endforeach
@@ -37,7 +40,10 @@
                         <ul class="list-unstyled">
                             @foreach($upcomming_events as $event)
                                 <li>
-                                    <h5><b>{{Carbon\Carbon::parse($event->date)->toDayDateTimeString()}}</b></h5>
+                                    <h5>
+                                        <b>{{Carbon\Carbon::parse($event->date)->toDayDateTimeString()}}</b>
+                                        <p class="pull-right"><small>{{count($event->comments)}} comments</small></p>
+                                    </h5>
                                     <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right" style="border:none; color: cornflowerblue !important;">Find out more</a></p>
                                 </li>
                             @endforeach
@@ -47,7 +53,11 @@
                         <ul class="list-unstyled">
                             @foreach($new_events as $event)
                                 <li>
-                                    <h5><b>{{Carbon\Carbon::parse($event->date)->toDayDateTimeString()}}</b></h5>
+                                    <h5>
+                                        <b>{{Carbon\Carbon::parse($event->date)->toDayDateTimeString()}}</b>
+                                        <p class="pull-right"><small style="color: limegreen">{{count($event->votes)}} votes!</small></p>
+                                        <p class="pull-right"><small>{{count($event->comments)}} comments</small></p>
+                                    </h5>
                                     <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right" style="border:none; color: cornflowerblue !important;">Find out more</a></p>
                                 </li>
                             @endforeach

@@ -17,6 +17,7 @@ class CreateEventVotesTable extends Migration
             $table->increments('id');
             $table->integer('event_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->boolean('vote');
             $table->timestamps();
         });
     }

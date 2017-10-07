@@ -76,6 +76,11 @@
 .announcementsDiv ul li h5{padding:10px}
 .announcementsDiv ul li p{text-indent: 1em; border-bottom: none}
 
+.commentBox{
+    margin-top: 25px;
+    border-left: 2px solid transparent;
+}
+
 @media (max-width: 768px){
 
     .content-2-div .col-md-6:nth-child(1){
@@ -84,5 +89,9 @@
 
     .content-2-div .col-md-6:nth-child(2){
         padding-left: 0px;
+    }
+
+    .pullLeftOnXs{
+        text-align: left !important;
     }
 }

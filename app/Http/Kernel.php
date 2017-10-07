@@ -3,8 +3,10 @@
 namespace App\Http;
 
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\NotVerified;
 use App\Http\Middleware\Student;
 use App\Http\Middleware\SuperAdmin;
+use App\Http\Middleware\Verified;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +65,7 @@ class Kernel extends HttpKernel
         'student' => Student::class,
         'admin' => Admin::class,
         'superadmin' => SuperAdmin::class,
+        'verified' => Verified::class,
+        'notVerified' => NotVerified::class,
     ];
 }

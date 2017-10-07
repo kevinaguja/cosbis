@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Cosbis\TokenGenerator\TokenGenerator;
+use App\Events\WelcomeVerification;
+use App\Http\Requests\Admin\AdminCreateAccountRequest;
+use App\Http\Requests\Admin\AdminUpdateAccountRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,16 +30,9 @@ class AccountController extends Controller
         return view('admin.students.edit',compact('account','roles'));
     }
 
-    public function update(Request $request,$user)
+    public function update(AdminUpdateAccountRequest $request,$user)
     {
         $account= \App\User::find($user);
-        $this->validate($request, [
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email|unique:users,email,'.$request['id'],
-        ]);
-
         $data=array(
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname'],
@@ -46,5 +43,32 @@ class AccountController extends Controller
         $account->update($data);
 
         return redirect()->back();
+    }
+
+    public function create()
+    {
+        $roles=\App\Role::where('id', '!=','1')->get();
+        return view('admin.students.create',compact('roles'));
+    }
+
+    public function store(AdminCreateAccountRequest $request, TokenGenerator $tokenGenerator)
+    {
+        $token= $tokenGenerator->getToken();
+        if($user = \App\User::create([
+            'student_number' => $request['student_number'],
+            'firstname' => $request['firstname'],
+            'lastname' => $request['lastname'],
+            'email' => $request['email'],
+            'phone' => $request['phone'],
+            'token' => $token,
+            'img' => '/img/account_img/example.jpg',
+            'role_id' => $request['role'],
+            'password' => bcrypt('asdasd'),
+        ])){
+            event(new WelcomeVerification($user));
+            return redirect()->back()->with('success');
+        }
+
+        return redirect()->back()->with('error');
     }
 }

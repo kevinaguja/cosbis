@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Students\StudentUpdateAccountRequest;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 
@@ -22,16 +23,9 @@ class AccountController extends Controller
         return view('accounts.edit');
     }
 
-    public function update(Request $request)
+    public function update(StudentUpdateAccountRequest $request)
     {
-        $user= User::find(auth()->user()->id);
-        $this->validate($request, [
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email',
-        ]);
-
+        $user= \App\User::find(auth()->user()->id);
         $data=array(
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname'],
@@ -69,5 +63,14 @@ class AccountController extends Controller
             $request->session()->flash('success', 'Your password has been changed.');
             return back();
         }
+    }
+
+    public function destroy()
+    {
+        if($user = \App\User::find(request('id'))){
+            $user->delete();
+        }
+
+        return back();
     }
 }

@@ -45,7 +45,31 @@ class UserTableSeeder extends Seeder
             'student_number' => '2',
             'phone' => '0999-3231-534',
             'is_suspended' => '0',
-            'password' => 'cosbr',
+            'password' => '$2a$06$0Cz/opS0QXtJbwN4K8clzu5jp8uDfFPL.c.Cd/lWzatn9b6cV6MOi',
+        ]);
+        factory(App\User::class)->create([
+            'firstname'=>'Maika Madel',
+            'lastname'=>'De Vera',
+            'email' =>'studen2@cosbr.com',
+            'is_verified' => '1',
+            'role_id' => '2',
+            'img' => '/img/account_img/example.jpg',
+            'student_number' => '3',
+            'phone' => '0999-3231-533',
+            'is_suspended' => '0',
+            'password' => '$2a$06$0Cz/opS0QXtJbwN4K8clzu5jp8uDfFPL.c.Cd/lWzatn9b6cV6MOi',
+        ]);
+        factory(App\User::class)->create([
+            'firstname'=>'Fredric Jules',
+            'lastname'=>'Cajayon',
+            'email' =>'student3@cosbr.com',
+            'is_verified' => '1',
+            'role_id' => '2',
+            'img' => '/img/account_img/example.jpg',
+            'student_number' => '4',
+            'phone' => '0999-3231-535',
+            'is_suspended' => '0',
+            'password' => '$2a$06$0Cz/opS0QXtJbwN4K8clzu5jp8uDfFPL.c.Cd/lWzatn9b6cV6MOi',
         ]);
     }
 }

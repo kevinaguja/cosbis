@@ -23,7 +23,7 @@ class EventController extends Controller
         $week_ago= Carbon::now()->subDays(7)->format('Y-m-d');
         $week_from_now = Carbon::now()->addDays(7)->format('Y-m-d');
 
-        $events= \App\Event::where([['date', '>=', $week_ago], ['status', '=', 'approved']])
+        $events= \App\Event::where([['date', '>=', $week_ago], ['date', '<=', $week_from_now],['status', '=', 'approved']])
             ->orderBy('date', 'asc')
             ->get();
         $upcomming_events= \App\Event::where([['date', '>', $now], ['status', '=', 'approved']])
@@ -54,8 +54,9 @@ class EventController extends Controller
     public function show($id)
     {
         $event= \App\Event::where("id", "=", $id)->first();
+        $comments= $event->comments()->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('events.show', compact('event'));
+        return view('events.show', compact('event', 'comments'));
     }
 
     public function store(StoreEventRequest $request)
@@ -68,6 +69,23 @@ class EventController extends Controller
             return back()->with('success', 'Event Successfully registered');
 
         return back()->with('error', 'Unable to register event, Please contact your administrator to fix this issue');
+    }
+
+    public function vote($id)
+    {
+        if(!\App\Event::find($id)->checkForVotes()){
+            \App\EventVote::create([
+                'event_id' => $id,
+                'user_id' => auth()->user()->id,
+                'vote' => request('vote')
+            ]);
+
+            return back()->with('success', 'Successfully Voted!');
+        }
+
+        return back()->with('error', 'You have already submitted your vote for this suggestion!');
+
+
     }
 
     private function getStatus()

@@ -24,8 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone',50);
+            $table->string('program',20)->nullable();
             $table->text('img')->nullable();
             $table->boolean('is_suspended')->default(false);
+            $table->text('token')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes()->nullable();

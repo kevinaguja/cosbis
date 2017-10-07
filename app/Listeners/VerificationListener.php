@@ -2,11 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\UserRegistration;
+use App\Events\ResendVerification;
+use App\Mail\VerificationEmail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserRegistrationListener
+class VerificationListener
 {
     /**
      * Create the event listener.
@@ -21,11 +22,11 @@ class UserRegistrationListener
     /**
      * Handle the event.
      *
-     * @param  UserRegistration  $event
+     * @param  ResendVerification  $event
      * @return void
      */
-    public function handle(UserRegistration $event)
+    public function handle(ResendVerification $event)
     {
-        //
+        \Mail::to($event->user)->send(new VerificationEmail($event->user));
     }
 }

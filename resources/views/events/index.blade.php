@@ -20,7 +20,7 @@
                 <div class="col-md-4 col-xs-5">
                     <input type="text" class="form-control" placeholder="Search...">
                 </div>
-                <button class="btn eventsBtn pull-right" style="margin-bottom: 15px; margin-right: 15px" onclick="window.location.href='/events/create'"><b><span class="glyphicon glyphicon-pencil" style="color: green"></span> Suggest an Event</b></button>
+                <button class="btn btn-primary pull-right" style="margin-bottom: 15px; margin-right: 15px" onclick="window.location.href='/events/create'"><b><span class="glyphicon glyphicon-pencil" style="color: white"></span> Suggest an Event</b></button>
                 @foreach($events as $event)
                     <div class="col-md-12" style="margin-bottom: 25px">
                         <div class="col-md-12 noPadding">

@@ -17,11 +17,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'student_number',
         'firstname',
         'lastname',
         'is_verified',
         'role_id',
         'email',
+        'token',
+        'phone',
+        'img',
         'is_suspended',
         'remember_token',
         'password',
@@ -49,6 +53,16 @@ class User extends Authenticatable
     public function is_superadmin()
     {
         return $this->role_id === 1;
+    }
+
+    public function is_verified()
+    {
+        return $this->is_verified;
+    }
+
+    public function program()
+    {
+        $this->belongsTo(Program, 'id', 'program');
     }
 
     public function events(){

@@ -62,7 +62,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown list-transparent">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Earl Kevin A. Aguja
+                            {{auth()->user()->firstname}} {{auth()->user()->lastname}}
                             <img src="{{auth()->user()->img}}" class="img-circle">
                             <b class="caret"></b>
                         </a>

@@ -10,10 +10,11 @@ class SuggestedEventController extends Controller
     //
     public function index()
     {
-        $events= \App\Event::where('status', '=', 'new')->with('user')->get();
+        $events= \App\Event::where('status', '=', 'new')->with('user')->orderBy('created_at', 'desc')->get();
 
         foreach($events as $event){
             $event->date= Carbon::parse($event->date)->toFormattedDateString();
+            $event->hasVoted= $event->checkForVotes();
         }
 
         return view('events.suggestedEvents.index', compact('events'));

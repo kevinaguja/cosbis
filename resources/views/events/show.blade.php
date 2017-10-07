@@ -25,9 +25,13 @@
                         <button class="btn btn-success" style="background-color: #4CAF50">Edit</button>
                         <button class="btn btn-danger">Delete</button>
                     @endif
-                    @if((strcmp('new', $event->status)===0 && $event->user_id !== auth()->user()->id))
-                        <button class="btn btn-success" style="background-color: #4CAF50">Upvote</button>
-                        <button class="btn btn-danger">Boo!</button>
+                    @if((strcmp('new', $event->status)===0 && !$event->checkForVotes() && $event->user_id !== auth()->user()->id))
+                        <form action="/events/{{$event->id}}/vote" method="POST" style="display: inline">
+                            {{csrf_field()}}
+
+                            <button class="btn btn-success" style="background-color: #4CAF50" name="vote" value="1">Huzzah!</button>
+                            <button class="btn btn-danger" name="vote" value="0">Boo!</button>
+                        </form>
                     @endif
                 </h3>
                 <hr>
@@ -47,15 +51,52 @@
                     <p><b>Status: <span class="alert-info">New Entry</span></b></p>
                     @break;
                 @endswitch
-                <hr>
-                <h5><b><img src="{{$event->user->img}}" style="width: 50px; height: 50px;"
-                            class="img-circle">
+                <h5><b>
+                        <img src="{{$event->user->img}}" style="width: 50px; height: 50px;"
+                             class="img-circle">
                         <p><b>{{$event->user->firstname}} {{$event->user->lastname}}
                                 <br> {{Carbon\Carbon::parse($event->created_at)->toFormattedDateString()}}</b>
                             <small>({{Carbon\Carbon::parse($event->created_at)->diffForHumans()}})</small>
                         </p>
-                    </b></h5>
+                    </b>
+                </h5>
+                <hr>
+                @if(session()->has('success'))
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{session('success')}}
+                    </div>
+                @endif
+                @if(session()->has('error'))
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{session('error')}}
+                    </div>
+                @endif
+                <form action="/events/{{$event->id}}" method="POST">
+                    {{csrf_field()}}
 
+                    <div class="form-group">
+                        <textarea name="comment" id="" rows="10" class="form-control" style="resize: none" placeholder="Tell us what you think..." required></textarea>
+                    </div>
+                    <button class="btn btn-primary pull-right">Comment</button>
+                </form>
+                @foreach($comments as $comment)
+                    <div class="col-md-12 noPadding commentBox" style="border-left-color: {{$comment->user->is_student()? 'green': ($comment->user->is_superadmin()? 'red':'yellow')}}">
+                        <div class="col-md-1 col-sm-2 pullLeftOnXs text-right">
+                            <img src="{{$comment->user->img}}" alt="user_image" style="width: 50px; height: 50px" class="img-circle">
+                        </div>
+                        <div class="col-md-11 col-sm-10">
+                            <p>
+                                <b>{{$comment->user->firstname}} {{$comment->user->lastname}}</b> <small>{{Carbon\Carbon::parse($comment->created_at)->diffForHumans()}}</small>
+                            </p>
+                            <p>{{$comment->comment}}</p>
+                        </div>
+                    </div>
+                @endforeach
+                <div class="col-md-12 text-right">
+                    {{$comments->links()}}
+                </div>
             </div>
         </div>
     </div>

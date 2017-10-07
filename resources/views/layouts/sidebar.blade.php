@@ -18,20 +18,17 @@
             @if(auth()->user()->is_superadmin())
                 <li id="accordion">
                     <a data-toggle="collapse" data-parent="#accordion" href="#accountsCollapse"><span class="glyphicon glyphicon-th-list"></span> Accounts <small><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></small></a>
-                    <div id="accountsCollapse" class="panel-collapse collapse">
-                        <a href="/accounts/">Accounts</a>
-                        <a href="#">Message</a>
+                    <div id="accountsCollapse" class="panel-collapse collapse {{Request::is("accounts*") ? "in" :  ''}}">
+                        <a href="/accounts/" {{Request::is("accounts*")  && !Request::is("accounts/create") ? " class=active" :  ''}}>Accounts</a>
+                        <a href="/accounts/create" {{Request::is("accounts/create")  ? " class=active" :  ''}}>Create Account</a>
                     </div>
                 </li>
             @endif
-            <li><a {{Request::is("announcements*") ? " class= active" :  ''}} href="/announcements"><span class="glyphicon glyphicon-info-sign"></span> Accouncements</a></li>
-            @if(auth()->user()->is_admin())
-                <li><a {{Request::is("profile*") ? " class= active" :  ''}} href="/users">Users</a></li>
-            @endif
+            <li><a {{Request::is("announcements*") ? " class= ac    tive" :  ''}} href="/announcements"><span class="glyphicon glyphicon-info-sign"></span> Accouncements</a></li>
             <li id="accordion">
                 <a data-toggle="collapse" data-parent="#accordion" href="#eventsCollapse"><span class="glyphicon glyphicon-cloud"></span> Events <small><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></small></a>
                 <div id="eventsCollapse" class="panel-collapse collapse {{Request::is("events*") || Request::is("suggestions*") ? "in" :  ''}}">
-                    <a href="/events/calendar" {{Request::is("events/calendar*")  ? " class=active" :  ''}}>Calendar</a>
+                    <a href="/events/calendar" {{Request::is("events/calendar*")  ? " class=active" :  ''}}>Weekly</a>
                     <a href="/events" {{(Request::is("events*") && !Request::is('events/calendar'))  ? " class=active" :  ''}}>Events</a>
                     <a href="/suggestions" {{Request::is("suggestions*")  ? " class=active" :  ''}}>Suggested Events</a>
                 </div>
