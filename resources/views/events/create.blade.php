@@ -111,6 +111,18 @@
                                                 {{csrf_field()}}
 
                                                 <div class="col-md-12">
+                                                    <div class="col-md-12 noPadding" style="margin-top: 25px">
+                                                        <div class="col-md-3 noPadding pull-right">
+                                                            <label for="organization_id">Post as</label>
+                                                            <select name="organization_id" class="form-control">
+                                                                <option value="null">{{auth()->user()->firstname}} {{auth()->user()->lastname}}</option>
+                                                                @foreach(auth()->user()->handledOrganizations()->get() as $organization)
+                                                                    <option value="{{$organization->id}}">{{$organization->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                                         <br>
                                                         <label for="title">Title</label>

@@ -2,7 +2,10 @@
 
 namespace App;
 
+use App\Cosbis\Filters\EventFilters;
+use App\Cosbis\Filters\QueryFilter;
 use Illuminate\Database\Eloquent\Model;
+use MongoDB\Driver\Query;
 
 class Event extends Model
 {
@@ -21,6 +24,15 @@ class Event extends Model
         'theme',
         'img',
     ];
+
+    protected $dates= [
+	'date',
+    ];
+
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
+    }
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'id');
@@ -47,5 +59,10 @@ class Event extends Model
     public function checkForVotes()
     {
         return $this->votes()->where('user_id', '=', auth()->user()->id)->exists();
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class, 'organization_id', 'id');
     }
 }

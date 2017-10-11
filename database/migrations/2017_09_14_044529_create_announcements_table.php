@@ -15,10 +15,13 @@ class CreateAnnouncementsTable extends Migration
     {
         Schema::create('announcements', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('organization_id')->unsigned()->nullable();
+            $table->integer('restriction')->unsigned()->nullable();
             $table->string('title',100);
             $table->text('announcement');
             $table->integer('user_id')->unsigned();
+            $table->integer('views')->default(0);
+            $table->integer('organization_id')->unsigned()->nullable();
+            $table->integer('restrictions')->nullable();
             $table->timestamps();
         });
     }

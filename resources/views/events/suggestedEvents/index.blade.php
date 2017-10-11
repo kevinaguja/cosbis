@@ -56,9 +56,10 @@
                                     </div>
                                 </div>
                                 <p><b>Title:</b> @{{ props.row.title }}</p>
-                                <p><b>Author:</b> @{{ props.row.user.firstname }} @{{ props.row.user.lastname }}</p>
+                                <p v-if="props.row.organization_id == null"><b>Author:</b> @{{ props.row.user.firstname }} @{{ props.row.user.lastname }}</p>
+                                <p v-if="props.row.organization_id !== null"><b>Author:</b> @{{ props.row.organization.name }}</p>
                                 <p><b>Description:</b> @{{ props.row.description }}</p>
-                                <p><b>Date:</b> @{{ props.row.date }}</p>
+                                <p><b>Date:</b> @{{ props.row.formattedDate }}</p>
                                 <p><b>Time:</b> @{{ props.row.time }}</p>
                             </template>
                         </el-table-column>

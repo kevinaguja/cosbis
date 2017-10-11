@@ -19,6 +19,7 @@
                     <li class= 'active'><a data-toggle="pill" href="#index"><span class="glyphicon glyphicon-th-list"></span> Index</a></li>
                     <li><a data-toggle="pill" href="#upcomming"><span class="glyphicon glyphicon-bitcoin"></span> Upcomming</a></li>
                     <li><a data-toggle="pill" href="#suggestions"><span class="glyphicon glyphicon-plus-sign"></span> New Suggestions</a></li>
+                    <li><a data-toggle="pill" href="#relevant"><span class="glyphicon glyphicon-eye-open"></span> relevant</a></li>
                 </ul>
             </div>
             <div class="col-md-12">
@@ -57,6 +58,21 @@
                                         <b>{{Carbon\Carbon::parse($event->date)->toDayDateTimeString()}}</b>
                                         <p class="pull-right"><small style="color: limegreen">{{count($event->votes)}} votes!</small></p>
                                         <p class="pull-right"><small>{{count($event->comments)}} comments</small></p>
+                                    </h5>
+                                    <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right" style="border:none; color: cornflowerblue !important;">Find out more</a></p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div id="relevant" class="tab-pane">
+                        <ul class="list-unstyled">
+                            @foreach($relevant_events as $event)
+                                <li>
+                                    <h5>
+                                        <b>{{Carbon\Carbon::parse($event->date)->toDayDateTimeString()}}</b>
+                                        <p class="pull-right"><small>{{$event->views}} views</small></p>
+                                        <p class="pull-right"><small style="color: limegreen">{{count($event->votes)}} votes!</small></p>
+                                        <p class="pull-right"><small style="color: blue">{{count($event->comments)}} comments</small></p>
                                     </h5>
                                     <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right" style="border:none; color: cornflowerblue !important;">Find out more</a></p>
                                 </li>

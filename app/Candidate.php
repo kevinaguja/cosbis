@@ -9,7 +9,11 @@ class Candidate extends Model
     protected $fillable=[
         'user_id',
         'position_id',
-
+        'slogan',
+        'statement',
+        'party',
+        'img',
+        'status',
     ];
 
     public function user(){

@@ -15,6 +15,7 @@ class AddRelationshipAnnouncementsTable extends Migration
     {
         Schema::table('announcements', function (Blueprint $table) {
             $table->foreign('organization_id')->references('id')->on('organizations');
+            $table->foreign('restriction')->references('id')->on('organizations');
         });
     }
 }

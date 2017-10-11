@@ -14,7 +14,7 @@ class AddRelationshipOrganizationsTable extends Migration
     public function up()
     {
         /*Schema::table('organizations', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('admin_id')->references('id')->on('users');
         });*/
     }
 }

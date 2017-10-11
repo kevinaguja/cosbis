@@ -2,17 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Cosbis\Filters\EventFilters;
+use App\Cosbis\Repositories\Criterias\Events\OrderBy;
+use App\Cosbis\Repositories\Criterias\Events\Where;
+use App\Cosbis\Repositories\Criterias\Events\WithCommentCount;
+use App\Cosbis\Repositories\EventRepository;
+use App\Cosbis\Repositories\EventVoteRepository;
 use App\Craftbeer\Filetransfer\Classes\PhotoTransferable;
 use App\Http\Requests\events\StoreEventRequest;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
-    //
-    public function index()
+    private $eventRepository, $eventVoteRepository;
+
+    public function __construct(EventRepository $eventRepository, EventVoteRepository $eventVoteRepository)
     {
-        $events= \App\Event::where('status', '=', 'approved')->paginate(5);
+        $this->eventRepository= $eventRepository;
+        $this->eventVoteRepository= $eventVoteRepository;
+    }
+
+    //
+    public function index(EventFilters $filters)
+    {
+        $now= Carbon::now();
+
+        $events= $this->eventRepository->pushCriteria(new Where([['restriction','=', null], ['date', '>=', $now]]))
+            ->pushCriteria(new OrderBy('date', 'asc'))
+            ->filter($filters)
+            ->paginate(5);
 
         return view('events.index', compact('events'));
     }
@@ -23,27 +41,25 @@ class EventController extends Controller
         $week_ago= Carbon::now()->subDays(7)->format('Y-m-d');
         $week_from_now = Carbon::now()->addDays(7)->format('Y-m-d');
 
-        $events= \App\Event::where([['date', '>=', $week_ago], ['date', '<=', $week_from_now],['status', '=', 'approved']])
-            ->orderBy('date', 'asc')
-            ->get();
-        $upcomming_events= \App\Event::where([['date', '>', $now], ['status', '=', 'approved']])
-            ->orderBy('date', 'asc')
-            ->get();
-        $new_events= \App\Event::where([['created_at', '>=', $week_ago], ['status', '=', 'new']])
-            ->orderBy('date', 'asc')
-            ->get();
+        $events= $this->eventRepository->pushCriteria(new Where([['date', '>=', $week_ago], ['date', '<=', $week_from_now],['status', '=', 'approved']]))
+            ->pushCriteria(new OrderBy('date', 'asc'))
+            ->all();
+        $upcomming_events= $this->eventRepository->clear()
+            ->pushCriteria(new Where(([['date', '>', $now], ['status', '=', 'approved']])))
+            ->pushCriteria(new OrderBy('date', 'asc'))
+            ->all();
+        $new_events= $this->eventRepository->clear()
+            ->pushCriteria(new Where(([['created_at', '>=', $week_ago], ['status', '=', 'new']])))
+            ->pushCriteria(new OrderBy('date', 'asc'))
+            ->all();
+        $relevant_events= $this->eventRepository->clear()
+            ->pushCriteria(new Where([['status', '<>', 'rejected']]))
+            ->pushCriteria(new WithCommentCount())
+            ->pushCriteria(new OrderBy('views', 'desc'))
+            ->pushCriteria(new OrderBy('comments_count', 'desc'))
+            ->all();
 
-        foreach($events as $event){
-            $event->date= Carbon::parse($event->date)->toDayDateTimeString();
-        }
-        foreach($upcomming_events as $event){
-            $event->date= Carbon::parse($event->date)->toDayDateTimeString();
-        }
-        foreach($new_events as $event){
-            $event->date= Carbon::parse($event->date)->toDayDateTimeString();
-        }
-
-        return view('events.calendar', compact('events', 'upcomming_events', 'new_events'));
+        return view('events.calendar', compact('events', 'upcomming_events', 'new_events', 'relevant_events'));
     }
 
     public function create()
@@ -53,7 +69,12 @@ class EventController extends Controller
 
     public function show($id)
     {
-        $event= \App\Event::where("id", "=", $id)->first();
+        if(!($event= $this->eventRepository->pushCriteria(new Where([['restriction', '=', null]]))->find($id))){
+            return redirect('/events');
+        }
+        if(!($event->user_id === auth()->user()->id))
+            $event->views++;
+        $event->save();
         $comments= $event->comments()->orderBy('created_at', 'desc')->paginate(10);
 
         return view('events.show', compact('event', 'comments'));
@@ -61,11 +82,12 @@ class EventController extends Controller
 
     public function store(StoreEventRequest $request)
     {
+        dd(request()->all());
         $img= '/public/img/events/default.jpg';
         if(request('img') !== null)
             $img= PhotoTransferable::move(request('img'));
 
-        if(\App\Event::create(array_merge(request()->all(), ["img"=>$img, "status"=> $this->getStatus(), "user_id"=>auth()->user()->id])));
+        if($this->eventRepository->create(array_merge(request()->all(), ["img"=>$img, "status"=> $this->getStatus(), "user_id"=>auth()->user()->id])));
             return back()->with('success', 'Event Successfully registered');
 
         return back()->with('error', 'Unable to register event, Please contact your administrator to fix this issue');
@@ -73,8 +95,8 @@ class EventController extends Controller
 
     public function vote($id)
     {
-        if(!\App\Event::find($id)->checkForVotes()){
-            \App\EventVote::create([
+        if(!(($this->eventRepository->find($id))->checkForVotes())){
+            $this->eventVoteRepository->create([
                 'event_id' => $id,
                 'user_id' => auth()->user()->id,
                 'vote' => request('vote')

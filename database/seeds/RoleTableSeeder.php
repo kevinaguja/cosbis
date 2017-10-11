@@ -14,5 +14,7 @@ class RoleTableSeeder extends Seeder
         factory(App\Role::class)->create(['name'=>'admin']);
         factory(App\Role::class)->create(['name'=>'Supreme Student Council']);
         factory(App\Role::class)->create(['name'=>'Student']);
+        factory(App\Role::class)->create(['name'=>'Organization Member']);
+        factory(App\Role::class)->create(['name'=>'Organization Admin']);
     }
 }

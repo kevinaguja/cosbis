@@ -1,0 +1,64 @@
+.org_name {
+    font-size: 13px;
+    color: #999;
+}
+
+.bottom {
+    margin-top: 13px;
+    line-height: 12px;
+}
+
+.button {
+    padding: 0;
+    float: right;
+}
+
+.image {
+    width: 100%;
+    display: block;
+}
+
+.card_container{
+    max-height: 150px;
+    overflow: hidden;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both
+}
+
+#cards{
+    padding-bottom: 25px;
+}
+
+#cards .col-md-4{
+    height: 200px;
+    margin-top: 25px;
+}
+
+.trim_padding{
+    padding-bottom: 0px !important;
+    padding-top: 25px !important;
+}
+
+.jumbotron h1{
+    color: green;
+    font-family: Roboto;
+    text-align: right;
+    border-right: 10px solid green;
+    padding-bottom: 70px;
+    padding-right: 15px;
+}
+
+.organization_h3{
+    color: white !important;
+    font-family: Roboto !important;
+    text-shadow: 1px 1px 5px grey !important;
+    font-weight: 600 !important;
+}

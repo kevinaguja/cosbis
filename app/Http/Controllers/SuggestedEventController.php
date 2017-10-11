@@ -2,18 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Cosbis\Repositories\Criterias\Events\{OrderBy, Where, With};
+use App\Cosbis\Repositories\EventRepository;
 
 class SuggestedEventController extends Controller
 {
-    //
+    private $eventRepository;
+
+    public function __construct(EventRepository $eventRepository)
+    {
+        $this->eventRepository= $eventRepository;
+    }
+
     public function index()
     {
-        $events= \App\Event::where('status', '=', 'new')->with('user')->orderBy('created_at', 'desc')->get();
+        $events= $this->eventRepository->pushCriteria(new Where([['status', '=', 'new'], ['restriction', '=', null]]))
+            ->pushCriteria(new With('user'))
+            ->pushCriteria(new With('organization'))
+            ->pushCriteria(new orderBy('created_at', 'desc'))
+            ->all();
 
         foreach($events as $event){
-            $event->date= Carbon::parse($event->date)->toFormattedDateString();
+            $event->formattedDate= $event->date->toFormattedDateString();
             $event->hasVoted= $event->checkForVotes();
         }
 
@@ -23,7 +33,7 @@ class SuggestedEventController extends Controller
     public function show()
     {
         if(request('id')===null){
-            $events= auth()->user()->events;
+            $events= auth()->user()->events()->withCount('comments')->get();
 
             return view('events.suggestedEvents.show', compact('events'));
         }

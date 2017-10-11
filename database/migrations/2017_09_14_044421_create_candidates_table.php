@@ -17,6 +17,11 @@ class CreateCandidatesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('position_id')->unsigned();
+            $table->text('slogan');
+            $table->text('statement');
+            $table->text('img');
+            $table->string('party',100);
+            $table->string('status',10);
             $table->timestamps();
         });
     }

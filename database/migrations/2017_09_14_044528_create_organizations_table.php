@@ -18,6 +18,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('name',100);
             $table->text('description');
             $table->text('img');
+            $table->text('logo');
             $table->timestamps();
         });
     }

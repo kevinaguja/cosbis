@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Cosbis\Repositories\UserRepository;
 use App\Http\Requests\Students\StudentUpdateAccountRequest;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 
 class AccountController extends Controller
 {
-    //
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository= $userRepository;
+    }
+
     public function index()
     {
         $events= \App\Event::where("status", "=", "approved")->paginate(5, ['*'], 'events');
@@ -25,7 +32,7 @@ class AccountController extends Controller
 
     public function update(StudentUpdateAccountRequest $request)
     {
-        $user= \App\User::find(auth()->user()->id);
+        $user= $this->userRepository->find(auth()->user()->id);
         $data=array(
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname'],
@@ -67,7 +74,7 @@ class AccountController extends Controller
 
     public function destroy()
     {
-        if($user = \App\User::find(request('id'))){
+        if($user = $this->userRepository->find(request('id'))){
             $user->delete();
         }
 

@@ -20,10 +20,13 @@
                 </div>
                 <div class="col-md-3 col-md-offset-5 noPadding">
                     <label for="author"><small>Sort By</small></label>
-                    <select name="auhor" id="author" class="form-control">
-                        <option>Author</option>
-                        <option>Date</option>
-                        <option>Title</option>
+                    <select name="auhor" id="author" class="form-control" onchange="redirect(this)">
+                        <option>Select</option>
+                        <option value="views,order=desc">Popular</option>
+                        <option value="created_at">Latest</option>
+                        <option value="created_at,order=desc">Earliest</option>
+                        <option value="title">Title</option>
+                        <option value="announcement">Announcement</option>
                     </select>
                 </div>
             </div>
@@ -60,10 +63,17 @@
                         </div>
                     @endforeach
                     <div class="col-md-12 text-right">
-                        {{$announcements->links()}}
+                        {{$announcements->appends(request()->except('page'))->links()}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function redirect(el){
+            console.log(el.value);
+            window.location.href= '/announcements?sort='+el.value;
+        }
+    </script>
 @endsection

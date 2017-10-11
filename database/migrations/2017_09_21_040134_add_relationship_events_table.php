@@ -15,6 +15,8 @@ class AddRelationshipEventsTable extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('organization_id')->references('id')->on('organizations');
+            $table->foreign('restriction')->references('id')->on('organizations');
         });
     }
 }

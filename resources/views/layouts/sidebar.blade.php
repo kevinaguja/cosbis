@@ -24,9 +24,9 @@
                     </div>
                 </li>
             @endif
-            <li><a {{Request::is("announcements*") ? " class= ac    tive" :  ''}} href="/announcements"><span class="glyphicon glyphicon-info-sign"></span> Accouncements</a></li>
+            <li><a {{Request::is("announcements*") ? " class= active" :  ''}} href="/announcements"><span class="glyphicon glyphicon-info-sign"></span> Accouncements</a></li>
             <li id="accordion">
-                <a data-toggle="collapse" data-parent="#accordion" href="#eventsCollapse"><span class="glyphicon glyphicon-cloud"></span> Events <small><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></small></a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#eventsCollapse"><span class="glyphicon glyphicon-th-list"></span> Events <small><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></small></a>
                 <div id="eventsCollapse" class="panel-collapse collapse {{Request::is("events*") || Request::is("suggestions*") ? "in" :  ''}}">
                     <a href="/events/calendar" {{Request::is("events/calendar*")  ? " class=active" :  ''}}>Weekly</a>
                     <a href="/events" {{(Request::is("events*") && !Request::is('events/calendar'))  ? " class=active" :  ''}}>Events</a>
@@ -35,8 +35,8 @@
             </li>
             <li id="accordion">
                 <a data-toggle="collapse" data-parent="#accordion" href="#orgCollapse"><span class="glyphicon glyphicon-cloud"></span> Organizations <small><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></small></a>
-                <div id="orgCollapse" class="panel-collapse collapse">
-                    <a href="#">Home</a>
+                <div id="orgCollapse" class="panel-collapse collapse {{Request::is("organizations*") ? "in" :  ''}}">
+                    <a href="/organizations" {{Request::is("organizations*") ? " class=active" :  ''}}>Home</a>
                     <a href="#">Announcements</a>
                 </div>
             </li>

@@ -20,11 +20,14 @@ class CreateEventsTable extends Migration
             $table->text('description');
             $table->string('status');
             $table->string('time');
-            $table->timestamp('date');
+            $table->dateTime('date');
             $table->string('location');
             $table->string('type');
             $table->string('theme');
             $table->text('img');
+            $table->integer('organization_id')->unsigned()->nullable();
+            $table->integer('restriction')->unsigned()->nullable();
+            $table->integer('views')->default(0);
             $table->timestamps();
         });
     }

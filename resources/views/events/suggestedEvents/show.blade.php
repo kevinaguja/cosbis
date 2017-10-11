@@ -28,6 +28,7 @@
                             <template scope="props">
                                 <p><b>Title:</b> @{{ props.row.title }}</p>
                                 <p><b>Description:</b> @{{ props.row.description }}</p>
+                                <p><b>Views:</b> @{{ props.row.views }} | <b>Comments:</b> @{{ props.row.comments_count }}</p>
                                 <p><b>Date:</b> @{{ props.row.date }}</p>
                                 <p><b>Time:</b> @{{ props.row.time }}</p>
                             </template>
