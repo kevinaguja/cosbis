@@ -8,7 +8,7 @@ use App\Cosbis\Repositories\Criterias\Events\Where;
 use App\Cosbis\Repositories\Criterias\Events\WithCommentCount;
 use App\Cosbis\Repositories\EventRepository;
 use App\Cosbis\Repositories\EventVoteRepository;
-use App\Craftbeer\Filetransfer\Classes\PhotoTransferable;
+use App\Craftbeer\Filetransfer\Classes\AccountImageTransferable;
 use App\Http\Requests\events\StoreEventRequest;
 use Carbon\Carbon;
 
@@ -85,7 +85,7 @@ class EventController extends Controller
         dd(request()->all());
         $img= '/public/img/events/default.jpg';
         if(request('img') !== null)
-            $img= PhotoTransferable::move(request('img'));
+            $img= AccountImageTransferable::move(request('img'));
 
         if($this->eventRepository->create(array_merge(request()->all(), ["img"=>$img, "status"=> $this->getStatus(), "user_id"=>auth()->user()->id])));
             return back()->with('success', 'Event Successfully registered');

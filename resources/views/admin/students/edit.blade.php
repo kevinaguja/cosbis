@@ -1,7 +1,6 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('css/sidebar.css')}}">
     <link rel="stylesheet" href="{{asset('css/studentIndex.css')}}">
 @endsection
 
@@ -10,8 +9,7 @@
 @endsection
 
 @section('content')
-    @include('layouts.sidebar')
-    <div class="cms-wrapper">
+    <div class="container" style="border: none">
         <form action="/accounts/{{$account->id}}/edit" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             {!! method_field("PATCH") !!}

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Cosbis\TokenGenerator\TokenGenerator;
+use App\Cosbis\TokenGenerator\UserTokenGenerator;
 use App\Events\ResendVerification;
 use Illuminate\Http\Request;
 
@@ -25,7 +25,7 @@ class AccountVerificationController extends Controller
         return view('auth.resendVerification');
     }
 
-    public function resendVerification(TokenGenerator $tokenGenerator)
+    public function resendVerification(UserTokenGenerator $tokenGenerator)
     {
         $token=$tokenGenerator->getToken();
         if($user= auth()->user()->update(['token'=>$token])){

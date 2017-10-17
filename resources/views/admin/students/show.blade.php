@@ -1,8 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
 @section('css')
     <link rel="stylesheet" href="{{asset('css/frontpage.css')}}">
-    <link rel="stylesheet" href="{{asset('css/sidebar.css')}}">
     <link rel="stylesheet" href="{{asset('css/studentIndex.css')}}">
 @endsection
 
@@ -11,8 +10,7 @@
 @endsection
 
 @section('content')
-    @include('layouts.sidebar')
-    <div class="cms-wrapper">
+    <div class="col-md-12">
         <div class="col-md-12 col-sm-12 bg-white noPadding noMargin">
             <div class="col-md-12">
                 <div class="col-md-12 dark-bottom-border">

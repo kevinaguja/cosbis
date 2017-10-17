@@ -96,7 +96,7 @@ body, html {
 }
 
 .bg-white{
-    background-color: #fff;
+    background-color: #fff !important;
 }
 
 .noPadding {
@@ -200,6 +200,15 @@ body, html {
     font-family: "Open Sans",Helvetica,Arial,sans-serif;
 }
 
+.roundedCorners{
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.padding-bottom-25{
+    padding-bottom: 25px;
+}
+
 @media (min-width: 768px) {
     .navbar .navbar-nav {
         display: inline-block;
@@ -210,6 +219,10 @@ body, html {
     .navbar .navbar-collapse {
         text-align: center;
     }
+
+    .pullLeftBeforeXs{
+        float: left;
+    }
 }
 
 @media (max-width: 768px) {
@@ -217,6 +230,15 @@ body, html {
         margin-left: 0 !important;
         width: 100% !important;
         padding-top: 50px;
+    }
+
+    .textCenterOnXs{
+        text-align: center;
+    }
+
+    .roundedCorners{
+        padding-top: 10px;
+        padding-bottom: 20px;
     }
 }
 

@@ -50,7 +50,7 @@ class UserTableSeeder extends Seeder
         factory(App\User::class)->create([
             'firstname'=>'Maika Madel',
             'lastname'=>'De Vera',
-            'email' =>'studen2@cosbr.com',
+            'email' =>'student2@cosbr.com',
             'is_verified' => '1',
             'role_id' => '2',
             'img' => '/img/account_img/example.jpg',

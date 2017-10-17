@@ -36,7 +36,10 @@
             <li id="accordion">
                 <a data-toggle="collapse" data-parent="#accordion" href="#orgCollapse"><span class="glyphicon glyphicon-cloud"></span> Organizations <small><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></small></a>
                 <div id="orgCollapse" class="panel-collapse collapse {{Request::is("organizations*") ? "in" :  ''}}">
-                    <a href="/organizations" {{Request::is("organizations*") ? " class=active" :  ''}}>Home</a>
+                    <a href="/organizations" {{Request::is("organizations") ? " class=active" :  ''}}>Home</a>
+                    @foreach(auth()->user()->organizations as $organization)
+                        <a href="/organizations/{{$organization->id}}" {{Request::is("organizations/$organization->id*") ? " class=active" :  ''}}><small style="padding-left: 2em;"><i>{{$organization->name}}</i></small></a>
+                    @endforeach
                     <a href="#">Announcements</a>
                 </div>
             </li>

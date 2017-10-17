@@ -17,7 +17,7 @@
             <div class="col-md-12" style="margin-bottom: 15px;">
                 <ul class="nav nav-pills" style="border-radius: 0px;">
                     <li class= 'active'><a data-toggle="pill" href="#index"><span class="glyphicon glyphicon-th-list"></span> Index</a></li>
-                    <li><a data-toggle="pill" href="#upcomming"><span class="glyphicon glyphicon-bitcoin"></span> Upcomming</a></li>
+                    <li><a data-toggle="pill" href="#upcomming"><span class="glyphicon glyphicon-collapse-up"></span> Upcomming</a></li>
                     <li><a data-toggle="pill" href="#suggestions"><span class="glyphicon glyphicon-plus-sign"></span> New Suggestions</a></li>
                     <li><a data-toggle="pill" href="#relevant"><span class="glyphicon glyphicon-eye-open"></span> relevant</a></li>
                 </ul>

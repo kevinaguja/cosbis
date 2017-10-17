@@ -2,18 +2,33 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Cosbis\TokenGenerator\TokenGenerator;
+use App\Cosbis\TokenGenerator\UserTokenGenerator;
+use App\Craftbeer\Filetransfer\Classes\AccountImageTransferable;
 use App\Events\WelcomeVerification;
 use App\Http\Requests\Admin\AdminCreateAccountRequest;
 use App\Http\Requests\Admin\AdminUpdateAccountRequest;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class AccountController extends Controller
 {
+    private $accountImageHandler, $tokenGenerator;
+
+    public function __construct(AccountImageTransferable $accountImageTransferable, UserTokenGenerator $tokenGenerator)
+    {
+        $this->accountImageHandler= $accountImageTransferable;
+        $this->tokenGenerator= $tokenGenerator;
+    }
+
     public function index()
     {
         $accounts=\App\User::where('role_id','!=','1')->get();
+
+        foreach($accounts as $account){
+            $account->created_at_formatted= $account->created_at->toFormattedDateString();
+            $account->updated_at_formatted= $account->updated_at->toFormattedDateString();
+        }
+
         return view('admin.students.index',compact('accounts'));
     }
 
@@ -51,9 +66,13 @@ class AccountController extends Controller
         return view('admin.students.create',compact('roles'));
     }
 
-    public function store(AdminCreateAccountRequest $request, TokenGenerator $tokenGenerator)
+    public function store(AdminCreateAccountRequest $request)
     {
-        $token= $tokenGenerator->getToken();
+        $token= $this->tokenGenerator->getToken();
+        $img= '/img/account_img/default.png';
+        if(request('img') !== null)
+            $img= $this->accountImageHandler->move(request('img'));
+
         if($user = \App\User::create([
             'student_number' => $request['student_number'],
             'firstname' => $request['firstname'],
@@ -61,7 +80,7 @@ class AccountController extends Controller
             'email' => $request['email'],
             'phone' => $request['phone'],
             'token' => $token,
-            'img' => '/img/account_img/example.jpg',
+            'img' => $img,
             'role_id' => $request['role'],
             'password' => bcrypt('asdasd'),
         ])){

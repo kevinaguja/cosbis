@@ -62,3 +62,5 @@ Route::middleware('notVerified')->group(function(){
     Route::post('/verify', 'AccountVerificationController@resendVerification');
     Route::get('/verify/{token}', 'AccountVerificationController@verifyAccount');
 });
+
+Route::get('/test', function(){return view('test.admin');});

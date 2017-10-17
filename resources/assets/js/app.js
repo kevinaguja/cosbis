@@ -7,6 +7,12 @@
 
 require('./bootstrap');
 
+import Vue from 'vue';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-default/index.css';
+
+Vue.use(ElementUI);
+
 window.Vue = require('vue');
 
 /**
@@ -16,7 +22,10 @@ window.Vue = require('vue');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component(Button.name, Button);
+Vue.component(Select.name, Select);
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    render: h => h(App)
 });

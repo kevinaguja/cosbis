@@ -1,7 +1,6 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('css/sidebar.css')}}">
     <link rel="stylesheet" href="{{asset('css/studentIndex.css')}}">
 @endsection
 
@@ -9,15 +8,14 @@
     @include('layouts.navigationadmin')
 @endsection
 @section('content')
-    @include('layouts.sidebar')
-    <div class="cms-wrapper">
+    <div class="container" style="border: none">
         <form action="/accounts/create" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="col-md-12 noPadding bg-white">
-                <div class="col-md-12 header noPadding">
-                    <div class="col-md-12 text-center readjustOrientation" style=" overflow: hidden">
+                <div class="col-md-12 header noPadding" style="background-color: #333;">
+                    <div class="col-md-12 text-center readjustOrientation" id="bannerDiv" style=" overflow: hidden;">
                         <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
-                            <img id="imgEl" src="{{asset('img/account_img/default.png')}}" class="img-responsive center-block img-circle" style="margin: 5px;" alt="">
+                            <img id="imgEl" src="{{asset('img/account_img/default.png')}}" class="img-responsive center-block img-rounded" style="margin: 5px;" alt="">
                         </div>
                     </div>
 
@@ -25,7 +23,7 @@
                         <label for="img" class="text-center" style="margin-top: 15px">
                                 <span>
                                     <img src="{{asset('img/cosbis/camera.png')}}" style="width: 27px">
-                                </span>Change Profile Picture
+                                </span><span style="color: white">Change Profile Picture</span>
                             <input type="file" style="display:none" name="img" id="img"
                                    accept="image/jpeg, image/png">
                         </label>
@@ -87,7 +85,9 @@
                                 <div class="form-group col-md-9 noPadding">
                                     <select name="role" class="form-control">
                                         @foreach($roles as $role)
-                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                            @if($role->id <= 3)
+                                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="col-md-6 col-md-offset-3">
+                    <div class="col-md-6 col-md-offset-3 noPadding">
                         <div>
                             @if(count($errors))
                                 <div class="form-group">
@@ -110,8 +110,8 @@
                                 </div>
                             @endif
                         </div>
-                        <div class="form-group text-right">
-                            <button type="submit" class="btn buttons btn-success">Create</button>
+                        <div class="col-md-12 noPadding text-right">
+                            <button type="submit" class="btn buttons btn-primary">Create</button>
                         </div>
                     </div>
                 </div>

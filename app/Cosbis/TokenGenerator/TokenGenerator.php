@@ -2,10 +2,21 @@
 
 namespace App\Cosbis\TokenGenerator;
 
+use App\Cosbis\TokenGenerator\Interfaces\DuplicateTokenValidator;
+use App\Cosbis\TokenGenerator\Interfaces\RandomTokenGenerator;
 use Illuminate\Support\Str;
 
-class TokenGenerator
+abstract class TokenGenerator implements RandomTokenGenerator, DuplicateTokenValidator
 {
+    protected $model;
+
+    abstract function model();
+
+    public function __construct()
+    {
+        $this->model= $this->model();
+    }
+
     public function getToken()
     {
         do{
@@ -15,13 +26,13 @@ class TokenGenerator
         return $token;
     }
 
-    private function generateToken()
+    public function generateToken()
     {
         return Str::random(60);
     }
 
-    private function checkForDuplicate($token_param)
+    public function checkForDuplicate($token)
     {
-        return \App\User::where('token', '=' , $token_param)->exists();
+        return $this->model::where('token', '=' , $token)->exists();
     }
 }

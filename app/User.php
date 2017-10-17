@@ -126,6 +126,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Organization::class, 'organization_members', 'user_id','org_id');
     }
 
+    public function organizationsId($id, $attribute= 'id')
+    {
+        return $this->organizations->pluck('id');
+    }
+
     public function handledOrganizations()
     {
         $org_list= \App\OrganizationMembers::where([['user_id', '=', auth()->user()->id], ['role_id', '=', 5]])->get(['org_id']);
