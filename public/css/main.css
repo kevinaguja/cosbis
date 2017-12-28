@@ -8,6 +8,7 @@ B3D7A9
 
 ::-webkit-scrollbar {
     width: 6px;
+    height: 7px;
 }
 
 /* Track */
@@ -77,9 +78,9 @@ B3D7A9
 }
 
 .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
-    background-color: rgba(76, 175, 80, .8);
+    background-color: #234567;
     border-color: transparent !important;
-    color: black;
+    color: white;
     cursor: default;
 }
 

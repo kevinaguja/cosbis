@@ -40,7 +40,7 @@
                                 <small>Password</small>
                             </label>
 
-                            <input id="password" type="password" class="form-control" name="password" required>
+                            <input id="password" type="password" class="form-control" name="password" placeholder="note: use default pw for 1st time users" required>
 
                             @if ($errors->has('password'))
                                 <span class="help-block">

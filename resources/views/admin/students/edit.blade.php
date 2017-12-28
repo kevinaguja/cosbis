@@ -9,20 +9,20 @@
 @endsection
 
 @section('content')
-    <div class="container" style="border: none">
+    <div class="container" style="border: none;">
         <form action="/accounts/{{$account->id}}/edit" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             {!! method_field("PATCH") !!}
             <div class="col-md-12 noPadding bg-white">
                 <div class="col-md-12 header noPadding">
-                    <div class="col-md-12 text-center readjustOrientation" style=" overflow: hidden">
+                    <div class="col-md-12 text-center readjustOrientation" style=" overflow: hidden;">
                         <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
                             <img id="imgEl" src="{{asset($account->img)}}" class="img-responsive center-block img-circle" style="margin: 5px;" alt="">
                         </div>
                     </div>
 
                     <div class="col-md-12 text-center changePhoto noPadding readjustOrientation" style="height: 60px; padding: 0">
-                        <label for="img" class="text-center" style="margin-top: 15px">
+                        <label for="img" class="text-center" style="margin-top: 15px;">
                                 <span>
                                     <img src="{{asset('img/cosbis/camera.png')}}" style="width: 27px">
                                 </span>Change Profile Picture

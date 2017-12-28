@@ -1,8 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('css/sidebar.css')}}">
-    <link rel="stylesheet" href="{{asset('css/studentIndex.css')}}">
+    <link rel="stylesheet" href="{{asset('css/admin/accounts.css')}}">
 @endsection
 
 @section('navigation')
@@ -10,21 +9,12 @@
 @endsection
 
 @section('content')
-    @include('layouts.sidebar')
-    <div class="cms-wrapper">
-        <div class="col-md-12 col-xs-12 col-sm-12 bg-white noPadding noMargin">
-            <div class="col-md-12">
-                <div class="col-md-12 dark-bottom-border">
-                    <div>
-                        <h3><b>Profile - <small>Welcome to the Cosbr control panel</small></b></h3>
-                        <div class="green-bottom-border col-md-2 col-xs-3"></div>
-                    </div>
-                </div>
-            </div>
+    <div class="col-md-12">
+        <div class="col-md-12 col-xs-12 col-sm-12 bg-white noPadding noMargin padding-25">
             <div class="col-md-12">
                 <div class="col-md-3 profilePictureDiv">
                     <img src="{{auth()->user()->img}}" class="img-rounded img-thumbnail" alt="Account Image"
-                         style="width: 250px;">
+                         style="max-width: 350px; width: 100%">
                 </div>
                 <div class="col-md-8">
                     <h3 class="profilePictureDetails noMargin">

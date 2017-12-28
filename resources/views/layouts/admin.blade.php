@@ -120,7 +120,7 @@
             <img src="{{auth()->user()->img}}" alt="Account Image" class="img-circle" style="width: 50px; background-color: white; padding: 3px">
             <span>{{auth()->user()->firstname." ".auth()->user()->lastname}}</span>
             <ul class="list-unstyled">
-                <a href=""><li><span class="glyphicon glyphicon-home"></span> Home</li></a>
+                <a href="/profile"><li><span class="glyphicon glyphicon-home"></span> Home</li></a>
                 <a data-toggle="collapse" data-parent="#accordion" href="#accountsCollapse"><li><span class="glyphicon glyphicon-user"></span> Accounts <small><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></small></li></a>
                 <li id="accordion">
                     <ul id="accountsCollapse" class="list-unstyled panel-collapse collapse {{Request::is("accounts*") ? "in" :  ''}}">
