@@ -27,39 +27,12 @@ class EventController extends Controller
     {
         $now= Carbon::now();
 
-        $events= $this->eventRepository->pushCriteria(new Where([['restriction','=', null], ['date', '>=', $now]]))
+        $events= $this->eventRepository->pushCriteria(new Where([['date', '>=', $now]]))
             ->pushCriteria(new OrderBy('date', 'asc'))
             ->filter($filters)
             ->paginate(5);
 
         return view('events.index', compact('events'));
-    }
-
-    public function calendar()
-    {
-        $now= Carbon::now()->format('Y-m-d');
-        $week_ago= Carbon::now()->subDays(7)->format('Y-m-d');
-        $week_from_now = Carbon::now()->addDays(7)->format('Y-m-d');
-
-        $events= $this->eventRepository->pushCriteria(new Where([['date', '>=', $week_ago], ['date', '<=', $week_from_now],['status', '=', 'approved']]))
-            ->pushCriteria(new OrderBy('date', 'asc'))
-            ->all();
-        $upcomming_events= $this->eventRepository->clear()
-            ->pushCriteria(new Where(([['date', '>', $now], ['status', '=', 'approved']])))
-            ->pushCriteria(new OrderBy('date', 'asc'))
-            ->all();
-        $new_events= $this->eventRepository->clear()
-            ->pushCriteria(new Where(([['created_at', '>=', $week_ago], ['status', '=', 'new']])))
-            ->pushCriteria(new OrderBy('date', 'asc'))
-            ->all();
-        $relevant_events= $this->eventRepository->clear()
-            ->pushCriteria(new Where([['status', '<>', 'rejected']]))
-            ->pushCriteria(new WithCommentCount())
-            ->pushCriteria(new OrderBy('views', 'desc'))
-            ->pushCriteria(new OrderBy('comments_count', 'desc'))
-            ->all();
-
-        return view('events.calendar', compact('events', 'upcomming_events', 'new_events', 'relevant_events'));
     }
 
     public function create()
@@ -69,7 +42,7 @@ class EventController extends Controller
 
     public function show($id)
     {
-        if(!($event= $this->eventRepository->pushCriteria(new Where([['restriction', '=', null]]))->find($id))){
+        if(!($event= $this->eventRepository->find($id))){
             return redirect('/events');
         }
         if(!($event->user_id === auth()->user()->id))

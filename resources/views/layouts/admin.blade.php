@@ -38,7 +38,7 @@
             background-size: 100% auto;
         }
         .left {
-            width:220px;
+            width:250px;
             background:blue;
             float:left;
             padding-left: 10px;
@@ -116,7 +116,7 @@
             </div>
         </nav>
 
-        <nav class="left sidebar collapse navbar-collapse" id="sideNav">
+        <nav class="left sidebar collapse navbar-collapse" id="sideNav" style="overflow-y: auto !important; height: 100%; min-height: 100% !important;">
             <img src="{{auth()->user()->img}}" alt="Account Image" class="img-circle" style="width: 50px; background-color: white; padding: 3px">
             <span>{{auth()->user()->firstname." ".auth()->user()->lastname}}</span>
             <ul class="list-unstyled">
@@ -128,9 +128,15 @@
                         <li><a href="/accounts/create">Create Account</a></li>
                     </ul>
                 </li>
-                <a href=""><li><span class="glyphicon glyphicon-book"></span> Announcements</li></a>
-                <a href=""><li><span class="glyphicon glyphicon-tags"></span> Events</li></a>
-                <a href=""><li><span class="glyphicon glyphicon-tag"></span> Organizations</li></a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#eventsCollapse"><li><span class="glyphicon glyphicon-tags"></span> Events <small><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></small></li></a>
+                <li id="accordion">
+                    <ul id="eventsCollapse" class="list-unstyled panel-collapse collapse {{Request::is("events*") ? "in" :  ''}}">
+                        <li><a href="/events">Official Events List</a></li>
+                        <li><a href="/events/create">Create Event</a></li>
+                        <li><a href="/events/list">Events List</a></li>
+                    </ul>
+                </li>
+                <a href="/organizations"><li><span class="glyphicon glyphicon-tag"></span> Organizations</li></a>
                 <a href=""><li><span class="glyphicon glyphicon-cog"></span> Settings</li></a>
             </ul>
 
@@ -139,8 +145,10 @@
                 <a href=""><li><span class="glyphicon glyphicon-tags"></span> Reports</li></a>
                 <a href=""><li><span class="glyphicon glyphicon-list-alt"></span> Election</li></a>
                 <a href=""><li><span class="glyphicon glyphicon-scissors"></span> CMS</li></a>
-                <a href=""><li><span class="glyphicon glyphicon-off"></span> Logout</li></a>
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li><span class="glyphicon glyphicon-off"></span> Logout</li></a>
             </ul>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                  style="display: none;">{{ csrf_field() }}</form>
         </nav>
         <div class="right">
             <div class="col-md-12" style="height: 100%; overflow: auto;">

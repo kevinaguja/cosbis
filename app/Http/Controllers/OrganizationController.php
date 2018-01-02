@@ -22,9 +22,7 @@ class OrganizationController extends Controller
     public function index()
     {
         $organizations= $this->organizationRepository->all();
-        $user_orgs= $this->userRepository->find(2)->organizations()->pluck('organizations.id');
 
-
-        return view('organizations.index', compact('organizations', 'user_orgs'));
+        return view('organizations.index', compact('organizations'));
     }
 }

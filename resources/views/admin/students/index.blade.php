@@ -12,7 +12,8 @@
     <div class="col-md-12" id="app">
         <div class="col-md-12 jumbotron" style="margin-bottom: 15px; padding: 20px 15px 0px 15px;">
             <div class="col-md-12 bg-white roundedCorners textCenterOnXs padding-25">
-                <img src="{{asset('img/cosbis/cosbr-logo.png')}}" alt="" style="width: 100px; margin-right: 20px" class="pullLeftBeforeXs">
+                <img src="{{asset('img/cosbis/cosbr-logo.png')}}" alt="" style="width: 100px; margin-right: 20px"
+                     class="pullLeftBeforeXs">
                 <h3 style="padding-bottom: 0; margin-bottom: 0; line-height: .9em">
                     <b>College of San Benildo- Rizal</b>
                     <br>
@@ -37,14 +38,16 @@
                     <small style="padding-left: 1.7em">Tip: Watch out for delinquent and inactive accounts</small>
                 </h4>
                 <div class="col-md-4 col-sm-12 noPadding padding-bottom-25" style="margin-top: 15px; overflow: hidden;">
-                    <a class="btn  btn-primary form-control" href="/accounts/create"><span class="glyphicon glyphicon-pencil"></span> Create Account</a>
+                    <a class="btn  btn-primary form-control" href="/accounts/create"><span
+                                class="glyphicon glyphicon-pencil"></span> Create Account</a>
                 </div>
                 <div>
                     <template>
                         <el-table :data="tableData" border style="width: 100%">
                             <el-table-column label="ID" prod="id" width="120">
                                 <template scope="scope">
-                                    <span style="margin-left: 10px">@{{ scope.row.id }}</span>
+                                    <span style="margin-left: 10px" v-if="scope.row.id === active_id" class="glyphicon glyphicon-arrow-right"></span>
+                                    <span style="margin-left: 10px" v-if="scope.row.id !== active_id">@{{ scope.row.id }}</span>
                                 </template>
                             </el-table-column>
                             <el-table-column label="Name">
@@ -55,12 +58,21 @@
                             </el-table-column>
                             <el-table-column label="Operations" width="180">
                                 <template scope="scope">
-                                    <el-button size="small" type="info" @click="updateChosenAccountDetails(scope.row.id, scope.row.firstname, scope.row.lastname, scope.row.email, scope.row.phone, scope.row.created_at_formatted, scope.row.updated_at_formatted, scope.row.img)"><span class="glyphicon glyphicon-eye-open"></span>
+                                    <a href="#account_details"><el-button size="small" type="info"
+                                               @click="updateChosenAccountDetails(scope.row.id, scope.row.firstname, scope.row.lastname, scope.row.email, scope.row.phone, scope.row.created_at_formatted, scope.row.updated_at_formatted, scope.row.img, scope.row.events)">
+                                        <span class="glyphicon glyphicon-eye-open"></span>
+                                    </el-button></a>
+                                    @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())
+                                    <el-button size="small" @click="handleEdit(scope.row.id)"><span
+                                                class="glyphicon glyphicon-pencil"></span>
                                     </el-button>
-                                    <el-button size="small" @click="handleEdit(scope.row.id)"><span class="glyphicon glyphicon-pencil"></span>
-                                    </el-button>
-                                    <el-button size="small" type="danger" @click="handleDeactivate(scope.row.id)"><span class="glyphicon glyphicon-remove"></span>
-                                    </el-button>
+                                    @endif
+                                    @if(auth()->user()->is_superadmin())
+                                        <el-button size="small" type="danger"
+                                                   @click="handleDeactivate(scope.row.id)"><span
+                                                    class="glyphicon glyphicon-remove"></span>
+                                        </el-button>
+                                    @endif
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -75,16 +87,18 @@
                     <h4>
                         <b><span class="glyphicon glyphicon-check"></span> Select an Account:</b>
                         <br>
-                        <small style="padding-left: 1.8em">View an account from the student list to access it's details.</small>
+                        <small style="padding-left: 1.8em">View an account from the student list to access it's
+                            details.
+                        </small>
                     </h4>
-                    <div class="col-md-12 noPadding">
+                    <div class="col-md-12 noPadding" id="account_details">
                         <div class="col-md-3 profilePictureDiv" style="padding-left: 0px">
                             <img :src="chosenAccount.img" class="img-rounded img-thumbnail" alt="Account Image"
                                  style="width: 250px;">
                         </div>
                         <div class="col-md-8">
                             <h3 class="profilePictureDetails noMargin">
-                                <b @click="asd">@{{ chosenAccount.name }}</b>
+                                <b>@{{ chosenAccount.name }}</b>
                             </h3>
                             <h5 class="profilePictureDetails"><span
                                         class="glyphicon glyphicon-map-marker"></span> @{{ chosenAccount.email }}</h5>
@@ -92,7 +106,8 @@
                                         class="glyphicon glyphicon-phone"></span> @{{ chosenAccount.phone }}</h5>
                             <h5 class="profilePictureDetails"><span class="glyphicon glyphicon-book"></span> Member
                                 since: @{{ chosenAccount.created_at_formatted }}</h5>
-                            <h5 class="profilePictureDetails"><span class="glyphicon glyphicon-pencil"></span>Last updated
+                            <h5 class="profilePictureDetails"><span class="glyphicon glyphicon-pencil"></span>Last
+                                updated
                                 on: @{{ chosenAccount.updated_at_formatted }}</h5>
                             <a :href="redirectUrl"><span class="glyphicon glyphicon-cog"></span> Edit Profile</a>
                         </div>
@@ -103,20 +118,41 @@
                 <div class="col-md-12">
                     <hr>
                     <h4>
-                        <b><span class="glyphicon glyphicon-check"></span> Student Participation</b>
+                        <b><span class="glyphicon glyphicon-check"></span> Events Contributed</b>
                         <br>
-                        <small style="padding-left: 1.8em">Data is accurate up to the last month only</small>
+                        <small style="padding-left: 1.8em"><b>Note:</b> Some events arent yet officially approved
+                        </small>
+                        <div class="col-md-12 padding-25">
+                            <ol class="noPadding">
+                                <li v-for="event in chosenAccount.events">
+                                    <p>
+                                        <small>Title: @{{event.title}}</small>
+                                        <br>
+                                        <small>Description: @{{event.description}}</small>
+                                        <br>
+                                        <small>Status: @{{event.status}}</small>
+                                        <br>
+                                        <small>Type: @{{event.type}}</small>
+                                        <br>
+                                        <small>Theme: @{{event.theme}}</small>
+                                        <br>
+                                        <small v-if="event.organization != null">Organization: @{{ event.organization.description }}</small>
+                                    </p>
+                                </li>
+                            </ol>
+                        </div>
                     </h4>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        var accounts={!! json_encode($accounts) !!};
+        var accounts ={!! json_encode($accounts) !!};
         var Main = {
             data() {
                 return {
                     tableData: accounts,
+                    active_id: accounts[0]['id'],
                     chosenAccount: {
                         id: accounts[0]['id'],
                         name: accounts[0]['firstname'] + " " + accounts[0]['lastname'],
@@ -124,30 +160,33 @@
                         phone: accounts[0]['phone'],
                         created_at_formatted: accounts[0]['created_at_formatted'],
                         updated_at_formatted: accounts[0]['updated_at_formatted'],
-                        img: accounts[0]['img']
+                        img: accounts[0]['img'],
+                        events: accounts[0]['events']
                     }
                 }
             },
             methods: {
                 handleEdit(id) {
-                    window.location.href='/accounts/'+id+'/edit'
+                    window.location.href = '/accounts/' + id + '/edit'
                 },
                 handleDeactivate(id) {
-                    document.getElementById('idField').value= id;
+                    document.getElementById('idField').value = id;
                     document.getElementById('deleteForm').submit();
                 },
-                updateChosenAccountDetails(id, firstname, lastname, email, phone, created_at, updated_at, img){
-                    this.chosenAccount.id= id;
-                    this.chosenAccount.name= firstname + " " + lastname;
-                    this.chosenAccount.email= email;
-                    this.chosenAccount.phone= phone;
-                    this.chosenAccount.created_at_formatted= created_at;
-                    this.chosenAccount.updated_at_formatted=updated_at;
-                    this.chosenAccount.img=img;
+                updateChosenAccountDetails(id, firstname, lastname, email, phone, created_at, updated_at, img, events) {
+                    this.active_id = id;
+                    this.chosenAccount.id = id;
+                    this.chosenAccount.name = firstname + " " + lastname;
+                    this.chosenAccount.email = email;
+                    this.chosenAccount.phone = phone;
+                    this.chosenAccount.created_at_formatted = created_at;
+                    this.chosenAccount.updated_at_formatted = updated_at;
+                    this.chosenAccount.img = img;
+                    this.chosenAccount.events = events;
                 }
             },
             computed: {
-                redirectUrl(){
+                redirectUrl() {
                     return "/accounts/" + this.chosenAccount.id + "/edit";
                 }
             }

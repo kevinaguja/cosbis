@@ -2,27 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Cosbis\Repositories\Criterias\Events\{OrderBy,Where,WithCommentCount};
+use App\Cosbis\Repositories\EventRepository;
 use App\Cosbis\Repositories\UserRepository;
 use App\Http\Requests\Students\StudentUpdateAccountRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
 
 class AccountController extends Controller
 {
-    private $userRepository;
+    private $userRepository, $eventRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, EventRepository $eventRepository)
     {
         $this->userRepository= $userRepository;
+        $this->eventRepository= $eventRepository;
     }
 
     public function index()
     {
         $events= \App\Event::where("status", "=", "approved")->paginate(5, ['*'], 'events');
-        $announcements= \App\Announcement::paginate(10, ['*'], 'announcements');
-        $news= \App\News::all();
 
-        return view('accounts.index', compact('events', 'announcements', 'news'));
+        $now= Carbon::now()->format('Y-m-d');
+        $week_ago= Carbon::now()->subDays(7)->format('Y-m-d');
+        $week_from_now = Carbon::now()->addDays(7)->format('Y-m-d');
+
+        $events= $this->eventRepository->pushCriteria(new Where([['date', '>=', $week_ago], ['date', '<=', $week_from_now],['status', '=', 'approved']]))
+            ->pushCriteria(new OrderBy('date', 'asc'))
+            ->all();
+        $upcomming_events= $this->eventRepository->clear()
+            ->pushCriteria(new Where(([['date', '>', $now], ['status', '=', 'approved']])))
+            ->pushCriteria(new OrderBy('date', 'asc'))
+            ->all();
+        $new_events= $this->eventRepository->clear()
+            ->pushCriteria(new Where(([['created_at', '>=', $week_ago], ['status', '=', 'new']])))
+            ->pushCriteria(new OrderBy('date', 'asc'))
+            ->all();
+        $relevant_events= $this->eventRepository->clear()
+            ->pushCriteria(new Where([['status', '<>', 'rejected']]))
+            ->pushCriteria(new WithCommentCount())
+            ->pushCriteria(new OrderBy('views', 'desc'))
+            ->pushCriteria(new OrderBy('comments_count', 'desc'))
+            ->all();
+
+        return view('accounts.index', compact('events', 'events', 'upcomming_events', 'new_events', 'relevant_events'));
     }
 
     public function edit()
@@ -70,14 +93,5 @@ class AccountController extends Controller
             $request->session()->flash('success', 'Your password has been changed.');
             return back();
         }
-    }
-
-    public function destroy()
-    {
-        if($user = $this->userRepository->find(request('id'))){
-            $user->delete();
-        }
-
-        return back();
     }
 }

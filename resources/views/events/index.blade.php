@@ -1,14 +1,11 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 @section('css')
-    <link rel="stylesheet" href="{{asset('css/sidebar.css')}}">
-    <link rel="stylesheet" href="{{asset('css/events.css')}}">
+    <link rel="stylesheet" href="{{asset('css/admin/accounts.css')}}">
 @endsection
 @section('navigation')
-    @include('layouts.navigationadmin')
 @endsection
 @section('content')
-    @include('layouts.sidebar')
-    <div class="cms-wrapper">
+    <div class="col-md-12">
         <div class="col-md-12 col-sm-12 col-xs-12 bg-white">
             {{--<div class="col-md-12 dark-bottom-border">
                 <div>
@@ -16,7 +13,7 @@
                     <div class="green-bottom-border col-md-2 col-xs-3"></div>
                 </div>
             </div>--}}
-            <div class="col-md-12" id="app" style="padding-bottom: 25px; padding-top: 25px;">
+            <div class="container" id="app" style="padding-bottom: 25px; padding-top: 25px; border: none; height: auto">
                 <div class="col-md-4 col-xs-5">
                     <input type="text" class="form-control" placeholder="Search...">
                 </div>

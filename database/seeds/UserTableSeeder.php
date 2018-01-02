@@ -14,6 +14,7 @@ class UserTableSeeder extends Seeder
         factory(App\User::class)->create([
             'firstname'=>'Super',
             'lastname'=>'Administrator',
+            'birthdate'=>'1994-2-7',
             'email' =>'cosbr@cosbr.com',
             'is_verified' => '1',
             'role_id' => '1',
@@ -26,6 +27,7 @@ class UserTableSeeder extends Seeder
         factory(App\User::class)->create([
             'firstname'=>'Earl Kevin',
             'lastname'=>'Aguja',
+            'birthdate'=>'1994-2-7',
             'email' =>'sc@cosbr.com',
             'is_verified' => '1',
             'role_id' => '3',
@@ -38,6 +40,7 @@ class UserTableSeeder extends Seeder
         factory(App\User::class)->create([
             'firstname'=>'Ann Lindsey',
             'lastname'=>'Soriano',
+            'birthdate'=>'1994-2-7',
             'email' =>'student@cosbr.com',
             'is_verified' => '1',
             'role_id' => '2',
@@ -50,9 +53,10 @@ class UserTableSeeder extends Seeder
         factory(App\User::class)->create([
             'firstname'=>'Maika Madel',
             'lastname'=>'De Vera',
+            'birthdate'=>'1994-2-7',
             'email' =>'student2@cosbr.com',
             'is_verified' => '1',
-            'role_id' => '2',
+            'role_id' => '3',
             'img' => '/img/account_img/example.jpg',
             'student_number' => '3',
             'phone' => '0999-3231-533',
@@ -62,9 +66,10 @@ class UserTableSeeder extends Seeder
         factory(App\User::class)->create([
             'firstname'=>'Fredric Jules',
             'lastname'=>'Cajayon',
+            'birthdate'=>'1994-2-7',
             'email' =>'student3@cosbr.com',
             'is_verified' => '1',
-            'role_id' => '2',
+            'role_id' => '3',
             'img' => '/img/account_img/example.jpg',
             'student_number' => '4',
             'phone' => '0999-3231-535',

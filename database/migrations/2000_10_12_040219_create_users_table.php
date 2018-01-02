@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('student_number');
             $table->string('firstname',50);
             $table->string('lastname',50);
+            $table->date('birthdate');
+            $table->string('address')->default('College of San Benildo- Rizal');
             $table->boolean('is_verified')->default(false);
             $table->integer('role_id')->default(2)->unsigned();
             $table->string('email')->unique();
@@ -41,6 +43,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('organizations');
         Schema::dropIfExists('users');
     }
 }
