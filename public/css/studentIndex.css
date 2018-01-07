@@ -74,11 +74,48 @@
     box-shadow: 1px 1px 5px black;
 }
 
+.header{
+    background-image: url("/img/cosbis/edit_header.png");
+    background-size: 100% 100%;
+    height: 340px !important;
+}
+
+.btn-suspend {
+    border-radius: 20px;
+    border: 2px solid white;
+    color: #FFFFFF;
+    background-color: rgba(38, 38, 38, 0.3);
+}
+
+.noStyleOnHover:hover{
+    text-decoration: none !important;
+}
+
 @media (max-width: 1000px) and (min-width:768px){
     .profilePictureDiv{
         text-align: left;
     }
 }
+
+/*@media (max-width: 1530px){
+    .full-size-1500{
+        width: 100% !important;
+    }
+
+    .text-right {
+        text-align: center !important;
+        background-color: red;
+    }
+
+    .text-right img{
+        float: none !important;
+        width: 100%;
+    }
+
+    .text-left {
+        text-align: center !important;
+    }
+}*/
 
 @media (max-width: 768px){
     .textLeftOnXs .text-right{
@@ -96,5 +133,9 @@
 
     .profilePictureDiv{
         text-align: center;
+    }
+
+    .pull-right{
+        float: none !important;
     }
 }

@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/suggestions/mysuggestions', 'SuggestedEventController@show');
 
     Route::get('/organizations', 'OrganizationController@index');
-
+    Route::get('/organizations/{organization}', 'OrganizationController@show');
 
     Route::group(['namespace' => 'Admin', 'middleware' => 'superadmin'], function () {
         Route::get('/accounts/create', 'AccountController@create');
@@ -65,6 +65,4 @@ Route::middleware('notVerified')->group(function () {
     Route::get('/verify/{token}', 'AccountVerificationController@verifyAccount');
 });
 
-Route::get('/test', function () {
-    return view('test.admin');
-});
+Route::get('/test', 'accountController@test');

@@ -19,13 +19,14 @@
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('student_number') ? ' has-error' : '' }}">
                             <label for="student_number" class="control-label">
                                 <small>Student Number</small>
                             </label>
 
+                            {{--^([0-9]{4})+(-([0-9]{4})+)+(-([0-9]{4})+)--}}
                             <input id="student_number" type="student_number" class="form-control" name="student_number"
-                                   value="{{ old('student_number') }}" placeholder="eg. 2017-1232-2213" required
+                                   value="{{ old('student_number') }}" placeholder="eg. 2017-1232-2213" pattern="^([0-9]{4})+(-([0-9]{2})+)+(-([0-9]{5})+)" required
                                    autofocus>
 
                             @if ($errors->has('student_number'))
@@ -71,8 +72,5 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            $('.loginFormDiv').fadeIn();
-        });
     </script>
 @endsection

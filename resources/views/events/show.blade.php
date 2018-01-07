@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <div class="col-md-12">
+    <div class="col-md-12 noPadding" style="margin-top: 10px">
         <div class="col-md-12 col-sm-12 col-xs-12 eventDetails noPadding">
             <div class="col-md-12 noPadding noMargin eventBannerDiv">
                 <img src="{{$event->img}}" alt="" style="width:100%;">
@@ -102,8 +102,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-
-    </script>
 @endsection

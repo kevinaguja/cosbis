@@ -9,9 +9,9 @@
 @endsection
 
 @section('content')
-    <div class="col-md-12" id="app">
-        <div class="col-md-12 jumbotron" style="margin-bottom: 15px; padding: 20px 15px 0px 15px;">
-            <div class="col-md-12 bg-white roundedCorners textCenterOnXs padding-25">
+    <div class="col-md-12 noPadding" id="app">
+        <div class="col-md-12 jumbotron" style="margin-bottom: 15px; padding: 20px 0px 0px 0px;">
+            <div class="col-md-12 noPadding bg-white roundedCorners textCenterOnXs padding-25">
                 <img src="{{asset('img/cosbis/cosbr-logo.png')}}" alt="" style="width: 100px; margin-right: 20px"
                      class="pullLeftBeforeXs">
                 <h3 style="padding-bottom: 0; margin-bottom: 0; line-height: .9em">
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-6 col-sm-12 noPadding">
             <form action="/accounts/delete" method="POST" id="deleteForm">
                 {{csrf_field()}}
                 {!! method_field('delete') !!}
@@ -43,45 +43,45 @@
                 </div>
                 <div>
                     <template>
-                        <el-table :data="tableData" border style="width: 100%">
-                            <el-table-column label="ID" prod="id" width="120">
-                                <template scope="scope">
-                                    <span style="margin-left: 10px" v-if="scope.row.id === active_id" class="glyphicon glyphicon-arrow-right"></span>
-                                    <span style="margin-left: 10px" v-if="scope.row.id !== active_id">@{{ scope.row.id }}</span>
+                        <div>
+                            <vue-good-table
+                                    :columns="columns"
+                                    :rows="rows"
+                                    :paginate="true"
+                                    :lineNumbers="true"
+                                    styleClass="table table-bordered table-striped condensed">
+                                <template slot="table-row" scope="scope">
+                                    <td class="fancy">@{{ scope.row.student_number }}</td>
+                                    <td class="has-text-right">@{{ scope.row.name }}</td>
+                                    <td class="has-text-right">@{{ scope.row.email}}</td>
+                                    <td class="has-text-right">
+                                        <a href="#account_details">
+                                            <el-button size="small" type="info"
+                                                       @click="updateChosenAccountDetails(scope.row.id, scope.row.firstname, scope.row.lastname, scope.row.email, scope.row.phone, scope.row.created_at_formatted, scope.row.updated_at_formatted, scope.row.img, scope.row.events)">
+                                                <span class="glyphicon glyphicon-eye-open"></span>
+                                            </el-button>
+                                        </a>
+                                        @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())
+                                            <el-button size="small" @click="handleEdit(scope.row.id)"><span
+                                                        class="glyphicon glyphicon-pencil"></span>
+                                            </el-button>
+                                        @endif
+                                        @if(auth()->user()->is_superadmin())
+                                            <el-button size="small" type="danger"
+                                                       @click="handleDeactivate(scope.row.id)"><span
+                                                        class="glyphicon glyphicon-remove"></span>
+                                            </el-button>
+                                        @endif
+                                    </td>
                                 </template>
-                            </el-table-column>
-                            <el-table-column label="Name">
-                                <template scope="scope">
-                                    <span for="">@{{scope.row.firstname}}</span>
-                                    <span for="">@{{scope.row.lastname}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="Operations" width="180">
-                                <template scope="scope">
-                                    <a href="#account_details"><el-button size="small" type="info"
-                                               @click="updateChosenAccountDetails(scope.row.id, scope.row.firstname, scope.row.lastname, scope.row.email, scope.row.phone, scope.row.created_at_formatted, scope.row.updated_at_formatted, scope.row.img, scope.row.events)">
-                                        <span class="glyphicon glyphicon-eye-open"></span>
-                                    </el-button></a>
-                                    @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())
-                                    <el-button size="small" @click="handleEdit(scope.row.id)"><span
-                                                class="glyphicon glyphicon-pencil"></span>
-                                    </el-button>
-                                    @endif
-                                    @if(auth()->user()->is_superadmin())
-                                        <el-button size="small" type="danger"
-                                                   @click="handleDeactivate(scope.row.id)"><span
-                                                    class="glyphicon glyphicon-remove"></span>
-                                        </el-button>
-                                    @endif
-                                </template>
-                            </el-table-column>
-                        </el-table>
+                            </vue-good-table>
+                        </div>
                     </template>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-6 col-sm-12" style="padding-right: 0px">
             <div class="col-md-12 col-sm-12 bg-white roundedCorners padding-bottom-25">
                 <div class="col-md-12">
                     <h4>
@@ -136,7 +136,9 @@
                                         <br>
                                         <small>Theme: @{{event.theme}}</small>
                                         <br>
-                                        <small v-if="event.organization != null">Organization: @{{ event.organization.description }}</small>
+                                        <small v-if="event.organization != null">Organization: @{{
+                                            event.organization.description }}
+                                        </small>
                                     </p>
                                 </li>
                             </ol>
@@ -148,6 +150,10 @@
     </div>
     <script>
         var accounts ={!! json_encode($accounts) !!};
+        accounts.forEach(function(item, index){
+            item.name= item.firstname + ' ' + item.lastname;
+        });
+        console.log(accounts);
         var Main = {
             data() {
                 return {
@@ -162,7 +168,33 @@
                         updated_at_formatted: accounts[0]['updated_at_formatted'],
                         img: accounts[0]['img'],
                         events: accounts[0]['events']
-                    }
+                    },
+                    columns: [
+                        {
+                            label: 'ID',
+                            sortable: 'true',
+                            field: 'student_number',
+                            filterable: true
+                        },
+                        {
+                            label: 'Name',
+                            sortable: 'true',
+                            field: 'name',
+                            filterable: true
+                        },
+                        {
+                            label: 'Email',
+                            sortable: 'true',
+                            field: 'email',
+                            filterable: true
+                        },
+                        {
+                            label: 'Action',
+                            sortable: 'false',
+                            field: 'phone',
+                        }
+                    ],
+                    rows: accounts
                 }
             },
             methods: {

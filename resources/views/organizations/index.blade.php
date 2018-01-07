@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <div class="col-md-12">
+    <div class="col-md-12 noPadding" style="margin-top: 10px" id="app">
         <div class="col-md-12 bg-white">
             <div class="container" style="border:none; height: auto">
                 <div class="jumbotron trim_padding">
@@ -30,7 +30,7 @@
                                 <span><b>@{{ org.description }}</b></span>
                                 <div class="bottom clearfix">
                                     <org-name class="org_name">@{{ org.name}}</org-name>
-                                    <el-button type="text" class="button" @click="window.location.href='/organizations/' + org.id + '/events'"><b>View events</b></el-button>
+                                    <a class="pull-right" :href="'/organizations/' + org.name">View Events</a>
                                 </div>
                             </div>
                         </el-card>

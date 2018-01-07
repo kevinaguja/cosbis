@@ -23,4 +23,15 @@ class Organization extends Model
     {
         return $this->belongsToMany(User::class, 'organization_members', 'org_id','user_id');
     }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'organization_id', 'id');
+    }
+
+
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
 }

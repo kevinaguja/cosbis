@@ -24,12 +24,11 @@ class AdminCreateAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'student_number' => 'required',
+            'student_number' => 'required|regex:[^([0-9]{4})+(-([0-9]{2})+)+(-([0-9]{5})+)]',
             'firstname' => 'required|max:50',
             'lastname' => 'required|max:50',
             'phone' => 'required|max:50',
             'email' => 'required|email|max:100|unique:users,email,'.auth()->user()->id,
-            'role' => 'required|max:1',
         ];
     }
 }

@@ -5,39 +5,41 @@ namespace App\Http\Controllers;
 use App\Cosbis\Filters\EventFilters;
 use App\Cosbis\Repositories\Criterias\Events\OrderBy;
 use App\Cosbis\Repositories\Criterias\Events\Where;
-use App\Cosbis\Repositories\Criterias\Events\WithCommentCount;
 use App\Cosbis\Repositories\EventRepository;
 use App\Cosbis\Repositories\EventVoteRepository;
-use App\Craftbeer\Filetransfer\Classes\AccountImageTransferable;
+use App\Cosbis\Repositories\OrganizationRepository;
+use App\Cosbis\Filetransfer\Classes\EventImageTransferable;
 use App\Http\Requests\events\StoreEventRequest;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    private $eventRepository, $eventVoteRepository;
+    private $eventRepository, $eventVoteRepository, $organizationRepository;
 
-    public function __construct(EventRepository $eventRepository, EventVoteRepository $eventVoteRepository)
+    public function __construct(EventRepository $eventRepository, EventVoteRepository $eventVoteRepository, OrganizationRepository $organizationRepository)
     {
         $this->eventRepository= $eventRepository;
         $this->eventVoteRepository= $eventVoteRepository;
+        $this->organizationRepository= $organizationRepository;
     }
 
     //
-    public function index(EventFilters $filters)
+    public function index(Request $request, EventFilters $filters)
     {
-        $now= Carbon::now();
+        $organizations= $this->organizationRepository->all();
 
-        $events= $this->eventRepository->pushCriteria(new Where([['date', '>=', $now]]))
-            ->pushCriteria(new OrderBy('date', 'asc'))
-            ->filter($filters)
+        $events= $this->eventRepository->filter($filters)
             ->paginate(5);
 
-        return view('events.index', compact('events'));
+        return view('events.index', compact('events', 'organizations'));
     }
 
     public function create()
     {
-        return view('events.create');
+        $organizations= $this->organizationRepository->all();
+
+        return view('events.create', compact('organizations'));
     }
 
     public function show($id)
@@ -53,14 +55,18 @@ class EventController extends Controller
         return view('events.show', compact('event', 'comments'));
     }
 
-    public function store(StoreEventRequest $request)
+    public function store(StoreEventRequest $request, EventImageTransferable $fileTransfer)
     {
-        dd(request()->all());
+        $organization= null;
+        if(strcmp($request->organization, "0")!=0){
+            $organization = $request->organization;
+        }
+
         $img= '/public/img/events/default.jpg';
         if(request('img') !== null)
-            $img= AccountImageTransferable::move(request('img'));
+            $img= $fileTransfer->move(request('img'));
 
-        if($this->eventRepository->create(array_merge(request()->all(), ["img"=>$img, "status"=> $this->getStatus(), "user_id"=>auth()->user()->id])));
+        if($this->eventRepository->create(array_merge(request()->except('organization'), ["img"=>$img, "status"=> $this->getStatus(), "user_id"=>auth()->user()->id, "organization_id" => $organization])));
             return back()->with('success', 'Event Successfully registered');
 
         return back()->with('error', 'Unable to register event, Please contact your administrator to fix this issue');

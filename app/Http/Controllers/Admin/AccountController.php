@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Cosbis\Repositories\UserRepository;
 use App\Cosbis\TokenGenerator\UserTokenGenerator;
-use App\Craftbeer\Filetransfer\Classes\AccountImageTransferable;
+use App\Cosbis\Filetransfer\Classes\AccountImageTransferable;
 use App\Events\WelcomeVerification;
 use App\Http\Requests\Admin\AdminCreateAccountRequest;
 use App\Http\Requests\Admin\AdminUpdateAccountRequest;
@@ -47,15 +47,23 @@ class AccountController extends Controller
         return view('admin.students.edit',compact('account','roles'));
     }
 
-    public function update(AdminUpdateAccountRequest $request,$user)
+    public function update(AdminUpdateAccountRequest $request,$user, AccountImageTransferable $fileTransfer)
     {
         $account= $this->userRepository->find($user);
+
+        $img= $account->img;
+        if(request('img') !== null)
+            $img= $fileTransfer->move(request('img'));
+
         $data=array(
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname'],
             'email' => $request['email'],
             'phone' => $request['phone'],
             'role_id' => $request['role'],
+            'address' => $request['address'],
+            'birthdate' => $request['birthdate'],
+            'img' => $img
         );
         $account->update($data);
 
@@ -83,7 +91,8 @@ class AccountController extends Controller
             'phone' => $request['phone'],
             'token' => $token,
             'img' => $img,
-            'role_id' => $request['role'],
+            'role_id' => $request['role_id'],
+            'birthdate' => $request['birthdate'],
             'password' => bcrypt('asdasd'),
         ])){
             event(new WelcomeVerification($user));

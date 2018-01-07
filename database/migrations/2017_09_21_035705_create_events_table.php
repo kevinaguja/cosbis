@@ -27,7 +27,7 @@ class CreateEventsTable extends Migration
             $table->text('img');
             $table->integer('organization_id')->unsigned()->nullable();
             $table->integer('views')->default(0);
-            $table->boolean('is_announcement',0);
+            //$table->boolean('is_announcement',0);
             $table->timestamps();
         });
     }

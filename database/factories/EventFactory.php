@@ -17,6 +17,6 @@ $factory->define(App\Event::class, function (Faker $faker) {
         'type'=>$faker->word,
         'theme'=>$faker->word,
         'img'=>'/img/events/default.jpg',
-        'is_announcement'=> $faker->boolean(0),
+        //'is_announcement'=> $faker->boolean(0),
     ];
 });

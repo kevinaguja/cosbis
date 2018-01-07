@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleTableSeeder::class);
         $this->call(PositionTableSeeder::class);
         $this->call(UserTableSeeder::class);
+        $this->call(OrganizationTableSeeder::class);
         $this->call(EventTableSeeder::class);
         $this->call(BlogTableSeeder::class);
         $this->call(NewsTableSeeder::class);
-        $this->call(OrganizationTableSeeder::class);
         $this->call(EventsCommentTableSeeder::class);
     }
 }

@@ -43,8 +43,6 @@
             {{--<a class="navbar-brand" href="#">WebSiteName</a>--}}
         </div>
         <div class="col-md-12 text-center navScroll">
-            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                  style="display: none;">{{ csrf_field() }}</form>
             <div class="col-md-6 collapse navbar-collapse navToggle">
                 <ul class="nav navbar-nav greenLinks">
                     <li><a href="#">Home</a></li>
@@ -61,6 +59,8 @@
                     <li>
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                     </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                          style="display: none;">{{ csrf_field() }}</form>
                 </ul>
             </div>
         </div>

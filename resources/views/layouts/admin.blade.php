@@ -20,32 +20,34 @@
 <body class="noPadding noMargin" style="background-color: #eaecf3">
 <div class="container-fluid noPadding noMargin">
     <style>
-        body,html, .container-fluid{
+        body, html, .container-fluid {
             height: 100%;
             width: 100%;
             font-family: 'Work Sans', Raleway, Arial;
         }
 
         .container {
-            height:200px;
-            border:1px solid;
+            height: 200px;
+            border: 1px solid;
         }
+
         .right {
             height: 100%;
-            width:auto;
-            background:#eaecf3;
-            overflow:hidden;
+            width: auto;
+            background: #eaecf3;
+            overflow: hidden;
             background-size: 100% auto;
         }
+
         .left {
-            width:250px;
-            background:blue;
-            float:left;
+            width: 250px;
+            background: blue;
+            float: left;
             padding-left: 10px;
             height: 100%;
         }
 
-        .sidebar{
+        .sidebar {
             padding-top: 50px;
             background-color: #234567;
             height: 100%;
@@ -55,49 +57,49 @@
             z-index: 999;
         }
 
-        .sidebar a{
+        .sidebar a {
             color: white;
             transition: all .4s ease-in-out;
         }
 
-        .sidebar a:hover{
+        .sidebar a:hover {
             text-decoration: none;
             color: #4eabbf;
         }
 
-        .sidebar li{
+        .sidebar li {
             padding-top: 15px;
             margin: 0;
         }
 
-        #accordion{
-            padding-top :0px
+        #accordion {
+            padding-top: 0px
         }
 
-        #accordion ul{
+        #accordion ul {
             border-right: 5px solid #4eabbf;
         }
 
-        #accordion ul a{
+        #accordion ul a {
             display: block;
             padding-left: 2em;
         }
 
-        @media (max-width: 768px){
-            .showOnXs{
+        @media (max-width: 768px) {
+            .showOnXs {
                 display: block !important;
                 background-color: #234567;
             }
 
-            .sidebar{
+            .sidebar {
                 width: 100%;
                 height: 500px !important;
                 margin-left: 0px !important;
-                background-color: rgba(35,69,103, .8);
+                background-color: rgba(35, 69, 103, .8);
                 position: absolute;
             }
 
-            .right{
+            .right {
                 padding-top: 50px;
             }
         }
@@ -116,42 +118,112 @@
             </div>
         </nav>
 
-        <nav class="left sidebar collapse navbar-collapse" id="sideNav" style="overflow-y: auto !important; height: 100%; min-height: 100% !important;">
-            <img src="{{auth()->user()->img}}" alt="Account Image" class="img-circle" style="width: 50px; background-color: white; padding: 3px">
+        <nav class="left sidebar collapse navbar-collapse" id="sideNav"
+             style="overflow-y: auto !important; height: 100%; min-height: 100% !important;">
+            <img src="{{auth()->user()->img}}" alt="Account Image" class="img-circle"
+                 style="width: 50px; background-color: white; padding: 3px">
             <span>{{auth()->user()->firstname." ".auth()->user()->lastname}}</span>
             <ul class="list-unstyled">
-                <a href="/profile"><li><span class="glyphicon glyphicon-home"></span> Home</li></a>
-                <a data-toggle="collapse" data-parent="#accordion" href="#accountsCollapse"><li><span class="glyphicon glyphicon-user"></span> Accounts <small><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></small></li></a>
+                <a href="/profile">
+                    <li><span class="glyphicon glyphicon-home"></span> Home</li>
+                </a>
+                @if((auth()->user()->is_admin() || auth()->user()->is_superadmin()))
+                    <a data-toggle="collapse" data-parent="#accordion" href="#accountsCollapse">
+                        <li><span class="glyphicon glyphicon-user"></span> Accounts
+                            <small><span class="glyphicon glyphicon-arrow-up"></span><span
+                                        class="glyphicon glyphicon-arrow-down"></span></small>
+                        </li>
+                    </a>
+                    <li id="accordion">
+                        <ul id="accountsCollapse"
+                            class="list-unstyled panel-collapse collapse {{Request::is("accounts*") ? "in" :  ''}}">
+                            <li><a href="/accounts">Accounts</a></li>
+                            <li><a href="/accounts/create">Create Account</a></li>
+                        </ul>
+                    </li>
+                @endif
+                <a data-toggle="collapse" data-parent="#accordion" href="#eventsCollapse">
+                    <li><span class="glyphicon glyphicon-tags"></span> Events
+                        <small><span class="glyphicon glyphicon-arrow-up"></span><span
+                                    class="glyphicon glyphicon-arrow-down"></span></small>
+                    </li>
+                </a>
                 <li id="accordion">
-                    <ul id="accountsCollapse" class="list-unstyled panel-collapse collapse {{Request::is("accounts*") ? "in" :  ''}}">
-                        <li><a href="/accounts">Accounts</a></li>
-                        <li><a href="/accounts/create">Create Account</a></li>
-                    </ul>
-                </li>
-                <a data-toggle="collapse" data-parent="#accordion" href="#eventsCollapse"><li><span class="glyphicon glyphicon-tags"></span> Events <small><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></small></li></a>
-                <li id="accordion">
-                    <ul id="eventsCollapse" class="list-unstyled panel-collapse collapse {{Request::is("events*") ? "in" :  ''}}">
+                    <ul id="eventsCollapse"
+                        class="list-unstyled panel-collapse collapse {{Request::is("events*") ? "in" :  ''}}">
                         <li><a href="/events">Official Events List</a></li>
                         <li><a href="/events/create">Create Event</a></li>
-                        <li><a href="/events/list">Events List</a></li>
                     </ul>
                 </li>
-                <a href="/organizations"><li><span class="glyphicon glyphicon-tag"></span> Organizations</li></a>
-                <a href=""><li><span class="glyphicon glyphicon-cog"></span> Settings</li></a>
+                <a href="/organizations">
+                    <li><span class="glyphicon glyphicon-tag"></span> Organizations</li>
+                </a>
+                <a href="/files">
+                    <li><span class="glyphicon glyphicon-file"></span> Files</li>
+                </a>
+                <a href="">
+                    <li><span class="glyphicon glyphicon-cog"></span> Settings</li>
+                </a>
             </ul>
 
             <ul class="list-unstyled" style="margin-top: 50px">
-                <a href=""><li><span class="glyphicon glyphicon-envelope"></span> Messages</li></a>
-                <a href=""><li><span class="glyphicon glyphicon-tags"></span> Reports</li></a>
-                <a href=""><li><span class="glyphicon glyphicon-list-alt"></span> Election</li></a>
-                <a href=""><li><span class="glyphicon glyphicon-scissors"></span> CMS</li></a>
-                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li><span class="glyphicon glyphicon-off"></span> Logout</li></a>
+                <a href="">
+                    <li><span class="glyphicon glyphicon-envelope"></span> Messages</li>
+                </a>
+                <a href="">
+                    <li><span class="glyphicon glyphicon-tags"></span> Reports</li>
+                </a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#electionCollapse">
+                    <li><span class="glyphicon glyphicon-list-alt"></span> Election
+                        <small><span class="glyphicon glyphicon-arrow-up"></span><span
+                                    class="glyphicon glyphicon-arrow-down"></span></small>
+                    </li>
+                </a>
+                <li id="accordion">
+                    <ul id="electionCollapse"
+                        class="list-unstyled panel-collapse collapse {{Request::is("election*") ? "in" :  ''}}">
+                        <li><a href="/election">Home</a></li>
+                        <li><a href="/election/candidates/create">Create candidate</a></li>
+                        <li><a href="/election/parties/create">Create Party</a></li>
+                        <li><a href="/election/results">Election Results</a></li>
+                    </ul>
+                </li>
+                <a href="">
+                    <li><span class="glyphicon glyphicon-scissors"></span> CMS</li>
+                </a>
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <li><span class="glyphicon glyphicon-off"></span> Logout</li>
+                </a>
             </ul>
             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                   style="display: none;">{{ csrf_field() }}</form>
         </nav>
+        <script>
+            var Main = {}
+        </script>
+
         <div class="right">
             <div class="col-md-12" style="height: 100%; overflow: auto;">
+                <div class="col-md-12 bg-white" style="padding: 15px" id="crumbs">
+                    <el-breadcrumb separator-class="el-icon-arrow-right">
+                        <span class="pull-left"><a href="/profile" style="color: black"><span class="glyphicon glyphicon-home"></span> Home</a></span>
+                        @php $count= 0; @endphp
+                        @foreach(explode('/',\Request::getRequestUri()) as $url_string)
+                            @php $path= ''; @endphp
+                            @for($index=0; $index<$count; $index++)
+                                @if(!(strcmp(explode('/', \Request::getRequestUri())[$count], '')==0))
+                                    @php $path.= '/'.explode('/',\Request::getRequestUri())[$index+1]; @endphp
+                                @endif
+                            @endfor
+                            <el-breadcrumb-item><a href="{{env('APP_URL')}}{{$path}}" style="color: black !important; font-weight: bold !important; font-size: 14px!important;">{{ucfirst(explode('?',explode('/',\Request::getRequestUri())[$index])[0])}}</a></el-breadcrumb-item>
+                            @php $count++; @endphp
+                        @endforeach
+                    </el-breadcrumb>
+                </div>
+                <script>
+
+                </script>
                 @yield('content')
             </div>
 
@@ -161,5 +233,8 @@
         </div>
     </div>
 </div>
+<script>
+    new Vue().$mount('#crumbs')
+</script>
 </body>
 </html>

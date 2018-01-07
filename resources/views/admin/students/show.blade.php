@@ -10,16 +10,8 @@
 @endsection
 
 @section('content')
-    <div class="col-md-12">
-        <div class="col-md-12 col-sm-12 bg-white noPadding noMargin">
-            <div class="col-md-12">
-                <div class="col-md-12 dark-bottom-border">
-                    <div>
-                        <h3><b>Profile - <small>Student Profile</small></b></h3>
-                        <div class="green-bottom-border col-md-2 col-xs-3"></div>
-                    </div>
-                </div>
-            </div>
+    <div class="col-md-12 noPadding" style="margin-top: 10px">
+        <div class="col-md-12 col-sm-12 bg-white">
             <div class="col-md-12">
                 <div class="col-md-3 profilePictureDiv">
                     <img src="{{$account->img}}" class="img-rounded img-thumbnail" alt="Account Image"

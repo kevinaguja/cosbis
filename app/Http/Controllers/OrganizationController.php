@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cosbis\Repositories\OrganizationRepository;
 use App\Cosbis\Repositories\UserRepository;
+use App\Organization;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -24,5 +25,10 @@ class OrganizationController extends Controller
         $organizations= $this->organizationRepository->all();
 
         return view('organizations.index', compact('organizations'));
+    }
+
+    public function show(Organization $organization)
+    {
+        return view('organizations.show', compact('organization'));
     }
 }

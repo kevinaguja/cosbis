@@ -47,7 +47,7 @@
     }
 </style>
 
-<nav class="navbar navbar-inverse navbar-fixed-top noMargin" style="background-color: #4CAF50">
+<nav class="navbar navbar-inverse navbar-fixed-top noMargin" style="background-color: #234567">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sideNav">
@@ -70,6 +70,9 @@
                             <li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                             <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                         </ul>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                              style="display: none;">{{ csrf_field() }}</form>
                     </li>
                 </ul>
             </div>

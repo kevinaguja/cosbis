@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <div class="col-md-12">
+    <div class="col-md-12 noPadding" style="margin-top: 10px">
         <div class="col-md-12 col-sm-12 col-xs-12 noPadding bg-white">
             {{--<div class="col-md-12 dark-bottom-border">
                 <div>
@@ -22,7 +22,8 @@
                     <div class="container suggestionFaq" id="suggestionFaq"
                          style="display: none; border:none; height: auto; max-width: 100%">
                         @else
-                            <div class="container suggestionFaq" id="suggestionFaq" style="border:none; height: auto; max-width: 100%">
+                            <div class="container suggestionFaq" id="suggestionFaq"
+                                 style="border:none; height: auto; max-width: 100%">
                                 @endif
                                 <div class="col-md-12 dark-bottom-border">
                                     <h3><b>Guidelines</b></h3>
@@ -124,6 +125,19 @@
                                                 {{csrf_field()}}
 
                                                 <div class="col-md-12">
+                                                    @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())
+                                                        <div class="col-md-12 noPadding" style="margin-top: 10px">
+                                                            <div class="col-md-3 col-md-offset-9 noPadding">
+                                                                <select name="organization" id="organization"
+                                                                        class="form-control">
+                                                                    <option value="0" selected>None</option>
+                                                                    @foreach($organizations as $organization)
+                                                                        <option value="{{$organization->id}}">{{$organization->id}}. {{$organization->description}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                                         <br>
                                                         <label for="title">Title</label>

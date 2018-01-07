@@ -13,6 +13,7 @@ class AccountVerificationController extends Controller
     {
         if(strcmp($token, auth()->user()->token)===0){
             auth()->user()->is_verified= 1;
+            auth()->user()->token= null;
             auth()->user()->save();
             return redirect('/profile');
         }

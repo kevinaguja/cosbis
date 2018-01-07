@@ -23,6 +23,7 @@ class Event extends Model
         'type',
         'theme',
         'img',
+        'organization_id',
     ];
 
     protected $dates= [

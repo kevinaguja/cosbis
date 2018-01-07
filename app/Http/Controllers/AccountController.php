@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Cosbis\Repositories\Criterias\Events\{OrderBy,Where,WithCommentCount};
 use App\Cosbis\Repositories\EventRepository;
 use App\Cosbis\Repositories\UserRepository;
+use App\Cosbis\Filetransfer\Classes\AccountImageTransferable;
+use App\Event;
 use App\Http\Requests\Students\StudentUpdateAccountRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AccountController extends Controller
 {
@@ -21,6 +26,17 @@ class AccountController extends Controller
 
     public function index()
     {
+        $official_events=[];
+        $rejected_events=[];
+        $new_events=[];
+        $my_events=[];
+        foreach(range(1,12) as $month){
+            $official_events[]= Event::where('status', 'approved')->whereYear('date', '=', now()->year)->whereMonth('date', '=', $month)->count();
+            $rejected_events[]= Event::where('status', 'rejected')->whereYear('date', '=', now()->year)->whereMonth('date', '=', $month)->count();
+            $new_suggestions[]= Event::where('status', 'new')->whereYear('date', '=', now()->year)->whereMonth('date', '=', $month)->count();
+            $my_events[]= Event::where('user_id', auth()->user()->student_number)->whereYear('date', '=', now()->year)->whereMonth('date', '=', $month)->count();
+        }
+
         $events= \App\Event::where("status", "=", "approved")->paginate(5, ['*'], 'events');
 
         $now= Carbon::now()->format('Y-m-d');
@@ -45,7 +61,7 @@ class AccountController extends Controller
             ->pushCriteria(new OrderBy('comments_count', 'desc'))
             ->all();
 
-        return view('accounts.index', compact('events', 'events', 'upcomming_events', 'new_events', 'relevant_events'));
+        return view('accounts.index', compact('events', 'events', 'upcomming_events', 'new_events', 'relevant_events', 'official_events', 'rejected_events', 'new_suggestions', 'my_events'));
     }
 
     public function edit()
@@ -53,14 +69,23 @@ class AccountController extends Controller
         return view('accounts.edit');
     }
 
-    public function update(StudentUpdateAccountRequest $request)
+    public function update(StudentUpdateAccountRequest $request, AccountImageTransferable $fileTransfer)
     {
         $user= $this->userRepository->find(auth()->user()->id);
+
+        $img= auth()->user()->img;
+        if(request('img') !== null)
+            $img= $fileTransfer->move(request('img'));
+
         $data=array(
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname'],
             'email' => $request['email'],
             'phone' => $request['phone'],
+            'role_id' => $request['role'],
+            'address' => $request['address'],
+            'birthdate' => $request['birthdate'],
+            'img' => $img,
         );
 
         $user->update($data);
@@ -93,5 +118,11 @@ class AccountController extends Controller
             $request->session()->flash('success', 'Your password has been changed.');
             return back();
         }
+    }
+
+    public function test(Request $request){
+        $path = storage_path('app\test\asda.png');
+
+        return response()->download($path);
     }
 }
