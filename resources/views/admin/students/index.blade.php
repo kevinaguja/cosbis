@@ -4,15 +4,19 @@
     <link rel="stylesheet" href="{{asset('css/admin/accounts.css')}}">
 @endsection
 
-@section('navigation')
-    @include('layouts.navigationadmin')
-@endsection
-
 @section('content')
+    @if($accounts->count()===0)
+        <div class="col-md-12 bg-white noPadding roundedCorners jumbotron text-center">
+            <h1 class="glyphicon glyphicon-warning-sign" style="color: orangered; text-shadow: 5px 5px 5px #333"></h1>
+            <h2>Looks like there are no user accounts registered in our Database. If you think that this is a mistake,
+                please contact your system maintenance personnel to correct this. Otherwise you may go to the <a
+                        href="/accounts/create">accounts creation page</a> to register new accounts!</h2>
+        </div>
+    @endif
     <div class="col-md-12 noPadding" id="app">
         <div class="col-md-12 jumbotron" style="margin-bottom: 15px; padding: 20px 0px 0px 0px;">
             <div class="col-md-12 noPadding bg-white roundedCorners textCenterOnXs padding-25">
-                <img src="{{asset('img/cosbis/cosbr-logo.png')}}" alt="" style="width: 100px; margin-right: 20px"
+                <img src="{{asset('default.png')}}" alt="" style="width: 100px; margin-right: 20px"
                      class="pullLeftBeforeXs">
                 <h3 style="padding-bottom: 0; margin-bottom: 0; line-height: .9em">
                     <b>College of San Benildo- Rizal</b>
@@ -51,10 +55,10 @@
                                     :lineNumbers="true"
                                     styleClass="table table-bordered table-striped condensed">
                                 <template slot="table-row" scope="scope">
-                                    <td class="fancy">@{{ scope.row.student_number }}</td>
-                                    <td class="has-text-right">@{{ scope.row.name }}</td>
+                                    <td class="fancy" style="width: 20%">@{{ scope.row.student_number }}</td>
+                                    <td class="has-text-right" style="min-width: 200px">@{{ scope.row.name }}</td>
                                     <td class="has-text-right">@{{ scope.row.email}}</td>
-                                    <td class="has-text-right">
+                                    <td class="has-text-right" style="min-width: 150px">
                                         <a href="#account_details">
                                             <el-button size="small" type="info"
                                                        @click="updateChosenAccountDetails(scope.row.id, scope.row.firstname, scope.row.lastname, scope.row.email, scope.row.phone, scope.row.created_at_formatted, scope.row.updated_at_formatted, scope.row.img, scope.row.events)">
@@ -68,7 +72,7 @@
                                         @endif
                                         @if(auth()->user()->is_superadmin())
                                             <el-button size="small" type="danger"
-                                                       @click="handleDeactivate(scope.row.id)"><span
+                                                       @click="openDeleteModal(scope.row.id)"><span
                                                         class="glyphicon glyphicon-remove"></span>
                                             </el-button>
                                         @endif
@@ -150,10 +154,9 @@
     </div>
     <script>
         var accounts ={!! json_encode($accounts) !!};
-        accounts.forEach(function(item, index){
-            item.name= item.firstname + ' ' + item.lastname;
+        accounts.forEach(function (item, index) {
+            item.name = item.firstname + ' ' + item.lastname;
         });
-        console.log(accounts);
         var Main = {
             data() {
                 return {
@@ -201,10 +204,6 @@
                 handleEdit(id) {
                     window.location.href = '/accounts/' + id + '/edit'
                 },
-                handleDeactivate(id) {
-                    document.getElementById('idField').value = id;
-                    document.getElementById('deleteForm').submit();
-                },
                 updateChosenAccountDetails(id, firstname, lastname, email, phone, created_at, updated_at, img, events) {
                     this.active_id = id;
                     this.chosenAccount.id = id;
@@ -215,6 +214,25 @@
                     this.chosenAccount.updated_at_formatted = updated_at;
                     this.chosenAccount.img = img;
                     this.chosenAccount.events = events;
+                },
+                openDeleteModal(id) {
+                    this.$confirm('Delete this account?', 'Warning', {
+                        confirmButtonText: 'OK',
+                        cancelButtonText: 'Cancel',
+                        type: 'warning'
+                    }).then(() => {
+                        this.$message({
+                            type: 'success',
+                            message: 'Delete completed'
+                        });
+                        document.getElementById('idField').value = id;
+                        document.getElementById('deleteForm').submit();
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: 'Delete canceled'
+                        });
+                    });
                 }
             },
             computed: {

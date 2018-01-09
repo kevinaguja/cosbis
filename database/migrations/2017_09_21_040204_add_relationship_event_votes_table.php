@@ -14,7 +14,7 @@ class AddRelationshipEventVotesTable extends Migration
     public function up()
     {
         Schema::table('event_votes', function (Blueprint $table) {
-            $table->foreign('event_id')->references('id')->on('events');
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

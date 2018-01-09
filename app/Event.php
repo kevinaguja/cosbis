@@ -5,10 +5,12 @@ namespace App;
 use App\Cosbis\Filters\EventFilters;
 use App\Cosbis\Filters\QueryFilter;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use MongoDB\Driver\Query;
 
 class Event extends Model
 {
+    use SoftDeletes;
     protected $table= 'events';
 
 
@@ -45,12 +47,12 @@ class Event extends Model
 
     public function huzzahs()
     {
-        return $this->hasMany(EventVote::class, 'event_id', 'id')->where('vote', '=', 1)->get();
+        return $this->hasMany(EventVote::class, 'event_id', 'id')->where('vote', '=', 1);
     }
 
     public function boos()
     {
-        return $this->hasMany(EventVote::class, 'event_id', 'id')->where('vote', '=', 0)->get();
+        return $this->hasMany(EventVote::class, 'event_id', 'id')->where('vote', '=', 0);
     }
 
     public function comments(){

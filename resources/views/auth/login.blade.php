@@ -11,8 +11,8 @@
                 <h1><b>Learn, Live, Evolve</b></h1>
 
                 <p>A great mind once said, "Success only comes by persevering despite failure". Balance your <span
-                            style="color: green">academic life</span> with <span
-                            style="color: green">social growth</span>. Life is <span style="color: green">too short to waste</span> on one or the other.</p>
+                            style="color: green; text-shadow: 1px 1px 3px white">academic life</span> with <span
+                            style="color: green; text-shadow: 1px 1px 3px white">social growth</span>. Life is <span style="color: green; text-shadow: 1px 1px 3px white">too short to waste</span> on one or the other.</p>
             </div>
             <div class="col-md-5">
                 <div class="loginFormDiv">

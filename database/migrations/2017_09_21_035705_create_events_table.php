@@ -29,6 +29,7 @@ class CreateEventsTable extends Migration
             $table->integer('views')->default(0);
             //$table->boolean('is_announcement',0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

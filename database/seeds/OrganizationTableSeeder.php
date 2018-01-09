@@ -17,35 +17,35 @@ class OrganizationTableSeeder extends Seeder
             'name'=> 'BLAS',
             'description'=> 'Benildean Literary Arts Society',
             'img'=>'/img/organizations/blas.jpg',
-            'logo'=>'/img/organizations/cosbr-logo.png',
+            'logo'=>'/img/organizations/cosbr-default.png',
         ]);
 
         factory(App\Organization::class)->create([
             'name'=> 'BSD',
             'description'=> 'Benildean System Developers',
             'img'=>'/img/organizations/default.jpg',
-            'logo'=>'/img/organizations/cosbr-logo.png',
+            'logo'=>'/img/organizations/cosbr-default.png',
         ]);
 
         factory(App\Organization::class)->create([
             'name'=> 'NC',
             'description'=> 'Nap Committee',
             'img'=>'/img/organizations/default.jpg',
-            'logo'=>'/img/organizations/cosbr-logo.png',
+            'logo'=>'/img/organizations/cosbr-default.png',
         ]);
 
         factory(App\Organization::class)->create([
             'name'=> 'SC',
             'description'=> 'Snacks Committee',
             'img'=>'/img/organizations/default.jpg',
-            'logo'=>'/img/organizations/cosbr-logo.png',
+            'logo'=>'/img/organizations/cosbr-default.png',
         ]);;
 
         factory(App\Organization::class)->create([
             'name'=> 'SE',
             'description'=> 'Sports Enthusiasts',
             'img'=>'/img/organizations/default.jpg',
-            'logo'=>'/img/organizations/cosbr-logo.png',
+            'logo'=>'/img/organizations/cosbr-default.png',
         ]);
     }
 }

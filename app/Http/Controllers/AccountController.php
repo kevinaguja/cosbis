@@ -120,9 +120,8 @@ class AccountController extends Controller
         }
     }
 
-    public function test(Request $request){
-        $path = storage_path('app\test\asda.png');
-
-        return response()->download($path);
+    public function suspendedAccount()
+    {
+            return view('auth.suspendedaccount');
     }
 }

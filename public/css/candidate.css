@@ -1,0 +1,25 @@
+#imgBanner {
+    width: 100%;
+    height: auto;
+}
+
+.header{
+    background-color: #9a9ca0;
+    height: 200px !important;
+    width: 100%;
+}
+
+#imgCandidate {
+    border: 2px solid #f1f1f1 !important;
+    border-radius: 10px;
+}
+
+textarea{
+    resize: none;
+}
+
+.btnUpload{
+    padding-top: 30px !important;
+    border: 2px dashed darkblue;
+    border-radius: 10px;
+}

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Active;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\NotVerified;
 use App\Http\Middleware\Student;
@@ -67,5 +68,6 @@ class Kernel extends HttpKernel
         'superadmin' => SuperAdmin::class,
         'verified' => Verified::class,
         'notVerified' => NotVerified::class,
+        'active' => Active::class,
     ];
 }

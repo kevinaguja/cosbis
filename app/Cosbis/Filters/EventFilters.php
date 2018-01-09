@@ -21,9 +21,9 @@ class EventFilters extends QueryFilter
     public function search_date($data)
     {
         if(strcmp($data[0], 'latest')==0)
-            return $this->builder->orderBy('date', 'asc');
-        if(strcmp($data[0], 'oldest')==0)
             return $this->builder->orderBy('date', 'desc');
+        if(strcmp($data[0], 'oldest')==0)
+            return $this->builder->orderBy('date', 'asc');
         if(strcmp($data[0], 'future')==0)
             return $this->builder->where('date', '>=', Carbon::now());
     }

@@ -170,9 +170,12 @@
                 <a href="">
                     <li><span class="glyphicon glyphicon-envelope"></span> Messages</li>
                 </a>
-                <a href="">
+                @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())
+                <a href="/reports">
                     <li><span class="glyphicon glyphicon-tags"></span> Reports</li>
                 </a>
+                @endif
+                @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())
                 <a data-toggle="collapse" data-parent="#accordion" href="#electionCollapse">
                     <li><span class="glyphicon glyphicon-list-alt"></span> Election
                         <small><span class="glyphicon glyphicon-arrow-up"></span><span
@@ -188,6 +191,12 @@
                         <li><a href="/election/results">Election Results</a></li>
                     </ul>
                 </li>
+                @endif
+                @if(auth()->user()->is_student())
+                    <a href="/election/vote">
+                        <li><span class="glyphicon glyphicon-tags"></span> Election</li>
+                    </a>
+                @endif
                 <a href="">
                     <li><span class="glyphicon glyphicon-scissors"></span> CMS</li>
                 </a>
@@ -221,18 +230,10 @@
                         @endforeach
                     </el-breadcrumb>
                 </div>
-                <script>
-
-                </script>
                 @yield('content')
             </div>
-
-            <!-- <footer class="col-md-12 text-center" style="bottom:0; margin-top: -20px">
-                <small><span class="glyphicon glyphicon-copyright-mark"></span> COSBR, 2017</small>
-            </footer> -->
         </div>
     </div>
-</div>
 <script>
     new Vue().$mount('#crumbs')
 </script>

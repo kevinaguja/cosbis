@@ -51,6 +51,14 @@
             <div class="col-md-12 noPadding bg-white roundedCorners animateForms" v-if="active_tab===1">
                 <div class="container text-center"
                      style="padding-top: 10px; border:none; width: auto; height: auto">
+                    @if(session()->has('success'))
+                        <div class="col-md-12">
+                            <div class="col-md-4 col-md-offset-4 alert alert-success">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{session('success')}}
+                            </div>
+                        </div>
+                    @endif
                     <h4><b>Create Account</b></h4>
 
                     <div class="col-md-4 col-md-offset-4{{ $errors->has('student_number') ? ' has-error' : '' }}">

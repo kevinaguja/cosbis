@@ -16,6 +16,12 @@
             <div class="container"
                  style="padding-bottom: 25px; padding-top: 25px; border: none; height: auto; max-width: 100%">
                 <div class="col-md-12">
+                    @if(session()->has('success'))
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{session('success')}}
+                        </div>
+                    @endif
                     <form action="/events" method="get">
                         <div class="col-md-12 noPadding" style="margin-bottom: 15px;">
                             <div class="col-md-2">
@@ -31,8 +37,8 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-6">
-                                <div class="col-md-6">
+                            <div class="col-md-6 noPadding">
+                                <div class="col-md-6 noSidePaddingOnSm">
                                     <label for="">Sort by Criteria</label>
                                     <select name="search_date" id="filter_1" class="form-control">
                                         <option value="null" selected disabled hidden>Default</option>
@@ -41,7 +47,7 @@
                                         <option value="future">Future Events</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 noSidePaddingOnSm">
                                     <label for="">Sort by creator</label>
                                     <select name="status" id="filter_2" class="form-control">
                                         <option value="null" selected disabled hidden>All</option>
@@ -51,7 +57,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2" style="margin-top: 25px">
                                 <input type="submit" class="btn btn-primary form-control">
                             </div>
                         </div>
@@ -59,7 +65,7 @@
                     @foreach($events as $event)
                         <div class="col-md-12" style="margin-bottom: 25px">
                             <div class="col-md-12 noPadding">
-                                <img src="{{$event->img}}" alt="News Image" style="width: 100%">
+                                <img src="{{$event->img}}" alt="Event Image" style="width: 100%">
                                 <hr>
                                 <h4><b> {{$event->title}}</b> <br>
                                     <small style="color: grey">
@@ -81,7 +87,7 @@
                         </div>
                     @endforeach
                     <div class="col-md-12 text-right">
-                        {{$events->links()}}
+                        {{$events->appends(request()->input())->links()}}
                     </div>
                 </div>
                 {{--<template>
@@ -121,6 +127,14 @@
                 </template>--}}
             </div>
         </div>
+        @if($events->count()===0)
+            <div class="col-md-12 noPadding bg-white roundedCorners text-center" style="position: static !important;">
+                <h1 class="glyphicon glyphicon-warning-sign" style="color: orangered; text-shadow: 5px 5px 5px #333"></h1>
+                <h2>Looks like there are no user accounts registered in our Database. If you think that this is a mistake,
+                    please contact your system maintenance personnel to correct this. Otherwise you may go to the <a
+                            href="/accounts/create">accounts creation page</a> to register new accounts!</h2>
+            </div>
+        @endif
     </div>
     <script>
         var events = {!! json_encode($events) !!};

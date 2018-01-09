@@ -75,7 +75,7 @@
                         <span class="glyphicon glyphicon-copyright-mark"></span> {{Carbon\Carbon::parse(Carbon\Carbon::now())->year}}
                     </small>
                 </label>
-                <img src="{{asset('img/cosbis/cosbr-logo.png')}}" alt="" style="width: 30%">
+                <img src="{{asset('default.png')}}" alt="" style="width: 30%">
             </li>
         </ul>
     </div>

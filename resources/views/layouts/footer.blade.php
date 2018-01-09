@@ -4,7 +4,7 @@
            <div class="col-md-12">
                <div class="col-md-4 noPadding">
                    <div class="col-md-12 footerImgDiv">
-                       <img class="img-responsive" src="{{asset('img/cosbis/cosbr-logo.png')}}" alt="">
+                       <img class="img-responsive" src="{{asset('default.png')}}" alt="">
                    </div>
                </div>
                <div class="col-md-8 noPadding">

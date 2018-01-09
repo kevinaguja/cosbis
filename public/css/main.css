@@ -67,6 +67,14 @@ B3D7A9
     transition: all .4s ease-in-out;
 }
 
+.pointerOnHover{
+    transition: all .4s ease-in-out;
+}
+
+.pointerOnHover:hover{
+    cursor:pointer;
+}
+
 #imgLabel:hover{
     border-style:solid;
     background-color: rgba(76, 175, 80, .4);

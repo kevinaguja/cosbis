@@ -19,6 +19,7 @@ class CreateEventVotesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->boolean('vote');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -14,13 +14,35 @@
 Route::get('/home', function () {
     return redirect()->home();
 });
+Route::get('/suspendedaccount', 'AccountController@suspendedAccount');
 
 Auth::routes();
 
 //Route::middleware(['auth'])->group(function(){
 //});
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'active'])->group(function () {
+    Route::group(['namespace' => 'Admin', 'middleware' => 'superadmin'], function () {
+        Route::get('/accounts/create', 'AccountController@create');
+        Route::post('/accounts/create', 'AccountController@store');
+        Route::delete('/accounts/delete', 'AccountController@destroy');
+    });
+
+    Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function () {
+        Route::get('/accounts/', 'AccountController@index');
+        Route::get('/accounts/{user}', 'AccountController@show');
+        Route::get('/accounts/{user}/edit', 'AccountController@edit');
+        Route::patch('/accounts/{user}/edit', 'AccountController@update');
+        Route::patch('/accounts/{user}/suspend', 'AccountController@suspend');
+        Route::get('/election/candidates/create','Election\CandidateController@create');
+        Route::post('/election/candidates/create','Election\CandidateController@store');
+        Route::get('/election/parties/create','Election\PartyController@create');
+        Route::post('/election/parties/create','Election\PartyController@store');
+        Route::get('/election/parties/{id}/edit','Election\PartyController@edit');
+        Route::patch('/election/parties/{id}/edit','Election\PartyController@update');
+        Route::get('/election','Election\ElectionController@index');
+    });
+
     Route::get('/profile', 'AccountController@index');
     Route::get('/profile/edit', 'AccountController@edit');
     Route::patch('/profile/edit', 'AccountController@update');
@@ -30,6 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/announcements', 'AnnouncementController@index');
 
+    Route::delete('/events/{event}/delete', 'EventController@destroy')->middleware('admin');
     Route::get('/events', 'EventController@index');
     Route::get('/events/calendar', 'EventController@calendar');
     Route::get('/events/create', 'EventController@create');
@@ -44,19 +67,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/organizations', 'OrganizationController@index');
     Route::get('/organizations/{organization}', 'OrganizationController@show');
 
-    Route::group(['namespace' => 'Admin', 'middleware' => 'superadmin'], function () {
-        Route::get('/accounts/create', 'AccountController@create');
-        Route::post('/accounts/create', 'AccountController@store');
-        Route::delete('/accounts/delete', 'AccountController@destroy');
-    });
+    Route::get('/election/vote', 'ElectionController@index');
 
-    Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function () {
-        Route::get('/accounts/', 'AccountController@index');
-        Route::get('/accounts/{user}', 'AccountController@show');
-        Route::get('/accounts/{user}/edit', 'AccountController@edit');
-        Route::patch('/accounts/{user}/edit', 'AccountController@update');
-    });
-    
+    Route::get('/reports', 'ReportsController@index');
+    Route::post('/reports', 'ReportsController@store');
+    Route::patch('/reports', 'ReportsController@markAsRead');
 });
 
 Route::middleware('notVerified')->group(function () {

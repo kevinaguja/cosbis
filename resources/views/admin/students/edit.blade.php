@@ -23,9 +23,20 @@
                                 <p>{{$account->email}}</p>
                             </div>
                             <div class="col-md-12" style="margin-top: 15px">
-                                <div class="col-md-12">
-                                    <div class="btn btn-suspend">Suspend Account</div>
-                                </div>
+                                <form action="/accounts/{{$account->id}}/suspend"  method="post">
+                                    {{ csrf_field() }}
+                                    {!! method_field('PATCH') !!}
+                                    <input type="hidden" value="{{$account->id}}" name="id">
+                                    <div class="col-md-12">
+                                        @if($account->is_suspended == 0)
+                                            <input type="text" hidden value="1" name="is_suspended">
+                                            <button type="submit" class="btn btn-suspend">Suspend Account</button>
+                                        @else
+                                            <input type="text" hidden value="0" name="is_suspended">
+                                            <button type="submit" class="btn btn-success">Activate Account</button>
+                                        @endif
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

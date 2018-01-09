@@ -62,6 +62,11 @@ class User extends Authenticatable
         return $this->is_verified;
     }
 
+    public function is_suspended()
+    {
+        return $this->is_suspended == 1;
+    }
+
     public function program()
     {
         $this->belongsTo(Program, 'id', 'program');
@@ -71,7 +76,7 @@ class User extends Authenticatable
         return $this->hasMany(Event::class, 'user_id', 'id');
     }
 
-    public function comment(){
+    public function comments(){
         return $this->hasMany(Comment::class, 'user_id', 'id');
     }
 
@@ -107,8 +112,8 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 
-    public function eventVote(){
-        return $this->hasMany(User::class, 'user_id', 'id');
+    public function eventVotes(){
+        return $this->hasMany(EventVote::class, 'user_id', 'id');
     }
 
     public function blogComment(){
@@ -119,7 +124,7 @@ class User extends Authenticatable
         return $this->hasMany(NewsComment::class, 'user_id', 'id');
     }
 
-    public function eventComment(){
+    public function eventComments(){
         return $this->hasMany(EventComment::class, 'user_id', 'id');
     }
 

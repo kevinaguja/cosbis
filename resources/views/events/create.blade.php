@@ -18,7 +18,7 @@
                 </div>
             </div>--}}
             <div class="col-md-12 noPadding" id="app" style="padding-bottom: 25px;">
-                @if($errors->has('title') || $errors->has('location') || $errors->has('type') || $errors->has('theme') || $errors->has('date') || $errors->has('description'))
+                @if($errors->has('title') || $errors->has('location') || $errors->has('type') || $errors->has('theme') || $errors->has('date') || $errors->has('description') || $errors->has('time'))
                     <div class="container suggestionFaq" id="suggestionFaq"
                          style="display: none; border:none; height: auto; max-width: 100%">
                         @else
@@ -112,13 +112,13 @@
                                     <button class="btn btn-success" @click="proceedToCreate()">Proceed</button>
                                 </div>
                             </div>
-                            @if($errors->has('title') || $errors->has('location') || $errors->has('type') || $errors->has('theme') || $errors->has('date') || $errors->has('description'))
+                            @if($errors->has('title') || $errors->has('location') || $errors->has('type') || $errors->has('theme') || $errors->has('date') || $errors->has('description') || $errors->has('time'))
                                 <div class="col-md-12 noPadding noMargin suggestionForm" id="suggestionForm"
                                      style="display: block">
                                     @else
                                         <div class="col-md-12 noPadding noMargin suggestionForm" id="suggestionForm">
                                             @endif
-                                            <img src="{{asset('img/events/default.jpg')}}" alt="" style="width:100%"
+                                            <img src="{{asset('img/events/default.jpg')}}" alt="" style="max-width: 1920px; max-height: 1000px; width: 100%"
                                                  id="imgBanner">
                                             <form action="/events/create" method="POST" enctype="multipart/form-data"
                                                   class="container" style="border:none; height: auto; max-width: 100%">
@@ -187,7 +187,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group col-md-12 content-2-div">
+                                                    <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }} col-md-12 content-2-div">
                                                         <div class="col-md-6 form-group{{ $errors->has('date') ? ' has-error' : '' }}">
                                                             <label for="theme">Date</label>
                                                             <input class="form-control" type="date" name="date"
@@ -209,6 +209,12 @@
                                         end: '18:30'
                                       }" placeholder="Select time">
                                                             </el-time-select>
+
+                                                            @if ($errors->has('time'))
+                                                                <span class="help-block">
+                                        <strong>{{ $errors->first('time') }}</strong>
+                                    </span>
+                                                            @endif
                                                         </div>
                                                     </div>
 
@@ -244,7 +250,7 @@
                 var Main = {
                     data() {
                         return {
-                            value1: ''
+                            value1: {!! json_encode(old('time')) !!}
                         };
                     },
                     mounted: function () {

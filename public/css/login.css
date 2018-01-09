@@ -12,7 +12,7 @@
 }
 
 .loginPage .jumbotron p {
-    color: #333;
+    color: black;
     font-weight: 700;
 }
 
@@ -24,7 +24,7 @@
     padding: 40px;
     border-left: 15px solid green;
     background-color: white;
-    border-radius: 3px;
+    border-radius: 5px;
     margin-bottom: 100px;
 }
 
@@ -39,4 +39,8 @@
 .loginFormDiv h3 {
     margin: 0px;
     margin-bottom: 25px;
+}
+
+h1{
+    text-shadow: 1px 1px 3px white;
 }

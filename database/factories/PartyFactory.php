@@ -8,6 +8,6 @@ $factory->define(Model::class, function (Faker $faker) {
         'slogan' => $faker->word,
         'description' =>$faker->word,
         'banner' => 'img/cosbis/header.png',
-        'logo'=> 'img/election/party/logo.png',
+        'logo'=> 'img/election/party/default.png',
     ];
 });

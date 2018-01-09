@@ -5,10 +5,6 @@
     <link rel="stylesheet" href="{{asset('css/events.css')}}">
 @endsection
 
-@section('navigation')
-    @include('layouts.navigationadmin')
-@endsection
-
 @section('content')
     <div class="col-md-12 noPadding">
         <div class="col-md-12 col-xs-12 col-sm-12 noPadding noMargin">
@@ -33,9 +29,13 @@
                             @endswitch
                         </h3>
                         <h5 class="profilePictureDetails"><span
-                                    class="glyphicon glyphicon-map-marker"></span> {{auth()->user()->email}}</h5>
+                                    class="glyphicon glyphicon-info-sign"></span> {{auth()->user()->email}}</h5>
                         <h5 class="profilePictureDetails"><span
                                     class="glyphicon glyphicon-phone"></span> {{auth()->user()->phone}}</h5>
+                        <h5 class="profilePictureDetails"><span class="glyphicon glyphicon-baby-formula"></span>
+                            Birthdate: {{Carbon\Carbon::parse(auth()->user()->birthdate)->toFormattedDateString()}}</h5>
+                        <h5 class="profilePictureDetails"><span class="glyphicon glyphicon-map-marker"></span>
+                            Address: {{auth()->user()->address}}</h5>
                         <h5 class="profilePictureDetails"><span class="glyphicon glyphicon-book"></span> Member
                             since: {{Carbon\Carbon::parse(auth()->user()->created_at)->toFormattedDateString()}}</h5>
                         <h5 class="profilePictureDetails"><span class="glyphicon glyphicon-pencil"></span>Last updated
@@ -56,10 +56,14 @@
                 <div class="col-md-12 bg-white roundedCorners padding-25">
                     <div class="col-md-12" style="margin-bottom: 15px;">
                         <ul class="nav nav-pills" style="border-radius: 0px;">
-                            <li class= 'active'><a data-toggle="pill" href="#index"><span class="glyphicon glyphicon-th-list"></span> Events</a></li>
-                            <li><a data-toggle="pill" href="#upcomming"><span class="glyphicon glyphicon-collapse-up"></span> Upcomming Events</a></li>
-                            <li><a data-toggle="pill" href="#suggestions"><span class="glyphicon glyphicon-plus-sign"></span> New Suggestions</a></li>
-                            <li><a data-toggle="pill" href="#relevant"><span class="glyphicon glyphicon-eye-open"></span> relevant</a></li>
+                            <li class='active'><a data-toggle="pill" href="#index"><span
+                                            class="glyphicon glyphicon-th-list"></span> Events</a></li>
+                            <li><a data-toggle="pill" href="#upcomming"><span
+                                            class="glyphicon glyphicon-collapse-up"></span> Upcomming Events</a></li>
+                            <li><a data-toggle="pill" href="#suggestions"><span
+                                            class="glyphicon glyphicon-plus-sign"></span> New Suggestions</a></li>
+                            <li><a data-toggle="pill" href="#relevant"><span
+                                            class="glyphicon glyphicon-eye-open"></span> relevant</a></li>
                         </ul>
                     </div>
                     <div class="col-md-12">
@@ -70,9 +74,13 @@
                                         <li>
                                             <h5>
                                                 <b>{{Carbon\Carbon::parse($event->date)->toDayDateTimeString()}}</b>
-                                                <p class="pull-right"><small>{{count($event->comments)}} comments</small></p>
+                                                <p class="pull-right">
+                                                    <small>{{count($event->comments)}} comments</small>
+                                                </p>
                                             </h5>
-                                            <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right" style="border:none; color: cornflowerblue !important;">Find out more</a></p>
+                                            <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right"
+                                                                    style="border:none; color: cornflowerblue !important;">Find
+                                                    out more</a></p>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -83,9 +91,13 @@
                                         <li>
                                             <h5>
                                                 <b>{{Carbon\Carbon::parse($event->date)->toDayDateTimeString()}}</b>
-                                                <p class="pull-right"><small>{{count($event->comments)}} comments</small></p>
+                                                <p class="pull-right">
+                                                    <small>{{count($event->comments)}} comments</small>
+                                                </p>
                                             </h5>
-                                            <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right" style="border:none; color: cornflowerblue !important;">Find out more</a></p>
+                                            <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right"
+                                                                    style="border:none; color: cornflowerblue !important;">Find
+                                                    out more</a></p>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -96,10 +108,17 @@
                                         <li>
                                             <h5>
                                                 <b>{{Carbon\Carbon::parse($event->date)->toDayDateTimeString()}}</b>
-                                                <p class="pull-right"><small style="color: limegreen">{{count($event->votes)}} votes!</small></p>
-                                                <p class="pull-right"><small>{{count($event->comments)}} comments</small></p>
+                                                <p class="pull-right">
+                                                    <small style="color: limegreen">{{count($event->votes)}}votes!
+                                                    </small>
+                                                </p>
+                                                <p class="pull-right">
+                                                    <small>{{count($event->comments)}} comments</small>
+                                                </p>
                                             </h5>
-                                            <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right" style="border:none; color: cornflowerblue !important;">Find out more</a></p>
+                                            <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right"
+                                                                    style="border:none; color: cornflowerblue !important;">Find
+                                                    out more</a></p>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -110,11 +129,21 @@
                                         <li>
                                             <h5>
                                                 <b>{{Carbon\Carbon::parse($event->date)->toDayDateTimeString()}}</b>
-                                                <p class="pull-right"><small>{{$event->views}} views</small></p>
-                                                <p class="pull-right"><small style="color: limegreen">{{count($event->votes)}} votes!</small></p>
-                                                <p class="pull-right"><small style="color: blue">{{count($event->comments)}} comments</small></p>
+                                                <p class="pull-right">
+                                                    <small>{{$event->views}} views</small>
+                                                </p>
+                                                <p class="pull-right">
+                                                    <small style="color: limegreen">{{count($event->votes)}}votes!
+                                                    </small>
+                                                </p>
+                                                <p class="pull-right">
+                                                    <small style="color: blue">{{count($event->comments)}}comments
+                                                    </small>
+                                                </p>
                                             </h5>
-                                            <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right" style="border:none; color: cornflowerblue !important;">Find out more</a></p>
+                                            <p>{{$event->title}} <a href="/events/{{$event->id}}" class="pull-right"
+                                                                    style="border:none; color: cornflowerblue !important;">Find
+                                                    out more</a></p>
                                         </li>
                                     @endforeach
                                 </ul>

@@ -19,6 +19,7 @@ class EventCommentsTable extends Migration
             $table->integer('event_id')->unsigned();
             $table->text('comment');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

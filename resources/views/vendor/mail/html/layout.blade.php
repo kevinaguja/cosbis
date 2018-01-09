@@ -33,7 +33,7 @@
                 <div class="custom-header" style="text-align: left">
                     <div>
                         <div>
-                            <img src="{{asset('img/cosbis/cosbr-logo.png')}}" class="logo" style="float:left">
+                            <img src="{{asset('default.png')}}" class="logo" style="float:left">
                             <div style="display: inline;">
                                 <h1 style="text-align: left; padding-top: 10px; margin-bottom: 0px; display: inline">
                                     <br>College Of San Benildo-Rizal

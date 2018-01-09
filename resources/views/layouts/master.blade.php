@@ -17,7 +17,7 @@
     <title>{{ config('app.name', 'Cosbis') }}</title>
     @yield('css')
 </head>
-<body class="noPadding noMargin" style="background-color: #eaecf3">
+<body class="noPadding noMargin" style="background-color: #eaecf3; background-image: url({{asset('/img/cosbis/loginbg.jpg')}}); background-size: cover">
 <div class="container-fluid noPadding noMargin">
     <div class="container noPadding">
         @yield('navigation')
