@@ -36,6 +36,8 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
         Route::patch('/accounts/{user}/suspend', 'AccountController@suspend');
         Route::get('/election/candidates/create','Election\CandidateController@create');
         Route::post('/election/candidates/create','Election\CandidateController@store');
+        Route::get('/election/candidates/{id}/edit','Election\CandidateController@edit');
+        Route::patch('/election/candidates/{candidate}/edit','Election\CandidateController@update');
         Route::get('/election/parties/create','Election\PartyController@create');
         Route::post('/election/parties/create','Election\PartyController@store');
         Route::get('/election/parties/{id}/edit','Election\PartyController@edit');

@@ -21,7 +21,6 @@ class CreateCandidatesTable extends Migration
             $table->text('statement');
             $table->text('img');
             $table->string('party',100);
-            $table->string('status',10);
             $table->timestamps();
         });
     }

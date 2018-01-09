@@ -1,17 +1,18 @@
 @extends('layouts.admin')
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('css/election/party.css')}}">
+    <link rel="stylesheet" href="{{asset('css/party.css')}}">
 @endsection
 
 @section('content')
-    <div class="container" style="border:none;">
+    <div class="col-md-12" style="border:none;">
         <form action="/election/parties/{{$party->id}}/edit" method="post" enctype="multipart/form-data">
             {{csrf_field()}}
             {!! method_field("PATCH") !!}
-            <div class="col-md-12 noPadding" >
-                <div class="col-md-12 header noPadding img-responsive" >
-                    <img id="imgBanner" name="banner" src="{{asset($party->banner)}}" alt="party banner" class="img-responsive">
+            <div class="container noPadding" style="max-width: 100%; border: none">
+                <div class="col-md-12 header noPadding img-responsive text-center" style="background-color: #555">
+                    <img id="imgBanner" name="banner" src="{{asset($party->banner)}}" alt="party banner"
+                         style="width: auto; max-width: 100%; max-height: 800px">
                 </div>
                 <div class="col-md-12" style="padding-top: 10px; background-color: white; padding-bottom: 20px">
                     <div class="col-md-12">
@@ -19,31 +20,35 @@
                             <hr>
                             <div class="col-md-12 noPadding text-center">
 
-                                <div class="form-group">
+                                <div class="form-group col-md-12">
                                     <h5 class="col-md-3"><b>Party Name: </b></h5>
                                     <div class="form-group col-md-9 noPadding">
-                                        <input type="text" class="form-control" name="name" required value="{{$party->name}}">
+                                        <input type="text" class="form-control" name="name" required
+                                               value="{{$party->name}}">
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-12">
                                     <h5 class="col-md-3 "><b>Slogan: </b></h5>
                                     <div class="form-group col-md-9 noPadding">
-                                        <input type="text" class="form-control" name="slogan" required value="{{$party->slogan}}">
+                                        <input type="text" class="form-control" name="slogan" required
+                                               value="{{$party->slogan}}">
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group col-md-12">
                                     <h5 class="col-md-3 "><b>Description: </b></h5>
                                     <div class="form-group col-md-9 noPadding">
-                                        <textarea  class="form-control" name="description" rows="6" required style="resize: none">{{$party->description}}</textarea>
+                                        <textarea class="form-control" name="description" rows="6" required
+                                                  style="resize: none">{{$party->description}}</textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-md-12 text-center">
                                     <div class="col-md-4 col-md-push-3" style="padding-top: 20px">
                                         <label class="uploadLogo text-center"> UPLOAD LOGO
-                                            <input type="file" accept="image/jpeg, image/png" name="logo" id="logo" style="visibility: hidden">
+                                            <input type="file" accept="image/jpeg, image/png" name="logo" id="logo"
+                                                   style="visibility: hidden">
                                         </label>
                                         <script>
                                             $('#logo').on('change', function () {
@@ -60,7 +65,8 @@
 
                                     <div class="col-md-4 col-md-push-4" style="padding-top: 20px">
                                         <label class="uploadBanner text-center"> UPLOAD BANNER
-                                            <input type="file" accept="image/jpeg, image/png" name="banner" id="banner" style="visibility: hidden">
+                                            <input type="file" accept="image/jpeg, image/png" name="banner" id="banner"
+                                                   style="visibility: hidden">
                                             <script>
                                                 $('#banner').on('change', function () {
                                                     var reader = new FileReader();
@@ -80,7 +86,7 @@
 
                         <div class="col-md-4">
                             <div class="col-md-8 text-center">
-                                <img src="{{asset($party->logo)}}" class="img-responsive" id="imgLogo"  alt="Party Logo">
+                                <img src="{{asset($party->logo)}}" class="img-responsive" id="imgLogo" alt="Party Logo">
                             </div>
                         </div>
                     </div>

@@ -12,8 +12,6 @@ class Candidate extends Model
         'slogan',
         'statement',
         'party',
-        'img',
-        'status',
     ];
 
     public function user(){
@@ -22,6 +20,10 @@ class Candidate extends Model
 
     public function position(){
         return $this->belongsTo(Position::class, 'position_id', 'id');
+    }
+
+    public function election_party(){
+        return $this->belongsTo(Party::class, 'party', 'id');
     }
 
     public function electionBoard(){
