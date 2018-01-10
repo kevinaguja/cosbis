@@ -15,6 +15,7 @@ class AddRelationshipElectionBoardsTable extends Migration
     {
         Schema::table('election_boards', function (Blueprint $table) {
             $table->foreign('candidate_id')->references('id')->on('candidates');
+            $table->foreign('position_id')->references('id')->on('positions');
         });
     }
 

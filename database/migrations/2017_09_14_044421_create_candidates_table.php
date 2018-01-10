@@ -19,7 +19,6 @@ class CreateCandidatesTable extends Migration
             $table->integer('position_id')->unsigned();
             $table->text('slogan');
             $table->text('statement');
-            $table->text('img');
             $table->string('party',100);
             $table->timestamps();
         });

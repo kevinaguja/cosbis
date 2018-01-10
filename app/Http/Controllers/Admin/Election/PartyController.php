@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Election;
 
+use App\Candidate;
 use App\Cosbis\Repositories\PartyRepository;
 use App\Http\Requests\Admin\AdminCreatePartyRequest;
 use App\Http\Requests\Admin\AdminUpdatePartyRequest;
+use App\Party;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -40,7 +43,7 @@ class PartyController extends Controller
             'banner'=>$banner
         ]);
 
-        return back();
+        return back()->with('success', 'Party successfully registered!');
     }
 
     public function edit($id)
@@ -64,6 +67,21 @@ class PartyController extends Controller
             'banner'=>$banner
         );
         $party->update($data);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Party information successfully updated');
+    }
+
+    public function destroy(Party $party)
+    {
+        if($party->id === 1){
+            return back()->with('error', 'Deleting the Independent Party Category is not allowed');
+        }
+        $now= Carbon::now()->format('Y');
+        if(Candidate::whereYear('created_at', '=', $now)->where('party', '=', $party->id)->update(['party' => 1])){
+            if($party->delete()){
+                return redirect('/election/parties/create')->with('success', 'Candidate Successfully Removed');
+            }
+        }
+
+        return back()->with('error', 'There was an error trying to delete the candidate. Please try again');
     }
 }

@@ -16,6 +16,7 @@ class CreateElectionBoardsTable extends Migration
         Schema::create('election_boards', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('candidate_id')->unsigned();
+            $table->integer('position_id')->unsigned();
             $table->bigInteger('vote');
             $table->timestamps();
         });

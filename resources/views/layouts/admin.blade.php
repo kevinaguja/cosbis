@@ -20,6 +20,10 @@
 <body class="noPadding noMargin" style="background-color: #eaecf3">
 <div class="container-fluid noPadding noMargin">
     <style>
+        .el-message-box__message{
+            margin-left: 40px !important;
+        }
+
         body, html, .container-fluid {
             height: 100%;
             width: 100%;

@@ -11,6 +11,7 @@ class ElectionBoard extends Model
 
     protected $fillable=[
         'candidate_id',
+        'position_id',
         'vote',
     ];
 

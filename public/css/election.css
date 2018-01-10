@@ -1,0 +1,24 @@
+.remindersDiv li .panel-heading{
+    background-color: green;
+    color: white
+}
+
+.remindersDiv li h4 a:hover{
+    cursor: pointer;
+    color: lightblue;
+}
+
+.fade_out{
+    transition: all .4s ease-in-out;
+}
+
+.candidate_cubes{
+    transition: all .2s ease-in-out;
+    margin-bottom: 20px;
+}
+
+
+.candidate_cubes:hover{
+    cursor: pointer;
+    background-color: rgba(0, 255, 0, .1);
+}

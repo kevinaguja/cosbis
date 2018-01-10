@@ -11,6 +11,7 @@ class UserVote extends Model
 
     protected $fillable=[
         'user_id',
+        'position_id',
         'candidate_id',
     ];
 

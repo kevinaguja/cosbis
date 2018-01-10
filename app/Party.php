@@ -16,6 +16,6 @@ class Party extends Model
     ];
 
     public function candidates(){
-        return $this->hasMany(Candidate::class,'party_id','id');
+        return $this->hasMany(Candidate::class,'party','id');
     }
 }

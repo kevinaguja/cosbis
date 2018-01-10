@@ -16,6 +16,7 @@ class CreateUserVotesTable extends Migration
         Schema::create('user_votes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('position_id')->unsigned();
             $table->integer('candidate_id')->unsigned();
             $table->timestamps();
         });

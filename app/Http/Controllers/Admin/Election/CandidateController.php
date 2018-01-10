@@ -50,7 +50,10 @@ class CandidateController extends Controller
     public function store(AdminCreateCandidateRequest $request)
     {
         $now= Carbon::now()->format('Y');
-        $img='img/election/party/logo.png';
+
+        if( \App\Candidate::whereYear('created_at', '=', $now)->where([['position_id', '=', $request->position], ['party', '!=', 1], ['party', '=', $request->party_id]])->count() == 0){
+            return redirect()->back()->with('error', "The position from that party has already been occupied");
+        }
 
         if(\App\Candidate::whereYear('created_at','=',$now)->where('user_id','=',$request['user_id'])->count() > 0){
             return back()->with('error', "That student is already a candidate for this year's election!");
@@ -62,11 +65,10 @@ class CandidateController extends Controller
                 'slogan'=>$request['slogan'],
                 'statement'=>$request['statement'],
                 'party'=>$request['party_id'],
-                'img'=>$img,
             ]);
         }
 
-        return redirect()->back()->with('sucess', 'Candidate has been successfully registered!');
+        return redirect()->back()->with('success', 'Candidate has been successfully registered!');
     }
 
     public function edit($id)
@@ -93,6 +95,11 @@ class CandidateController extends Controller
 
     public function update(Candidate $candidate, Request $request)
     {
+        $now= Carbon::now()->format('Y');
+        if( \App\Candidate::whereYear('created_at', '=', $now)->where([['position_id', '=', $request->position], ['party', '!=', 1], ['party', '=', $request->party_id]])->count() == 0){
+            return redirect()->back()->with('error', "The position from that has already been occupied");
+        }
+
         $data=array(
             'user_id' => $request['user_id'],
             'position_id' => $request['position'],
@@ -103,6 +110,15 @@ class CandidateController extends Controller
 
         $candidate->update($data);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', "Candidate has been successfully registered");
+    }
+
+    public function destroy(Candidate $candidate)
+    {
+        if($candidate->delete()){
+            return redirect('/election/candidates/create')->with('success', 'Candidate Successfully Removed');
+        }
+
+        return back()->with('error', 'There was an error trying to delete the candidate. Please try again');
     }
 }

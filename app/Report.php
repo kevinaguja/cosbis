@@ -9,6 +9,7 @@ class Report extends Model
 {
     //
     use SoftDeletes;
+
     protected $fillable=[
         'event_id',
         'reported_user_id',

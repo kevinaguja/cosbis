@@ -12,13 +12,10 @@ class PositionTableSeeder extends Seeder
     public function run()
     {
         factory(App\Position::class)->create(['name'=>'President']);
-        factory(App\Position::class)->create(['name'=>'Vice President']);
+        factory(App\Position::class)->create(['name'=>'VP Operations']);
+        factory(App\Position::class)->create(['name'=>'VP Activities']);
+        factory(App\Position::class)->create(['name'=>'VP Academics']);
+        factory(App\Position::class)->create(['name'=>'VP Finance']);
         factory(App\Position::class)->create(['name'=>'Secretary']);
-        factory(App\Position::class)->create(['name'=>'Treasurer']);
-        factory(App\Position::class)->create(['name'=>'Auditor']);
-        factory(App\Position::class)->create(['name'=>'First Year Representative']);
-        factory(App\Position::class)->create(['name'=>'Second Year Representative']);
-        factory(App\Position::class)->create(['name'=>'Third Year Representative']);
-        factory(App\Position::class)->create(['name'=>'Fourth Year Representative']);
     }
 }

@@ -21,6 +21,7 @@
                         {{csrf_field()}}
 
                         <input type="hidden" name="reported_user_id" :value="user_id">
+                        <input type="hidden" name="event_id" value="{{$event->id}}">
                         <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                         <input type="hidden" name="type" value="user">
                         <div class="modal-body">
@@ -107,7 +108,7 @@
                             {{ csrf_field() }}
 
                             <input type="hidden" name="event_id" value="{{$event->id}}">
-                            <input type="hidden" name="reported_user_id" value="{{$event->user_id}}">
+                            <input type="hidden" name="reported_user_id" value="{{$event->user->id}}">
                             <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                             <input type="hidden" name="type" value="event">
                             <div class="col-md-12">
@@ -125,17 +126,17 @@
                             </div>
                         </form>
                         <a href="#" v-if="!showForm" @click="showForm=1" style="color: red">Do not like this event?</a>
-                        <h5><b>
-                                <img src="{{$event->user->img}}" style="width: 50px; height: 50px;"
-                                     class="img-circle">
-                                <p><b>{{$event->user->firstname}} {{$event->user->lastname}}
-                                        <br> {{Carbon\Carbon::parse($event->created_at)->toFormattedDateString()}}</b>
-                                    <small>({{Carbon\Carbon::parse($event->created_at)->diffForHumans()}})</small>
-                                </p>
-                            </b>
-                        </h5>
-                        <hr>
                     @endif
+                    <h5><b>
+                            <img src="{{$event->user->img}}" style="width: 50px; height: 50px;"
+                                 class="img-circle">
+                            <p><b>{{$event->user->firstname}} {{$event->user->lastname}}
+                                    <br> {{Carbon\Carbon::parse($event->created_at)->toFormattedDateString()}}</b>
+                                <small>({{Carbon\Carbon::parse($event->created_at)->diffForHumans()}})</small>
+                            </p>
+                        </b>
+                    </h5>
+                    <hr>
                     @if(session()->has('error'))
                         <div class="alert alert-success">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -194,7 +195,7 @@
         var Main = {
             data() {
                 return {
-                    showForm: 0,
+                    showForm: false,
                     user_id: null,
                 }
             },

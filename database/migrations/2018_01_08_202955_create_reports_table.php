@@ -19,7 +19,7 @@ class CreateReportsTable extends Migration
             $table->integer('reported_user_id')->unsigned()->nullable();
             $table->integer('user_id');
             $table->string('type');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->boolean('read')->default(0);
             $table->timestamps();
             $table->softDeletes()->nullable();

@@ -37,11 +37,13 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
         Route::get('/election/candidates/create','Election\CandidateController@create');
         Route::post('/election/candidates/create','Election\CandidateController@store');
         Route::get('/election/candidates/{id}/edit','Election\CandidateController@edit');
+        Route::delete('/election/candidates/{candidate}/delete','Election\CandidateController@destroy');
         Route::patch('/election/candidates/{candidate}/edit','Election\CandidateController@update');
         Route::get('/election/parties/create','Election\PartyController@create');
         Route::post('/election/parties/create','Election\PartyController@store');
         Route::get('/election/parties/{id}/edit','Election\PartyController@edit');
         Route::patch('/election/parties/{id}/edit','Election\PartyController@update');
+        Route::delete('/election/parties/{party}/delete','Election\PartyController@destroy');
         Route::get('/election','Election\ElectionController@index');
     });
 

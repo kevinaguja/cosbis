@@ -63,19 +63,19 @@
                             <td class="has-text-right" style="width: 155px">
                                 <el-tooltip class="item" effect="dark" content="View event related to this report"
                                             placement="top">
-                                    <el-button size="small" @click="redirectEvents(scope.row.id)" type="info"><span
+                                    <el-button size="small" @click="redirectEvents(scope.row.event_id, scope.row.reported_user_id)" type="info"><span
                                                 class="glyphicon glyphicon-bookmark" style="color: green"></span>
                                     </el-button>
                                 </el-tooltip>
                                 <el-tooltip class="item" effect="dark" content="View user related to this report"
                                             placement="top">
-                                    <el-button size="small" @click="redirectUsers(scope.row.id)" type="info"><span
+                                    <el-button size="small" @click="redirectUsers(scope.row.reported_user_id)" type="info"><span
                                                 class="glyphicon glyphicon-user"></span>
                                     </el-button>
                                 </el-tooltip>
                                 <el-tooltip class="item" effect="dark" content="Mark as read"
                                             placement="top">
-                                    <el-button size="small" @click="markAsRead(scope.row.id)" type="danger  "><span
+                                    <el-button size="small" @click="markAsRead(scope.row.id)" type="danger"><span
                                                 class="glyphicon glyphicon-eye-open"></span>
                                     </el-button>
                                 </el-tooltip>
@@ -88,6 +88,7 @@
     </div>
     <script>
         var reports ={!! json_encode($reports) !!};
+        console.log(reports[0]);
         var Main = {
             data() {
                 return {
@@ -128,8 +129,8 @@
                 }
             },
             methods: {
-                redirectEvents(id) {
-                    window.location.href = '/events/' + id + "/?hl=" + id
+                redirectEvents(id, r_id) {
+                    window.location.href = '/events/' + id + "/?hl=" + r_id
                 },
                 redirectUsers(id) {
                     window.location.href = '/accounts/' + id + '/edit'

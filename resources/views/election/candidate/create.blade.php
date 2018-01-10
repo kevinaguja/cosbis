@@ -29,6 +29,21 @@
 
                                             <div class="col-md-12 noPadding textLeftOnXs">
 
+                                                @if(session()->has('error'))
+                                                    <div class="alert alert-danger">
+                                                        <a href="#" class="close" data-dismiss="alert"
+                                                           aria-label="close">&times;</a>
+                                                        {{session('error')}}
+                                                    </div>
+                                                @endif
+
+                                                @if(session()->has('success'))
+                                                    <div class="alert alert-success">
+                                                        <a href="#" class="close" data-dismiss="alert"
+                                                           aria-label="close">&times;</a>
+                                                        {{session('success')}}
+                                                    </div>
+                                                @endif
                                                 <div class="form-group">
                                                     <h5 class="col-md-3 noPadding"><b>Name: </b></h5>
                                                     <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }} col-md-9 noPadding">
@@ -146,7 +161,8 @@
                                             <div class="col-md-4 col-md-offset-4">
                                                 <img :src="parties[banner-1].logo" alt="Candidate Photo"
                                                      name="imgCandidate"
-                                                     id="imgCandidate" class="img-responsive candidateBorder" style="width: 100%;">
+                                                     id="imgCandidate" class="img-responsive candidateBorder"
+                                                     style="width: 100%;">
                                             </div>
                                         </div>
                                     </div>

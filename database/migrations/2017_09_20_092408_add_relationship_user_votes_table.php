@@ -15,6 +15,7 @@ class AddRelationshipUserVotesTable extends Migration
     {
         Schema::table('user_votes', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('position_id')->references('id')->on('positions');
             $table->foreign('candidate_id')->references('id')->on('candidates');
         });
     }
