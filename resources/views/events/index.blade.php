@@ -48,7 +48,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 noSidePaddingOnSm">
-                                    <label for="">Sort by creator</label>
+                                    <label for="">Sort by Type</label>
                                     <select name="status" id="filter_2" class="form-control">
                                         <option value="null" selected disabled hidden>All</option>
                                         <option value="approved">Official Event</option>

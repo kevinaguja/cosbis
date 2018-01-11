@@ -41,7 +41,7 @@ class UserTableSeeder extends Seeder
             'firstname'=>'Ann Lindsey',
             'lastname'=>'Soriano',
             'birthdate'=>'1994-2-7',
-            'email' =>'student@cosbr.com',
+            'email' =>'kevinaguja@yahoo.com.ph',
             'is_verified' => '1',
             'role_id' => '2',
             'img' => '/img/account_img/example.jpg',
