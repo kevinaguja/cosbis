@@ -37,7 +37,7 @@
                                 <div class="form-group col-md-12{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <h5 class="col-md-3"><b>Party Name: </b></h5>
                                     <div class="form-group col-md-9 noPadding">
-                                        <input type="text" class="form-control" name="slogan" required
+                                        <input type="text" class="form-control" name="name" required
                                                placeholder="Slogan" value="{{old('name')}}">
                                         @if ($errors->has('name'))
                                             <span class="help-block">

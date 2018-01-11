@@ -34,17 +34,17 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
         Route::get('/accounts/{user}/edit', 'AccountController@edit');
         Route::patch('/accounts/{user}/edit', 'AccountController@update');
         Route::patch('/accounts/{user}/suspend', 'AccountController@suspend');
-        Route::get('/election/candidates/create','Election\CandidateController@create');
-        Route::post('/election/candidates/create','Election\CandidateController@store');
-        Route::get('/election/candidates/{id}/edit','Election\CandidateController@edit');
-        Route::delete('/election/candidates/{candidate}/delete','Election\CandidateController@destroy');
-        Route::patch('/election/candidates/{candidate}/edit','Election\CandidateController@update');
-        Route::get('/election/parties/create','Election\PartyController@create');
-        Route::post('/election/parties/create','Election\PartyController@store');
-        Route::get('/election/parties/{id}/edit','Election\PartyController@edit');
-        Route::patch('/election/parties/{id}/edit','Election\PartyController@update');
-        Route::delete('/election/parties/{party}/delete','Election\PartyController@destroy');
-        Route::get('/election','Election\ElectionController@index');
+        Route::get('/election/candidates/create', 'Election\CandidateController@create');
+        Route::post('/election/candidates/create', 'Election\CandidateController@store');
+        Route::get('/election/candidates/{id}/edit', 'Election\CandidateController@edit');
+        Route::delete('/election/candidates/{candidate}/delete', 'Election\CandidateController@destroy');
+        Route::patch('/election/candidates/{candidate}/edit', 'Election\CandidateController@update');
+        Route::get('/election/parties/create', 'Election\PartyController@create');
+        Route::post('/election/parties/create', 'Election\PartyController@store');
+        Route::get('/election/parties/{id}/edit', 'Election\PartyController@edit');
+        Route::patch('/election/parties/{id}/edit', 'Election\PartyController@update');
+        Route::delete('/election/parties/{party}/delete', 'Election\PartyController@destroy');
+        Route::get('/election', 'Election\ElectionController@index');
     });
 
     Route::get('/profile', 'AccountController@index');
@@ -72,10 +72,11 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
     Route::get('/organizations/{organization}', 'OrganizationController@show');
 
     Route::get('/election/vote', 'ElectionController@index');
+    Route::post('/election/vote', 'ElectionController@store');
 
-    Route::get('/reports', 'ReportsController@index');
-    Route::post('/reports', 'ReportsController@store');
-    Route::patch('/reports', 'ReportsController@markAsRead');
+    Route::get('/messages', 'ReportsController@index');
+    Route::post('/messages', 'ReportsController@store');
+    Route::patch('/messages', 'ReportsController@markAsRead');
 });
 
 Route::middleware('notVerified')->group(function () {

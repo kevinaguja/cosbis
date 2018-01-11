@@ -17,7 +17,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h3 class="modal-title" style="color: red"><b>Report User!</b></h3>
                     </div>
-                    <form action="/reports" method="POST">
+                    <form action="/messages" method="POST">
                         {{csrf_field()}}
 
                         <input type="hidden" name="reported_user_id" :value="user_id">
@@ -103,30 +103,28 @@
                         <p><b>Status: <span class="alert-info">New Entry</span></b></p>
                         @break;
                     @endswitch
-                    @if(auth()->user()->is_student() && $event->user_id !== auth()->user()->id)
-                        <form action="/reports" method="POST" v-if="showForm" class="col-md-12">
-                            {{ csrf_field() }}
+                    <form action="/messages" method="POST" v-if="showForm" class="col-md-12">
+                        {{ csrf_field() }}
 
-                            <input type="hidden" name="event_id" value="{{$event->id}}">
-                            <input type="hidden" name="reported_user_id" value="{{$event->user->id}}">
-                            <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
-                            <input type="hidden" name="type" value="event">
-                            <div class="col-md-12">
-                                <div class="col-md-6">
-                                    <label for="" style="color: red">Tell us more</label>
-                                    <textarea name="description" id="description" cols="30" rows="10"
-                                              class="form-control"
-                                              placeholder="Tell us how we can help improve your experience with the site"></textarea>
-                                </div>
+                        <input type="hidden" name="event_id" value="{{$event->id}}">
+                        <input type="hidden" name="reported_user_id" value="{{$event->user->id}}">
+                        <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                        <input type="hidden" name="type" value="event">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <label for="" style="color: red">Tell us more</label>
+                                <textarea name="description" id="description" cols="30" rows="10"
+                                          class="form-control"
+                                          placeholder="Tell us how we can help improve your experience with the site"></textarea>
                             </div>
-                            <div class="col-md-12" style="margin-top: 15px">
-                                <div class="col-md-6">
-                                    <input type="submit" class="btn btn-danger form-control">
-                                </div>
+                        </div>
+                        <div class="col-md-12" style="margin-top: 15px">
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-danger form-control">
                             </div>
-                        </form>
-                        <a href="#" v-if="!showForm" @click="showForm=1" style="color: red">Do not like this event?</a>
-                    @endif
+                        </div>
+                    </form>
+                    <a href="#" v-if="!showForm" @click="showForm=1" style="color: red">Do not like this event?</a>
                     <h5><b>
                             <img src="{{$event->user->img}}" style="width: 50px; height: 50px;"
                                  class="img-circle">
@@ -177,7 +175,8 @@
                                 <p>
                                     <b>{{$comment->user->firstname}} {{$comment->user->lastname}}</b>
                                     <small>{{Carbon\Carbon::parse($comment->created_at)->diffForHumans()}}</small>
-                                    <span class="glyphicon glyphicon-exclamation-sign pull-right pointerOnHover" style="color: red" data-toggle="modal" data-target="#myModal"
+                                    <span class="glyphicon glyphicon-exclamation-sign pull-right pointerOnHover"
+                                          style="color: red" data-toggle="modal" data-target="#myModal"
                                           @click="updateReportUserModal({{$comment->user->id}})"></span>
                                 </p>
                                 <p>{{$comment->comment}}</p>
@@ -185,7 +184,7 @@
                         </div>
                     @endforeach
                     <div class="col-md-12 text-right">
-                        {{$comments->links()}}
+                        {{$comments->appends(request()->input())->links()}}
                     </div>
                 </div>
             </div>

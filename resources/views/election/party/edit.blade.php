@@ -128,7 +128,7 @@
                             <button class="form-control btn btn-success">Update</button>
                         </div>
                         <div class="col-md-4">
-                            <el-button type="text" @click="deleteModal" style="color: white" class="btn btn-danger form-control">Delete Candidate</el-button>
+                            <el-button type="text" @click="deleteModal" style="color: white" class="btn btn-danger form-control">Delete Party</el-button>
                         </div>
                     </div>
                 </div>

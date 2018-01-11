@@ -35,7 +35,7 @@
                     @endif
                 </div>
 
-                <form action="/reports" method="post" id="form">
+                <form action="/messages" method="post" id="form">
                     {{csrf_field()}}
                     {{method_field('patch')}}
 

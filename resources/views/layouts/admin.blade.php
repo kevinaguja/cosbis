@@ -20,7 +20,7 @@
 <body class="noPadding noMargin" style="background-color: #eaecf3">
 <div class="container-fluid noPadding noMargin">
     <style>
-        .el-message-box__message{
+        .el-message-box__message {
             margin-left: 40px !important;
         }
 
@@ -171,39 +171,44 @@
             </ul>
 
             <ul class="list-unstyled" style="margin-top: 50px">
-                <a href="">
-                    <li><span class="glyphicon glyphicon-envelope"></span> Messages</li>
-                </a>
                 @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())
-                <a href="/reports">
-                    <li><span class="glyphicon glyphicon-tags"></span> Reports</li>
+                    <a href="/messages">
+                        <li><span class="glyphicon glyphicon-envelope"></span> Messages</li>
+                    </a>
+                    <a href="/reports">
+                        <li><span class="glyphicon glyphicon-tags"></span> Reports</li>
                 </a>
                 @endif
                 @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())
-                <a data-toggle="collapse" data-parent="#accordion" href="#electionCollapse">
-                    <li><span class="glyphicon glyphicon-list-alt"></span> Election
-                        <small><span class="glyphicon glyphicon-arrow-up"></span><span
-                                    class="glyphicon glyphicon-arrow-down"></span></small>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#electionCollapse">
+                        <li><span class="glyphicon glyphicon-list-alt"></span> Election
+                            <small><span class="glyphicon glyphicon-arrow-up"></span><span
+                                        class="glyphicon glyphicon-arrow-down"></span></small>
+                        </li>
+                    </a>
+                    <li id="accordion">
+                        <ul id="electionCollapse"
+                            class="list-unstyled panel-collapse collapse {{Request::is("election*") ? "in" :  ''}}">
+                            <li><a href="/election">Home</a></li>
+                            <li><a href="/election/candidates/create">Create candidate</a></li>
+                            <li><a href="/election/parties/create">Create Party</a></li>
+                            <li><a href="/election/results">Election Results</a></li>
+                            <a href="/election/vote">
+                                <li><span class="glyphicon glyphicon-tags"></span> Election</li>
+                            </a>
+                        </ul>
                     </li>
-                </a>
-                <li id="accordion">
-                    <ul id="electionCollapse"
-                        class="list-unstyled panel-collapse collapse {{Request::is("election*") ? "in" :  ''}}">
-                        <li><a href="/election">Home</a></li>
-                        <li><a href="/election/candidates/create">Create candidate</a></li>
-                        <li><a href="/election/parties/create">Create Party</a></li>
-                        <li><a href="/election/results">Election Results</a></li>
-                    </ul>
-                </li>
                 @endif
                 @if(auth()->user()->is_student())
                     <a href="/election/vote">
                         <li><span class="glyphicon glyphicon-tags"></span> Election</li>
                     </a>
                 @endif
-                <a href="">
-                    <li><span class="glyphicon glyphicon-scissors"></span> CMS</li>
-                </a>
+                @if((auth()->user()->is_admin() || auth()->user()->is_superadmin()))
+                    <a href="">
+                        <li><span class="glyphicon glyphicon-scissors"></span> CMS</li>
+                    </a>
+                @endif
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <li><span class="glyphicon glyphicon-off"></span> Logout</li>
@@ -220,7 +225,8 @@
             <div class="col-md-12" style="height: 100%; overflow: auto;">
                 <div class="col-md-12 bg-white" style="padding: 15px" id="crumbs">
                     <el-breadcrumb separator-class="el-icon-arrow-right">
-                        <span class="pull-left"><a href="/profile" style="color: black"><span class="glyphicon glyphicon-home"></span> Home</a></span>
+                        <span class="pull-left"><a href="/profile" style="color: black"><span
+                                        class="glyphicon glyphicon-home"></span> Home</a></span>
                         @php $count= 0; @endphp
                         @foreach(explode('/',\Request::getRequestUri()) as $url_string)
                             @php $path= ''; @endphp
@@ -229,7 +235,9 @@
                                     @php $path.= '/'.explode('/',\Request::getRequestUri())[$index+1]; @endphp
                                 @endif
                             @endfor
-                            <el-breadcrumb-item><a href="{{env('APP_URL')}}{{$path}}" style="color: black !important; font-weight: bold !important; font-size: 14px!important;">{{ucfirst(explode('?',explode('/',\Request::getRequestUri())[$index])[0])}}</a></el-breadcrumb-item>
+                            <el-breadcrumb-item><a href="{{env('APP_URL')}}{{$path}}"
+                                                   style="color: black !important; font-weight: bold !important; font-size: 14px!important;">{{ucfirst(explode('?',explode('/',\Request::getRequestUri())[$index])[0])}}</a>
+                            </el-breadcrumb-item>
                             @php $count++; @endphp
                         @endforeach
                     </el-breadcrumb>
@@ -238,8 +246,8 @@
             </div>
         </div>
     </div>
-<script>
-    new Vue().$mount('#crumbs')
-</script>
+    <script>
+        new Vue().$mount('#crumbs')
+    </script>
 </body>
 </html>

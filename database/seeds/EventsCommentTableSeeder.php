@@ -11,6 +11,6 @@ class EventsCommentTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\EventComment::class,50)->create();
+        factory(App\EventComment::class,1000)->create();
     }
 }

@@ -51,7 +51,7 @@ class CandidateController extends Controller
     {
         $now= Carbon::now()->format('Y');
 
-        if( \App\Candidate::whereYear('created_at', '=', $now)->where([['position_id', '=', $request->position], ['party', '!=', 1], ['party', '=', $request->party_id]])->count() == 0){
+        if( \App\Candidate::whereYear('created_at', '=', $now)->where([['position_id', '=', $request->position], ['party', '!=', 1], ['party', '=', $request->party_id]])->count() > 0){
             return redirect()->back()->with('error', "The position from that party has already been occupied");
         }
 
@@ -96,7 +96,7 @@ class CandidateController extends Controller
     public function update(Candidate $candidate, Request $request)
     {
         $now= Carbon::now()->format('Y');
-        if( \App\Candidate::whereYear('created_at', '=', $now)->where([['position_id', '=', $request->position], ['party', '!=', 1], ['party', '=', $request->party_id]])->count() == 0){
+        if( \App\Candidate::whereYear('created_at', '=', $now)->where([['position_id', '=', $request->position], ['party', '=', $request->party_id]])->count() == 0 || $request->party_id != 1){
             return redirect()->back()->with('error', "The position from that has already been occupied");
         }
 

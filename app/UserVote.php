@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserVote extends Model
 {
-    protected $table= 'user_votes';
-
-
     protected $fillable=[
         'user_id',
         'position_id',
