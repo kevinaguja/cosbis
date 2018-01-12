@@ -25,7 +25,7 @@ Once Again we would like to welcome you to our Cosbis family. Lastly, in order
 for us to verify your identity and to preserve confidentiality of information
 to the school, please click the button below.
 
-@component('mail::button', ['url' => 'http://csbr.localhost.com/verify/'.$user->token])
+    @component('mail::button', ['url' => 'http://csbr.localhost.com/verify/'.$user->token])
 Verify Account
 @endcomponent
 

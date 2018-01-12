@@ -14,7 +14,7 @@
                         <img src="{{auth()->user()->img}}" class="img-rounded img-thumbnail" alt="Account Image"
                              style="max-width: 300px; width: 100%">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-5">
                         <h3 class="profilePictureDetails noMargin">
                             <b>{{auth()->user()->firstname." ".auth()->user()->lastname}}, </b>
                             @switch(auth()->user()->role_id)
@@ -28,6 +28,7 @@
                                 <small>Super Administrator</small>
                             @endswitch
                         </h3>
+                        <hr>
                         <h5 class="profilePictureDetails"><span
                                     class="glyphicon glyphicon-info-sign"></span> {{auth()->user()->email}}</h5>
                         <h5 class="profilePictureDetails"><span
@@ -41,6 +42,18 @@
                         <h5 class="profilePictureDetails"><span class="glyphicon glyphicon-pencil"></span>Last updated
                             on: {{Carbon\Carbon::parse(auth()->user()->updated_at)->diffForHumans()}}</h5>
                         <a href="/profile/edit"><span class="glyphicon glyphicon-cog"></span> Edit Profile</a>
+                    </div>
+                    <div class="col-md-4">
+                        <hr style="margin-top: 46px">
+                        <label for="">Account was last update <span
+                                    style="color: green">{{Carbon\Carbon::parse(auth()->user()->updated_at)->diffForHumans()}}</span></label><br>
+                        <label for="">Total events this week: {{$events_this_month}}</label><br>
+                        <label for="">Total Contributions: {{$total_user_contributions}}</label><br>
+                        @if(\App\ElectionLog::latest()->first()->date_ended == null)
+                            <label for="">Election Status: <span style="color: green">Ongoing</span></label>
+                        @else
+                            <label for="">Election Status: <span style="color: red">Closed</span></label>
+                        @endif
                     </div>
                 </div>
                 <script src="https://unpkg.com/highcharts/highcharts.js"></script>

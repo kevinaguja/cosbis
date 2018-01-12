@@ -27,7 +27,7 @@
             </table>
             <hr>
             <h6><b>Print Copy Request By: </b>{{auth()->user()->firstname}} {{auth()->user()->lastname}}</h6>
-            <h6><b><span class="glyphicon glyphicon-copyright-mark"></span> Cosbr</b> {{now()->year}}</h6>
+            <h6><b><span class="glyphicon glyphicon-"></span> Cosbr</b> {{now()->year}}</h6>
         </div>
     </div>
 @endsection

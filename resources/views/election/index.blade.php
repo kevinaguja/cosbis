@@ -5,13 +5,16 @@
 @endsection
 
 @section('content')
-    <div class="col-md-12 noPadding">
-        <div class="col-md-12 col-xs-12 col-sm-12 noPadding">
-            <div class="col-md-12 col-xs-12 col-sm-12 bg-white noPadding roundedCorners"
-                 style="padding-bottom: 20px; padding-bottom: 0px">
+    <div class="col-md-12 noPadding" id="app">
+        <div class="col-md-12 noPadding">
+            <div class="col-md-12 bg-white noPadding roundedCorners"
+                 style="padding-bottom: 20px; padding-bottom: 0px;">
                 <div class="container noPadding"
                      style="height: 100%; border:none; max-width: 100%; padding-bottom: 0px">
-                    <h3>Currently Displaying Details of the {{now()->year}} election</h3>
+                    <div class="col-m12 noPadding text-center">
+                        <img src="{{asset('img/cosbis/cosbr-logo.png')}}" alt="" style="max-width: 150px;">
+                        <h3><b>Currently Displaying Details of the {{now()->year}} election</b></h3>
+                    </div>
                     <hr>
                     <form action="/election" method="get">
                         <div class="col-md-3" style="padding: 10px">
@@ -23,20 +26,48 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="col-md-3" style="padding: 10px">
-                            <div class="form-group">
-                                <button class="btn btn-success">Search</button>
-                            </div>
-                        </div>
                     </form>
+
+                    <div class="col-md-3" style="padding: 10px">
+                        <div class="form-group ">
+                            <button class="btn btn-success form-control">Search</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-md-offset-3" style="padding: 10px">
+                        <div class="form-group">
+                            @if(empty($election_log) || $election_log->date_ended !=null)
+                                <form action="/election/start" method="post">
+                                    {{csrf_field()}}
+                                    <button class="btn btn-success form-control"><span
+                                                class="glyphicon glyphicon-folder-open" type="submit"></span> Start
+                                        Election
+                                    </button>
+                                </form>
+                            @else
+                                <form action="/election/close" method="post">
+                                    {{csrf_field()}}
+                                    <button class="btn btn-warning form-control"><span
+                                                class="glyphicon glyphicon-folder-close"
+                                                type="submit"></span> Close
+                                        Election
+                                    </button>
+                                </form>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-12 bg-white noPadding roundedCorners">
                 <div class="container noPadding"
                      style="height: 100%; border:none; max-width: 100%; padding-bottom: 0px">
                     <button class="btn" style="background-color: transparent; border-bottom: 1px solid green"
-                            onclick="window.location.href='/print/elections'">Print Election Result
+                            onclick="window.location.href='/print/elections?year={{ app('request')->input('year') }}'">
+                        Print Election Result
+                    </button>
+                    <button class="btn" style="background-color: transparent; border-bottom: 1px solid green"
+                            onclick="window.location.href='/print/elections_summary?year={{ app('request')->input('year') }}'">
+                        Print Election Summary
                     </button>
                     <hr>
                     <div class="col-md-12">
@@ -111,7 +142,7 @@
             </div>
             @foreach($parties as $party)
                 @if($party->id==1)
-                    <div class="col-md-12 col-xs-12 col-sm-12 bg-white noPadding roundedCorners"
+                    <div class="col-md-12 bg-white noPadding roundedCorners"
                          style="padding-bottom: 20px">
                         <div class="container noPadding" style="height: 100%; border:none; max-width: 100%">
                             <div class="col-md-12">
@@ -150,7 +181,7 @@
                         </div>
                     </div>
                 @else
-                    <div class="col-md-12 col-xs-12 col-sm-12 bg-white noPadding roundedCorners"
+                    <div class="col-md-12 bg-white noPadding roundedCorners"
                          style="padding-bottom: 20px">
                         <div class="container noPadding" style="height: 100%; border:none; max-width: 100%">
                             <div class="col-md-12">
@@ -194,4 +225,35 @@
             @endforeach
         </div>
     </div>
+
+    <style>@import url("//unpkg.com/element-ui@2.0.11/lib/theme-chalk/index.css");</style>
+
+    <script>
+        var status= {!! json_encode(session('success')) !!};
+        var Main = {
+            methods: {
+                showOpenElection() {
+                    this.$message({
+                        message: 'The Election has been started!',
+                        type: 'success'
+                    });
+                },
+
+                showCloseElection() {
+                    this.$message({
+                        message: 'The Election has been ended!',
+                        type: 'warning'
+                    });
+                },
+            },
+            mounted: function(){
+                if(status==0)
+                    this.showCloseElection();
+                else if(status==1)
+                    this.showOpenElection();
+            }
+        }
+        var Ctor = Vue.extend(Main)
+        new Ctor().$mount('#app')
+    </script>
 @endsection

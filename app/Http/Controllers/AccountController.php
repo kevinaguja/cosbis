@@ -62,7 +62,9 @@ class AccountController extends Controller
             ->pushCriteria(new OrderBy('comments_count', 'desc'))
             ->all();
 
-        return view('accounts.index', compact('events', 'events', 'upcomming_events', 'new_events', 'relevant_events', 'official_events', 'rejected_events', 'new_suggestions', 'my_events'));
+        $events_this_month= Event::whereMonth('date', '=', now()->month)->count();
+        $total_user_contributions= Event::where([['user_id', '=', auth()->user()->id], ['status', '=', 'new']])->count();
+        return view('accounts.index', compact('events_this_month', 'total_user_contributions','events', 'events', 'upcomming_events', 'new_events', 'relevant_events', 'official_events', 'rejected_events', 'new_suggestions', 'my_events'));
     }
 
     public function edit()
@@ -77,13 +79,11 @@ class AccountController extends Controller
         $img= auth()->user()->img;
         if(request('img') !== null)
             $img= $fileTransfer->move(request('img'));
-
         $data=array(
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname'],
             'email' => $request['email'],
             'phone' => $request['phone'],
-            'role_id' => $request['role'],
             'address' => $request['address'],
             'birthdate' => $request['birthdate'],
             'img' => $img,

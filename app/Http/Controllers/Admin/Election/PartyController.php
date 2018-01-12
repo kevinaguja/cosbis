@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Election;
 
 use App\Candidate;
+use App\Cosbis\Filetransfer\Classes\PartyImageTransferable;
+use App\Cosbis\Filetransfer\Classes\PartyLogoTransferable;
 use App\Cosbis\Repositories\PartyRepository;
 use App\Http\Requests\Admin\AdminCreatePartyRequest;
 use App\Http\Requests\Admin\AdminUpdatePartyRequest;
@@ -25,10 +27,18 @@ class PartyController extends Controller
         return view('election.party.create');
     }
 
-    public function store(AdminCreatePartyRequest $request)
+    public function store(AdminCreatePartyRequest $request, PartyImageTransferable $fileTransfer,  PartyLogoTransferable $partyLogo)
     {
         $logo='/img/election/party/logo.png';
-        $banner='img/cosbis/header.png';
+        $banner='img/cosbis/edit_header.png';
+
+
+        if (request('logo') !== null)
+            $logo = $partyLogo->move(request('logo'));
+
+
+        if (request('banner') !== null)
+            $banner = $fileTransfer->move(request('banner'));
 //        if (request('logo')!==null)
 //            $logo=$this->accountImageHandler->move(request('logo'));
 //
@@ -53,10 +63,19 @@ class PartyController extends Controller
 
     }
 
-    public function update($id, AdminUpdatePartyRequest $request)
+    public function update($id, AdminUpdatePartyRequest $request, PartyImageTransferable $fileTransfer, PartyLogoTransferable $partyLogo)
     {
         $logo='/img/election/party/logo.png';
-        $banner='img/cosbis/header.png';
+        $banner='img/cosbis/edit_header.png';
+
+
+        if (request('logo') !== null)
+            $logo = $partyLogo->move(request('logo'));
+
+
+        if (request('banner') !== null)
+            $banner = $fileTransfer->move(request('banner'));
+
         $party=$this->partyRepository->find($id);
 
         $data=array(

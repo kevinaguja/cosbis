@@ -62,13 +62,12 @@ class EventController extends Controller
         if (strcmp($request->organization, "0") != 0) {
             $organization = $request->organization;
         }
-
         $img = '/img/events/default.jpg';
         if (request('img') !== null)
             $img = $fileTransfer->move(request('img'));
 
         if ($this->eventRepository->create(array_merge(request()->except('organization'), ["img" => $img, "status" => $this->getStatus(), "user_id" => auth()->user()->id, "organization_id" => $organization]))) ;
-        return back()->with('success', 'Event Successfully registered');
+            return back()->with('success', 'Event Successfully registered');
 
         return back()->with('error', 'Unable to register event, Please contact your administrator to fix this issue');
     }

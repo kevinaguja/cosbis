@@ -17,7 +17,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h3 class="modal-title" style="color: red"><b>Report User!</b></h3>
                     </div>
-                    <form action="/messages" method="POST">
+                    <form action="/reports" method="POST">
                         {{csrf_field()}}
 
                         <input type="hidden" name="reported_user_id" :value="user_id">
@@ -63,7 +63,7 @@
                         </p>
                         <br>
                         @if((strcmp('new', $event->status)===0 && $event->user_id === auth()->user()->id) || auth()->user()->is_admin() || auth()->user()->is_superadmin())
-                            <a hre="#/print/events/{{$event->id}}" class="btn btn-warning">Print</a>
+                            <a href="/print/events/{{$event->id}}" class="btn btn-warning">Print</a>
                             <button class="btn btn-success" style="background-color: #4CAF50">Edit</button>
                             <template>
                                 <el-button type="text" @click="openDeleteModal"
@@ -104,7 +104,7 @@
                         <p><b>Status: <span class="alert-info">New Entry</span></b></p>
                         @break;
                     @endswitch
-                    <form action="/messages" method="POST" v-if="showForm" class="col-md-12">
+                    <form action="/reports" method="POST" v-if="showForm" class="col-md-12">
                         {{ csrf_field() }}
 
                         <input type="hidden" name="event_id" value="{{$event->id}}">

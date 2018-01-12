@@ -70,55 +70,88 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
+                                                <div class="form-group{{ $errors->has('firstname') ? ' has-error' : '' }}">
                                                     <h5 class="col-md-3 noPadding "><b>First Name: </b></h5>
                                                     <div class="form-group col-md-9 noPadding">
                                                         <input type="text" class="form-control" name="firstname"
-                                                               required
                                                                value="{{ucwords(strtolower(auth()->user()->firstname))}}">
+
+                                                        @if ($errors->has('firstname'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('firstname') }}</strong>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
+                                                <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
                                                     <h5 class="col-md-3 noPadding    "><b>Last Name: </b></h5>
                                                     <div class="form-group col-md-9 noPadding">
-                                                        <input type="text" class="form-control" name="lastname" required
+                                                        <input type="text" class="form-control" name="lastname"
                                                                value="{{ucwords(strtolower(auth()->user()->lastname))}}">
+
+                                                        @if ($errors->has('lastname'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('lastname') }}</strong>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
+                                                <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                                                     <h5 class="col-md-3 noPadding "><b>Phone: </b></h5>
                                                     <div class="form-group col-md-9 noPadding">
-                                                        <input type="text" class="form-control" name="phone" required
+                                                        <input type="text" class="form-control" name="phone"
                                                                value="{{auth()->user()->phone}}">
+
+                                                        @if ($errors->has('phone'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('phone') }}</strong>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
+                                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                                     <h5 class="col-md-3 noPadding"><b>Email: </b></h5>
                                                     <div class="form-group col-md-9 noPadding">
-                                                        <input type="text" class="form-control" required name="email"
+                                                        <input type="text" class="form-control" name="email"
                                                                value="{{auth()->user()->email}}">
+
+                                                        @if ($errors->has('email'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('email') }}</strong>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
+                                                <div class="form-group{{ $errors->has('birthdate') ? ' has-error' : '' }}">
                                                     <h5 class="col-md-3 noPadding"><b>Birthday: </b></h5>
                                                     <div class="form-group col-md-9 noPadding">
-                                                        <input type="date" class="form-control" required
+                                                        <input type="date" class="form-control"
                                                                name="birthdate" value="{{auth()->user()->birthdate}}">
+
+                                                        @if ($errors->has('birthdate'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('birthdate') }}</strong>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
+                                                <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                                                     <h5 class="col-md-3 noPadding"><b>Address: </b></h5>
                                                     <div class="form-group col-md-9 noPadding">
-                                                        <textarea style="resize:none;" class="form-control" required
-                                                                  name="address"
-                                                                  rows="4">{{auth()->user()->address}}</textarea>
+                                                        <textarea style="resize:none;" class="form-control" name="address" rows="4" required>{{auth()->user()->address}}</textarea>
+                                                        @if ($errors->has('address'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('address') }}</strong>
+                                                            </span>
+                                                        @endif
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -166,10 +199,10 @@
                                             <div class="col-md-12 form-group">
                                                 <h5 class="col-md-3 noPadding "><b>Status: </b></h5>
                                                 <div class="col-md-9 form-group noPadding">
-                                                    @if(auth()->user()->is_suspend==0)
-                                                        <h5>Active Account</h5>
+                                                    @if(auth()->user()->is_suspended==0)
+                                                        <h5 style="color: green">Active Account</h5>
                                                     @else
-                                                        <h5>Account Suspended</h5>
+                                                        <h5 style="color: red">Account Suspended</h5>
                                                     @endif
                                                 </div>
                                             </div>

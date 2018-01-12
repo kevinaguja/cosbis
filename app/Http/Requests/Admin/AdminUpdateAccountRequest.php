@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminUpdateAccountRequest extends FormRequest
@@ -29,6 +30,7 @@ class AdminUpdateAccountRequest extends FormRequest
             'firstname' => 'required|max:50',
             'lastname' => 'required|max:50',
             'phone' => 'required|digits:11',
+            'address' => 'required',
             'email' => 'required|email|max:100|unique:users,email,'.$this['id'],
             'role' => 'required|max:1',
             'birthdate' => 'required|date|before:'.$before,

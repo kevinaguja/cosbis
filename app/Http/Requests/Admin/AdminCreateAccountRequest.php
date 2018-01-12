@@ -31,6 +31,7 @@ class AdminCreateAccountRequest extends FormRequest
             'firstname' => 'required|max:50',
             'lastname' => 'required|max:50',
             'phone' => 'required|digits:11',
+            'address' => 'required',
             'email' => 'required|email|max:100|unique:users,email,'.auth()->user()->id,
             'birthdate' => 'required|date|before:'.$before,
         ];

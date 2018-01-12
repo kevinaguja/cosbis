@@ -27,6 +27,7 @@ class StudentUpdateAccountRequest extends FormRequest
             'firstname' => 'required|max:50',
             'lastname' => 'required|max:50',
             'phone' => 'required|max:50',
+            'address' => 'required',
             'email' => 'required|string|email|max:100|unique:users,email,'.auth()->user()->id,
         ];
     }

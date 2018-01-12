@@ -80,4 +80,13 @@
   'glyphicons halflings' => array(
     'normal' => $fontDir . '\6b8c00e6f38cb2c73ed33d8ed00a9e24',
   ),
+  'roboto' => array(
+    'normal' => $fontDir . '\6635cb8d74c1c5e1d70f633e30f9425c',
+  ),
+  'work sans' => array(
+    'normal' => $fontDir . '\4766630fe30b8ddb6ea7e35b6fcdfdd2',
+  ),
+  'element-icons' => array(
+    'normal' => $fontDir . '\bd0abde2e8abd8c4c9980a7501b3a7fc',
+  ),
 ) ?>

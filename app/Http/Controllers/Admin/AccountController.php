@@ -53,6 +53,7 @@ class AccountController extends Controller
         $account = $this->userRepository->find($user);
 
         $img = $account->img;
+
         if (request('img') !== null)
             $img = $fileTransfer->move(request('img'));
 

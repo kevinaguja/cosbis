@@ -175,9 +175,9 @@
                     <a href="/reports">
                         <li><span class="glyphicon glyphicon-envelope"></span> Report</li>
                     </a>
-                    <a href="/print">
+                    {{--<a href="/print">
                         <li><span class="glyphicon glyphicon-tags"></span> Print</li>
-                </a>
+                </a>--}}
                 @endif
                 @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())
                     <a data-toggle="collapse" data-parent="#accordion" href="#electionCollapse">
@@ -192,14 +192,15 @@
                             <li><a href="/election">Home</a></li>
                             <li><a href="/election/candidates/create">Create candidate</a></li>
                             <li><a href="/election/parties/create">Create Party</a></li>
-                            <li><a href="/election/results">Election Results</a></li>
+                            @if(\App\ElectionLog::latest()->first()->date_ended == null)
                             <a href="/election/vote">
-                                <li><span class="glyphicon glyphicon-tags"></span> Election</li>
+                                <li>Election</li>
                             </a>
+                            @endif
                         </ul>
                     </li>
                 @endif
-                @if(auth()->user()->is_student())
+                @if(auth()->user()->is_student() && \App\ElectionLog::latest()->first()->date_ended == null)
                     <a href="/election/vote">
                         <li><span class="glyphicon glyphicon-tags"></span> Election</li>
                     </a>
