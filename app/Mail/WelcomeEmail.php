@@ -30,7 +30,7 @@ class WelcomeEmail extends Mailable
     public function build()
     {
         $user= $this->user;
-        return $this->from('cosbis@cosbis.dev')
+        return $this->from('SC Organization')
             ->subject('Welcome to College of San Benildo-Rizal!')
             ->markdown('emails.welcomeEmail', compact('user'));
     }

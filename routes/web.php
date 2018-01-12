@@ -45,6 +45,10 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
         Route::patch('/election/parties/{id}/edit', 'Election\PartyController@update');
         Route::delete('/election/parties/{party}/delete', 'Election\PartyController@destroy');
         Route::get('/election', 'Election\ElectionController@index');
+        Route::get('/print', 'PrintController@index');
+        Route::get('/print/elections', 'PrintController@election');
+        Route::get('/print/events/{id}', 'PrintController@event');
+        Route::get('/print/accounts/{id}', 'PrintController@account');
     });
 
     Route::get('/profile', 'AccountController@index');
@@ -74,9 +78,9 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
     Route::get('/election/vote', 'ElectionController@index');
     Route::post('/election/vote', 'ElectionController@store');
 
-    Route::get('/messages', 'ReportsController@index');
-    Route::post('/messages', 'ReportsController@store');
-    Route::patch('/messages', 'ReportsController@markAsRead');
+    Route::get('/reports', 'ReportsController@index');
+    Route::post('/reports', 'ReportsController@store');
+    Route::patch('/reports', 'ReportsController@markAsRead');
 });
 
 Route::middleware('notVerified')->group(function () {
@@ -85,4 +89,4 @@ Route::middleware('notVerified')->group(function () {
     Route::get('/verify/{token}', 'AccountVerificationController@verifyAccount');
 });
 
-Route::get('/test', 'accountController@test');
+Route::get('/test', 'AccountController@test');

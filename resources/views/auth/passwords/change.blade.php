@@ -4,10 +4,6 @@
     <link rel="stylesheet" href="{{asset('css/auth.css')}}">
 @endsection
 
-@section('navigation')
-    @include('layouts.navigationadmin')
-@endsection
-
 @section('content')
     <div class="container authDiv passwordReset">
         <div class="row">

@@ -42,6 +42,11 @@
                     <input type="hidden" name="id" v-model="id">
                 </form>
 
+                <div class="col-md-12" v-if="tableData == undefined">
+                    <hr>
+                    <h2><b style="color: green">There are currently no reported events or users...</b></h2>
+                </div>
+
                 <div class="col-md-12" style="padding-bottom: 30px;">
                     <hr>
                     <vue-good-table
@@ -88,7 +93,6 @@
     </div>
     <script>
         var reports ={!! json_encode($reports) !!};
-        console.log(reports[0]);
         var Main = {
             data() {
                 return {

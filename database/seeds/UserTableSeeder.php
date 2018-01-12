@@ -28,7 +28,7 @@ class UserTableSeeder extends Seeder
             'firstname'=>'Earl Kevin',
             'lastname'=>'Aguja',
             'birthdate'=>'1994-2-7',
-            'email' =>'earlaguja@gmail.com',
+            'email' =>'earlaaguja@gmail.com',
             'is_verified' => '1',
             'role_id' => '3',
             'img' => '/img/account_img/example.jpg',

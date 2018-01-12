@@ -7,8 +7,12 @@
 @section('content')
     <div class="col-md-12 noPadding">
         <div class="col-md-12 col-xs-12 col-sm-12 noPadding">
-            <div class="col-md-12 col-xs-12 col-sm-12 bg-white noPadding roundedCorners" style="padding-bottom: 20px; padding-bottom: 0px">
-                <div class="container noPadding" style="height: 100%; border:none; max-width: 100%; padding-bottom: 0px">
+            <div class="col-md-12 col-xs-12 col-sm-12 bg-white noPadding roundedCorners"
+                 style="padding-bottom: 20px; padding-bottom: 0px">
+                <div class="container noPadding"
+                     style="height: 100%; border:none; max-width: 100%; padding-bottom: 0px">
+                    <h3>Currently Displaying Details of the {{now()->year}} election</h3>
+                    <hr>
                     <form action="/election" method="get">
                         <div class="col-md-3" style="padding: 10px">
                             <div class="form-group">
@@ -26,6 +30,83 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+            <div class="col-md-12 bg-white noPadding roundedCorners">
+                <div class="container noPadding"
+                     style="height: 100%; border:none; max-width: 100%; padding-bottom: 0px">
+                    <button class="btn" style="background-color: transparent; border-bottom: 1px solid green"
+                            onclick="window.location.href='/print/elections'">Print Election Result
+                    </button>
+                    <hr>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <h5><b>President</b></h5>
+                            <ol>
+                                @foreach($candidates as $candidate)
+                                    @if($candidate->position_id == 1)
+                                        <li><h5>{{$candidate->user->firstname}} {{$candidate->user->lastname}}
+                                                - {{$candidate->userVote->count()}}</h5></li>
+                                    @endif
+                                @endforeach
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><b>VP of Operations</b></h5>
+                            <ol>
+                                @foreach($candidates as $candidate)
+                                    @if($candidate->position_id == 2)
+                                        <li><h5>{{$candidate->user->firstname}} {{$candidate->user->lastname}}
+                                                - {{$candidate->userVote->count()}}</h5></li>
+                                    @endif
+                                @endforeach
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><b>VP of Activities</b></h5>
+                            <ol>
+                                @foreach($candidates as $candidate)
+                                    @if($candidate->position_id == 3)
+                                        <li><h5>{{$candidate->user->firstname}} {{$candidate->user->lastname}}
+                                                - {{$candidate->userVote->count()}}</h5></li>
+                                    @endif
+                                @endforeach
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><b>VP of Academics</b></h5>
+                            <ol>
+                                @foreach($candidates as $candidate)
+                                    @if($candidate->position_id == 4)
+                                        <li><h5>{{$candidate->user->firstname}} {{$candidate->user->lastname}}
+                                                - {{$candidate->userVote->count()}}</h5></li>
+                                    @endif
+                                @endforeach
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><b>VP of Finance</b></h5>
+                            <ol>
+                                @foreach($candidates as $candidate)
+                                    @if($candidate->position_id == 5)
+                                        <li><h5>{{$candidate->user->firstname}} {{$candidate->user->lastname}}
+                                                - {{$candidate->userVote->count()}}</h5></li>
+                                    @endif
+                                @endforeach
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><b>Secretary</b></h5>
+                            <ol>
+                                @foreach($candidates as $candidate)
+                                    @if($candidate->position_id == 6)
+                                        <li><h5>{{$candidate->user->firstname}} {{$candidate->user->lastname}}
+                                                - {{$candidate->userVote->count()}}</h5></li>
+                                    @endif
+                                @endforeach
+                            </ol>
+                        </div>
+                    </div>
                 </div>
             </div>
             @foreach($parties as $party)
@@ -51,7 +132,9 @@
                                     @foreach($candidates as $candidate)
                                         @if($party->id==$candidate->party)
                                             <h6 style="text-indent: 20px"><b>{{$candidate->position->name}}:</b>
-                                                <span>{{$candidate->user->firstname.' '.$candidate->user->lastname}}</span> <a href="/election/candidates/{{$candidate->id}}/edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                <span>{{$candidate->user->firstname.' '.$candidate->user->lastname}}</span>
+                                                <a href="/election/candidates/{{$candidate->id}}/edit"><span
+                                                            class="glyphicon glyphicon-pencil"></span></a>
                                             </h6>
                                         @endif
                                     @endforeach
@@ -59,7 +142,8 @@
                                         <span>{{$party->description}}</span>
                                     </h6>
                                     <h6 style="text-indent: 10px">
-                                        <a href="/election/parties/{{$party->id}}/edit"><span class="glyphicon glyphicon-pencil"></span> Edit Party</a>
+                                        <a href="/election/parties/{{$party->id}}/edit"><span
+                                                    class="glyphicon glyphicon-pencil"></span> Edit Party</a>
                                     </h6>
                                 </div>
                             </div>
@@ -87,7 +171,9 @@
                                     @foreach($candidates as $candidate)
                                         @if($party->id==$candidate->party)
                                             <h6 style="text-indent: 20px"><b>{{$candidate->position->name}}:</b>
-                                                <span>{{$candidate->user->firstname.' '.$candidate->user->lastname}}</span> <a href="/election/candidates/{{$candidate->id}}/edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                <span>{{$candidate->user->firstname.' '.$candidate->user->lastname}}</span>
+                                                <a href="/election/candidates/{{$candidate->id}}/edit"><span
+                                                            class="glyphicon glyphicon-pencil"></span></a>
                                             </h6>
                                         @endif
                                     @endforeach
@@ -95,9 +181,10 @@
                                         <span>{{$party->description}}</span>
                                     </h6>
                                     @if($party->created_at->year == now()->year)
-                                            <h6 style="text-indent: 10px">
-                                                <a href="/election/parties/{{$party->id}}/edit"><span class="glyphicon glyphicon-pencil"></span> Edit Party</a>
-                                            </h6>
+                                        <h6 style="text-indent: 10px">
+                                            <a href="/election/parties/{{$party->id}}/edit"><span
+                                                        class="glyphicon glyphicon-pencil"></span> Edit Party</a>
+                                        </h6>
                                     @endif
                                 </div>
                             </div>

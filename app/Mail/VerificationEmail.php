@@ -32,7 +32,7 @@ class VerificationEmail extends Mailable
     public function build()
     {
         $user= $this->user;
-        return $this->from('cosbis@cosbis.dev')
+        return $this->from('SC Organization')
             ->subject('Verify Your Account')
             ->markdown('emails.verificationEmail', compact('user'));
     }

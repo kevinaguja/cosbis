@@ -6,7 +6,7 @@
 @endsection
 @section('content')
     <div class="col-md-12 noPadding" style="margin-top: 10px" id="app">
-        <div class="col-md-12 col-sm-12 col-xs-12 bg-white">
+        <div class="col-md-12 col-sm-12 col-xs-12 bg-white noPadding">
             {{--<div class="col-md-12 dark-bottom-border">
                 <div>
                     <h3><b>Events - <small>Regularly check on the events lists in order to avoid missing out on all of the campus fun</small></b></h3>
@@ -15,7 +15,7 @@
             </div>--}}
             <div class="container"
                  style="padding-bottom: 25px; padding-top: 25px; border: none; height: auto; max-width: 100%">
-                <div class="col-md-12">
+                <div class="col-md-12 noPadding">
                     @if(session()->has('success'))
                         <div class="alert alert-danger">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -81,7 +81,7 @@
                                     </small>
                                 </h4>
                                 <button class="btn btn-primary pull-right"
-                                        onclick="window.location.href='events/{{$event->id}}'">Read more
+                                        onclick="window.location.href='events/{{$event->id}}'" style="margin-bottom: 30px">Read more
                                 </button>
                             </div>
                         </div>

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class AccountController extends Controller
@@ -123,5 +124,13 @@ class AccountController extends Controller
     public function suspendedAccount()
     {
             return view('auth.suspendedaccount');
+    }
+
+    public function test()
+    {
+    Mail::send(['text'=> 'mail'],['name', 'earl'], function($message){
+        $message->to('earlaguja@gmail.com', 'To Earl')->subject('test');
+        $message->from('kevinaguja@yahoo.com', 'Earl');
+    });
     }
 }

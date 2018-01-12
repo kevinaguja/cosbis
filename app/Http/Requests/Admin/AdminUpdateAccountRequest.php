@@ -23,12 +23,15 @@ class AdminUpdateAccountRequest extends FormRequest
      */
     public function rules()
     {
+        $dt = new Carbon();
+        $before = $dt->subYears(15)->format('Y-m-d');
         return [
             'firstname' => 'required|max:50',
             'lastname' => 'required|max:50',
-            'phone' => 'required|max:50',
+            'phone' => 'required|digits:11',
             'email' => 'required|email|max:100|unique:users,email,'.$this['id'],
             'role' => 'required|max:1',
+            'birthdate' => 'required|date|before:'.$before,
         ];
     }
 }

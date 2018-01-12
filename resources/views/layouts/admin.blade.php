@@ -172,11 +172,11 @@
 
             <ul class="list-unstyled" style="margin-top: 50px">
                 @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())
-                    <a href="/messages">
-                        <li><span class="glyphicon glyphicon-envelope"></span> Messages</li>
-                    </a>
                     <a href="/reports">
-                        <li><span class="glyphicon glyphicon-tags"></span> Reports</li>
+                        <li><span class="glyphicon glyphicon-envelope"></span> Report</li>
+                    </a>
+                    <a href="/print">
+                        <li><span class="glyphicon glyphicon-tags"></span> Print</li>
                 </a>
                 @endif
                 @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())

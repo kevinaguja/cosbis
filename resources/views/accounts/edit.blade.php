@@ -15,7 +15,8 @@
                 <div class="col-md-12" style="margin-top: 0px; border:none;">
                     <div class="col-md-12">
                         <div class="col-md-6 col-sm-6 textCenterOnXs">
-                            <img id="imgEl" src="{{asset(auth()->user()->img)}}" class="img-circle pull-right" style="margin: 5px; width: 100%; max-width: 170px" alt="image">
+                            <img id="imgEl" src="{{asset(auth()->user()->img)}}" class="img-circle pull-right"
+                                 style="margin: 5px; width: 100%; max-width: 170px" alt="image">
                         </div>
                         <div class="col-md-6 col-sm-6 textCenterOnXs">
                             <div class="col-md-12" style="color: white">
@@ -50,7 +51,8 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a href="#collapseBasic" data-parent="#accordion" data-toggle="collapse">Basic Information</a>
+                                        <a href="#collapseBasic" data-parent="#accordion" data-toggle="collapse">Basic
+                                            Information</a>
                                     </h4>
                                 </div>
                                 <div id="collapseBasic" class="panel-collapse collapse in">
@@ -61,7 +63,8 @@
                                             <div class="col-md-12 noPadding textLeftOnXs">
                                                 <div class="form-group">
                                                     <h5 class="col-md-3 noPadding "><b>Student ID: </b></h5>
-                                                    <div class="form-group col-md-9 noPadding" style="border-bottom: 2px solid green;">
+                                                    <div class="form-group col-md-9 noPadding"
+                                                         style="border-bottom: 2px solid green;">
                                                         <input class="form-control" disabled required
                                                                value="{{ucwords(strtolower(auth()->user()->student_number))}}">
                                                     </div>
@@ -70,7 +73,8 @@
                                                 <div class="form-group">
                                                     <h5 class="col-md-3 noPadding "><b>First Name: </b></h5>
                                                     <div class="form-group col-md-9 noPadding">
-                                                        <input type="text" class="form-control" name="firstname" required
+                                                        <input type="text" class="form-control" name="firstname"
+                                                               required
                                                                value="{{ucwords(strtolower(auth()->user()->firstname))}}">
                                                     </div>
                                                 </div>
@@ -94,21 +98,25 @@
                                                 <div class="form-group">
                                                     <h5 class="col-md-3 noPadding"><b>Email: </b></h5>
                                                     <div class="form-group col-md-9 noPadding">
-                                                        <input type="text" class="form-control" required name="email" value="{{auth()->user()->email}}">
+                                                        <input type="text" class="form-control" required name="email"
+                                                               value="{{auth()->user()->email}}">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <h5 class="col-md-3 noPadding"><b>Birthday: </b></h5>
                                                     <div class="form-group col-md-9 noPadding">
-                                                        <input type="date" class="form-control" required name="birthdate" value="{{auth()->user()->birthdate}}">
+                                                        <input type="date" class="form-control" required
+                                                               name="birthdate" value="{{auth()->user()->birthdate}}">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <h5 class="col-md-3 noPadding"><b>Address: </b></h5>
                                                     <div class="form-group col-md-9 noPadding">
-                                                        <textarea style="resize:none;" class="form-control" required name="address" rows="4">{{auth()->user()->address}}</textarea>
+                                                        <textarea style="resize:none;" class="form-control" required
+                                                                  name="address"
+                                                                  rows="4">{{auth()->user()->address}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,13 +128,15 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePhoto">Change Photo</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePhoto">Change
+                                            Photo</a>
                                     </h4>
                                 </div>
                                 <div id="collapsePhoto" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="col-md-12 form-group">
-                                            <input class="form-control" type="file" name="img" id="img" accept="image/png, image/jpg">
+                                            <input class="form-control" type="file" name="img" id="img"
+                                                   accept="image/png, image/jpg">
                                         </div>
                                         <script>
                                             $('#img').on('change', function () {
@@ -146,7 +156,8 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseStatus">Account Status</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseStatus">Account
+                                            Status</a>
                                     </h4>
                                 </div>
                                 <div id="collapseStatus" class="panel-collapse collapse">
@@ -170,15 +181,19 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePassword">Change Password</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePassword">Change
+                                            Password</a>
                                     </h4>
                                 </div>
                                 <div id="collapsePassword" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="col-md-8 col-md-offset-2">
                                             <div class="col-md-12 form-group">
-                                                <button class="btn btn-info form-control noStyleOnHover"><a href="/profile/password" class="col-md-10 col-md-offset-1 noStyleOnHover" style="color: white">
-                                                    Change Password</a></button>
+                                                <button class="btn btn-info form-control noStyleOnHover"><a
+                                                            href="/profile/password"
+                                                            class="col-md-10 col-md-offset-1 noStyleOnHover"
+                                                            style="color: white">
+                                                        Change Password</a></button>
 
                                             </div>
                                         </div>
@@ -189,7 +204,9 @@
 
                         <div class="col-md-6 col-md-offset-3" style="padding-bottom: 20px">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-success" style="width: 100%"><span class="glyphicon glyphicon-pencil"></span> Update</button>
+                                <button type="submit" class="btn btn-success" style="width: 100%"><span
+                                            class="glyphicon glyphicon-pencil"></span> Update
+                                </button>
                             </div>
                         </div>
                     </div>

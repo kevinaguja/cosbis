@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <base href="cosbis.dev">
+    <base href="csbr.localhost.com">
 </head>
 <body>
 <style>
@@ -33,7 +33,7 @@
                 <div class="custom-header" style="text-align: left">
                     <div>
                         <div>
-                            <img src="{{asset('default.png')}}" class="logo" style="float:left">
+                            <img src="{{asset('img/cosbis/cosbr-logo.png')}}" class="logo" style="float:left">
                             <div style="display: inline;">
                                 <h1 style="text-align: left; padding-top: 10px; margin-bottom: 0px; display: inline">
                                     <br>College Of San Benildo-Rizal

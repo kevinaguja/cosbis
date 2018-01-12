@@ -188,6 +188,30 @@
                                     </div>
                                 </div>
                             </div>
+
+                            @if(auth()->user()->is_admin() || auth()->user()->is_superadmin())
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#printAccount">Print Account</a>
+                                        </h4>
+                                    </div>
+                                    <div id="printAccount" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="col-md-8 col-md-offset-2">
+                                                <div class="col-md-12 form-group">
+                                                    <button class="btn btn-info form-control noStyleOnHover"><a
+                                                                href="/print/accounts/{{$account->id}}"
+                                                                class="col-md-10 col-md-offset-1 noStyleOnHover"
+                                                                style="color: white">
+                                                            Print Account</a></button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
 
                         <div class="col-md-6 col-md-offset-3" style="padding-bottom: 20px">
