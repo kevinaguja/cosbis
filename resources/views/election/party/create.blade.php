@@ -5,15 +5,15 @@
 @endsection
 
 @section('content')
-    <div class="col-md-12" style="border:none; max-width: 100%;">
+    <div class="col-md-12 noPadding" style="border:none; max-width: 100%;">
         <form action="/election/parties/create" method="post" enctype="multipart/form-data">
             {{csrf_field()}}
-            <div class="container noPadding" style="max-width: 100%; border: none">
+            <div class="col-md-12 noPadding" style="max-width: 100%; border: none">
                 <div class="col-md-12 header noPadding img-responsive text-center" style="background-color: #555">
                     <img id="imgBanner" name="banner" src="{{asset('img/elections/parties/banners/default.png')}}"
-                         alt="party banner" style="width: auto; max-width: 100%; max-height: 800px">
+                         alt="party banner" style="width: auto; max-height: 600px; max-width: 100%;">
                 </div>
-                <div class="col-md-12" style="padding-top: 10px; background-color: white; padding-bottom: 20px">
+                <div class="container bg-white" style="border: none; height: 100%; max-width: 100%;padding-top: 10px; background-color: white; padding-bottom: 20px">
                     <div class="col-md-12">
                         @if(session()->has('error'))
                             <div class="alert alert-danger">

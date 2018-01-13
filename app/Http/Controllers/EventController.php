@@ -11,6 +11,7 @@ use App\Cosbis\Repositories\OrganizationRepository;
 use App\Cosbis\Filetransfer\Classes\EventImageTransferable;
 use App\Event;
 use App\Http\Requests\events\StoreEventRequest;
+use App\Http\Requests\events\UpdateEventRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -85,6 +86,38 @@ class EventController extends Controller
         }
 
         return back()->with('error', 'You have already submitted your vote for this suggestion!');
+    }
+
+    public function edit($id) {
+        $event=$this->eventRepository->find($id);
+        if($event->user->id !== auth()->user()->id && !(auth()->user()->is_admin() || auth()->user()->is_superAdmin()))
+            return back();
+
+        $organizations = $this->organizationRepository->all();
+        return view('events.edit',compact('event', 'organizations'));
+    }
+
+    public function update(UpdateEventRequest $request, EventRepository $eventRepository, $id, EventImageTransferable $fileTransfer)
+    {
+        $event=$this->eventRepository->find($id);
+
+        if($event->user->id !== auth()->user()->id && !(auth()->user()->is_admin() || auth()->user()->is_superAdmin()))
+            return back();
+
+        if (strcmp($request->organization, "0") != 0) {
+            $organization = $request->organization;
+        }
+        $img= $event->img;
+
+        if (request('img') !== null){
+            $img = $fileTransfer->move(request('img'));
+        }
+
+        if ($event->update(array_merge(request()->except('organization'), ["img" => $img, "status" => $this->getStatus(), "user_id" => auth()->user()->id, "organization_id" => $organization])))
+            return back()->with('success', 'Event Successfully Updated');
+
+        return back()->with('error', 'Unable to register event, Please contact your administrator to fix this issue');
+
     }
 
     public function destroy(Event $event)

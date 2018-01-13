@@ -64,7 +64,7 @@
                         <br>
                         @if((strcmp('new', $event->status)===0 && $event->user_id === auth()->user()->id) || auth()->user()->is_admin() || auth()->user()->is_superadmin())
                             <a href="/print/events/{{$event->id}}" class="btn btn-warning">Print</a>
-                            <button class="btn btn-success" style="background-color: #4CAF50">Edit</button>
+                            <a href="/events/{{$event->id}}/edit" class="btn btn-success" style="background-color: #4CAF50">Edit</a>
                             <template>
                                 <el-button type="text" @click="openDeleteModal"
                                            style="color:white; background-color: rgba(255, 0, 0, .7)">Delete

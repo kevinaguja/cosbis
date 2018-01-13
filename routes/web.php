@@ -71,6 +71,8 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
     Route::get('/events/{id}', 'EventController@show');
     Route::post('/events/{id}', 'EventCommentController@store');
     Route::post('/events/{id}/vote', 'EventController@vote');
+    Route::get('events/{id}/edit','EventController@edit');
+    Route::patch('events/{id}/edit','EventController@update');
 
     Route::get('/suggestions', 'SuggestedEventController@index');
     Route::get('/suggestions/mysuggestions', 'SuggestedEventController@show');
