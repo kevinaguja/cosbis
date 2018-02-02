@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\Active;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\Election_isstarted;
 use App\Http\Middleware\NotVerified;
 use App\Http\Middleware\Student;
 use App\Http\Middleware\SuperAdmin;
@@ -69,5 +70,6 @@ class Kernel extends HttpKernel
         'verified' => Verified::class,
         'notVerified' => NotVerified::class,
         'active' => Active::class,
+        'election_isstarted' => Election_isstarted::class,
     ];
 }

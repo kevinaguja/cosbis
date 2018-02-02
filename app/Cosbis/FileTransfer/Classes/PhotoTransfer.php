@@ -4,6 +4,7 @@ namespace App\Cosbis\FileTransfer\Classes;
 
 use App\Craftbeer\Filetransfer\Interfaces\PhotoTransferInterface;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 abstract class PhotoTransfer implements PhotoTransferInterface
 {
@@ -18,18 +19,10 @@ abstract class PhotoTransfer implements PhotoTransferInterface
 
     public function move($file)
     {
-        $imageName = preg_replace('/[^0-9]/', '', Carbon::now()) . '.' .
-            $this->getOriginalFileExtension($file);
-
-        $file->move(
-            base_path() . "/public".$this->getDestinationFolder(), $imageName
+        $path = $file->store(
+            $this->getDestinationFolder(), 'uploads'
         );
 
-        return $this->getDestinationFolder(). $imageName;
-    }
-
-    public function getOriginalFileExtension($file)
-    {
-        return $file->getClientOriginalExtension();
+        return '/'.$path;
     }
 }

@@ -26,7 +26,7 @@ class Report extends Model
 
     public function event()
     {
-        return $this->belongsTo(event::class, 'event_id', 'id');
+        return $this->belongsTo(Event::class, 'event_id', 'id');
     }
 
     public function reported_user()

@@ -104,9 +104,11 @@ class EventController extends Controller
         if($event->user->id !== auth()->user()->id && !(auth()->user()->is_admin() || auth()->user()->is_superAdmin()))
             return back();
 
+        $organization=null;
         if (strcmp($request->organization, "0") != 0) {
             $organization = $request->organization;
         }
+
         $img= $event->img;
 
         if (request('img') !== null){

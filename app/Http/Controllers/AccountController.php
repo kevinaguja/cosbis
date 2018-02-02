@@ -35,7 +35,7 @@ class AccountController extends Controller
             $official_events[]= Event::where('status', 'approved')->whereYear('date', '=', now()->year)->whereMonth('date', '=', $month)->count();
             $rejected_events[]= Event::where('status', 'rejected')->whereYear('date', '=', now()->year)->whereMonth('date', '=', $month)->count();
             $new_suggestions[]= Event::where('status', 'new')->whereYear('date', '=', now()->year)->whereMonth('date', '=', $month)->count();
-            $my_events[]= Event::where('user_id', auth()->user()->student_number)->whereYear('date', '=', now()->year)->whereMonth('date', '=', $month)->count();
+            $my_events[]= Event::where('user_id', auth()->user()->id)->whereYear('date', '=', now()->year)->whereMonth('date', '=', $month)->count();
         }
 
         $events= \App\Event::where("status", "=", "approved")->paginate(5, ['*'], 'events');
@@ -77,8 +77,10 @@ class AccountController extends Controller
         $user= $this->userRepository->find(auth()->user()->id);
 
         $img= auth()->user()->img;
+
         if(request('img') !== null)
             $img= $fileTransfer->move(request('img'));
+
         $data=array(
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname'],
@@ -89,9 +91,10 @@ class AccountController extends Controller
             'img' => $img,
         );
 
-        $user->update($data);
+        if($user->update($data))
+            return back()->with('success', 'Account has been successfully updated!');
 
-        return redirect()->back();
+        return back()->with('error', 'There was an error while trying to update your account');
     }
 
     public function password()

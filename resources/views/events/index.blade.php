@@ -45,6 +45,7 @@
                                         <option value="latest">Latest</option>
                                         <option value="oldest">Oldest</option>
                                         <option value="future">Future Events</option>
+                                        <option value="past">Past Events</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 noSidePaddingOnSm">

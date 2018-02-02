@@ -58,7 +58,8 @@
 }
 
 .eventBannerDiv{
-    max-height: 400px;
+    mix-height: 400px;
+    max-height: 700px;
     overflow: hidden;
     background-size: contain;
     background-repeat: no-repeat;

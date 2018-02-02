@@ -39,8 +39,8 @@
             </div>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12 eventDetails noPadding">
-            <div class="col-md-12 noPadding noMargin eventBannerDiv">
-                <img src="{{$event->img}}" alt="" style="width:100%;">
+            <div class="col-md-12 noPadding noMargin eventBannerDiv text-center">
+                <img src="{{$event->img}}" alt="" style="max-width:100%; max-height: 100%">
             </div>
             <div class="container"
                  style="padding-left: 0px; padding-right: 0px; height: auto; border: none; max-width: 100%    ">

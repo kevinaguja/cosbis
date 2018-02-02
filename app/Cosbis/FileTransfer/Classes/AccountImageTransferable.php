@@ -8,6 +8,6 @@ class AccountImageTransferable extends PhotoTransfer
 {
     public function getDestinationFolder()
     {
-        return '/img/account_img/';
+        return '/img/account_img';
     }
 }

@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-md-4">
                         <hr style="margin-top: 46px">
-                        <label for="">Account was last update <span
+                        <label for="">Account was last updated <span
                                     style="color: green">{{Carbon\Carbon::parse(auth()->user()->updated_at)->diffForHumans()}}</span></label><br>
                         <label for="">Total events this week: {{$events_this_month}}</label><br>
                         <label for="">Total Contributions: {{$total_user_contributions}}</label><br>

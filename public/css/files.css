@@ -1,0 +1,63 @@
+/*.fileNav{
+    border-top: 2px solid green;
+    border-bottom: 2px solid green;
+}*/
+
+
+.el-upload__input{
+    display: none !important;
+}
+
+.fileNav h4 b{
+    transition: all .4s ease-in-out;
+}
+
+.fileNav h4 b:hover{
+    cursor: pointer;
+    color: green;
+}
+
+.filePreviewImg{
+    height: 120px;
+    padding: 0px;
+}
+
+.filePreviewImg img{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.toolTips span{
+    transition: all .4s ease-in-out;
+}
+
+.toolTips span:hover{
+    cursor: pointer;
+    text-shadow: .2px .2px .2px green;
+}
+
+@media (min-width: 1000px){
+    .paddingRightOnMd{
+        padding-right: 5px;
+    }
+
+    .paddingLeftOnMd{
+        padding-left: 5px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .centerOnSm{
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .paddingLeftOnMd, .paddingRightOnMd{
+        width: 100%;
+    }
+
+    .pull-right, .pull-left{
+        float: none !important;
+        text-align: center;
+    }
+}

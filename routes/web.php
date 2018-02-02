@@ -44,9 +44,9 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
         Route::get('/election/parties/{id}/edit', 'election\PartyController@edit');
         Route::patch('/election/parties/{id}/edit', 'election\PartyController@update');
         Route::delete('/election/parties/{party}/delete', 'election\PartyController@destroy');
-        Route::get('/election', 'election\ElectionController@index');
         Route::post('/election/start', 'election\ElectionController@openElection');
         Route::post('/election/close', 'election\ElectionController@closeElection');
+        Route::get('/election', 'election\ElectionController@index');
         Route::get('/print', 'PrintController@index');
         Route::get('/print/elections', 'PrintController@election');
         Route::get('/print/elections_summary', 'PrintController@election_summary');
@@ -80,12 +80,16 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
     Route::get('/organizations', 'OrganizationController@index');
     Route::get('/organizations/{organization}', 'OrganizationController@show');
 
-    Route::get('/election/vote', 'ElectionController@index');
-    Route::post('/election/vote', 'ElectionController@store');
+    Route::get('/election/vote', 'ElectionController@index')->middleware('election_isstarted');
+    Route::post('/election/vote', 'ElectionController@store')->middleware('election_isstarted');
 
     Route::get('/reports', 'ReportsController@index');
     Route::post('/reports', 'ReportsController@store');
     Route::patch('/reports', 'ReportsController@markAsRead');
+
+    Route::get('/files', 'FilesController@index');
+    Route::get('/files/create', 'FilesController@create');
+    Route::post('/files/create', 'FilesController@store');
 });
 
 Route::middleware('notVerified')->group(function () {

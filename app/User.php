@@ -67,6 +67,10 @@ class User extends Authenticatable
         return $this->is_suspended == 1;
     }
 
+    public function files(){
+        return $this->hasMany(File::class, 'user_id', 'id');
+    }
+
     public function program()
     {
         $this->belongsTo(Program, 'id', 'program');

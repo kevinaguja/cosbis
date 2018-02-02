@@ -47,6 +47,21 @@
 
                 <div class="container" style="border: none; height: auto; max-width: 100%">
                     <div class="col-md-12" style="margin-top: 2em">
+
+                        @if(session()->has('success'))
+                            <div class="alert alert-success">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{session('success')}}
+                            </div>
+                        @endif
+
+                        @if(session()->has('error'))
+                            <div class="alert alert-danger">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{session('error')}}
+                            </div>
+                        @endif
+
                         <div class="panel-group" id="accordion">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -143,7 +158,9 @@
                                                 <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                                                     <h5 class="col-md-3 noPadding"><b>Address: </b></h5>
                                                     <div class="form-group col-md-9 noPadding">
-                                                        <textarea style="resize:none;" class="form-control" name="address" rows="4" required>{{auth()->user()->address}}</textarea>
+                                                        <textarea style="resize:none;" class="form-control"
+                                                                  name="address" rows="4"
+                                                                  required>{{auth()->user()->address}}</textarea>
                                                         @if ($errors->has('address'))
                                                             <span class="help-block">
                                                                 <strong>{{ $errors->first('address') }}</strong>
