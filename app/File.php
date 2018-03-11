@@ -12,7 +12,7 @@ class File extends Model
     protected $fillable = [
         'user_id',
         'visibility',
-        'name',
+        'name q ',
     ];
 
     public function user()
